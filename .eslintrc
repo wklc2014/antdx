@@ -1,0 +1,372 @@
+{
+  "parser": "babel-eslint",
+  "extends": "umi",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "plugins": [
+    "eslint-plugin-babel",
+    "eslint-plugin-flowtype",
+    "eslint-plugin-import",
+    "eslint-plugin-jsx-a11y",
+    "eslint-plugin-react"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true,
+      "spread": true,
+      "restParams": true,
+      "destructuring": true
+    }
+  },
+  "rules": {
+    /**
+     * 箭头函数函数体强制大括号
+     * 当大括号是可省略的，强制不使用
+     * 不需要显式返回对象字面量
+     */
+    "arrow-body-style": ["error", "as-needed", { "requireReturnForObjectLiteral": false }],
+
+    /**
+     * 强制箭头函数参数用小括号括起来
+     * 当只有一个参数时强制省略圆括号
+     * 当函数体在一个指令块中，参数必须用圆括号包含
+     */
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
+
+    /**
+     * 强制箭头函数的箭头前后的空格
+     * example:
+     * a => a;
+     */
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+
+    /**
+     * generator 函数中 * 号周围的空格
+     * example:
+     * function* generator() {}
+     */
+    "generator-star-spacing": ["error", { "before": false, "after": true }],
+
+    /**
+     * 不允许rest参数和扩展运算符与他们的参数之间有空格
+     */
+    "rest-spread-spacing": ["error", "never"],
+
+    /**
+     * 禁止条件表达式中出现模棱两可的"赋值操作符"
+     */
+    "no-cond-assign": "error",
+
+    /**
+     * 不能修改类声明的变量
+     */
+    "no-class-assign": "error",
+
+    // 禁止定义未使用
+    "no-unused-vars": "warn",
+
+    /**
+     * 不允许类成员里有重复的名称
+     */
+    "no-dupe-class-members": "error",
+
+    /**
+     * 禁止修改const声明的变量
+     */
+    "no-const-assign": "error",
+
+    /**
+     * 不要重复引入一个模块
+     */
+    "no-duplicate-imports": "error",
+
+    /**
+     * 使用 let 或 const 而不是 var
+     */
+    "no-var": "error",
+
+    /**
+     * 禁止在字面量声明无用的计算属性
+     */
+    "no-useless-computed-key": "error",
+
+    /**
+     * 禁止模板字面量中的花括号出现括号
+     */
+    "template-curly-spacing": "error",
+
+    /**
+     * 若变量不会再次赋值，使用const声明
+     * destructuring: 解构赋值时，所有变量的类型都应该保持一致
+     * ignoreReadBeforeAssign: 忽略声明和第一次赋值之间的变量, 也就是不能先定义后赋值
+     */
+    "prefer-const": ["error", {
+      "destructuring": "any",
+      "ignoreReadBeforeAssign": true
+    }],
+
+    /**
+     * 使用模板字面量而不是字符串拼接
+     */
+    "prefer-template": "error",
+
+    /**
+     * 使用扩展运算符(...)而非.apply()调用可变参数
+     */
+    "prefer-spread": "warn",
+
+    /**
+     * 用rest参数(...变量名)替换arguments
+     */
+    "prefer-rest-params": "error",
+
+    /**
+     * 数组和对象键值对最后一个逗号
+     * never：不能带末尾的逗号,
+     * always：必须带末尾的逗号，
+     * always-multiline：多行模式必须带逗号，单行模式不能带逗号
+     */
+    "comma-dangle": ["error", "always-multiline"],
+
+    /**
+     * 强制使用单引号
+     */
+    "quotes": ["error", "single"],
+
+    /**
+     * 对象引号
+     */
+    "quote-props": [
+      "warn",
+      "as-needed",
+      {
+        "keywords": true,
+        "unnecessary": true,
+        "numbers": true
+      }
+    ],
+
+    /**
+     * parseInt 必须指定第二个参数
+     * as-needed: 第二个参数是 10，不用指定，其他值必须指定
+     */
+    "radix": [
+      "error",
+      "as-needed"
+    ],
+
+    /**
+     * 强制两个空格缩进
+     */
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+
+    // 生成器函数必须有yield
+    "require-yield":"off",
+
+    // 如果if语句里面有return,后面不能跟else语句
+    "no-else-return": "error",
+
+    // 强制一行的最大长度
+    "max-len": ["warn", 80],
+
+    // 强制最大行数
+    "max-lines": ["warn", 500],
+
+    // 强制 function 定义中最多允许的参数数量
+    "max-params": ["error", 3],
+
+    // 强制可嵌套的块的最大深度
+    "max-depth": ["error", 4],
+
+    // 强制回调函数最大嵌套深度
+    "max-nested-callbacks": ["error", 4],
+
+    // 要求方法链中每个调用都有一个换行符
+    "newline-per-chained-call": "error",
+
+    // 禁用 console
+    "no-console": "warn",
+
+    // 不允许在变量定义之前使用它们
+    "no-use-before-define": "error",
+
+    // 禁用不必要的转义字符
+    "no-useless-escape": "error",
+
+    // 如果在实例方法中没有使用this，那么ESLint推荐你写成static方法
+    "class-methods-use-this": "off",
+
+    // 禁止出现未使用过的表达式
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true
+      }
+    ],
+
+    // 禁止使用++，--
+    "no-plusplus": "warn",
+
+    // 禁止给参数重新赋值
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+
+    // 标识符不能以_开头或结尾
+    "no-underscore-dangle": ["off"],
+
+    /**
+     * 避免箭头函数和比较式混淆
+     * allowParens: 放宽标准，允许箭头函数使用括号 不强制必须用return返回
+     */
+    "no-confusing-arrow": ["warn", {
+      "allowParens": false
+    }],
+
+    // 不允许使用嵌套的三元表达式
+    "no-nested-ternary": "warn",
+
+    // 禁止 var 声明 与外层作用域的变量同名
+    "no-shadow": ["off", { "builtinGlobals": true, "hoist": "never" }],
+
+    // 要求或禁止在可能的情况下要求使用简化的赋值操作符
+    "operator-assignment": "error",
+
+    // 禁止使用特定的语法
+    "no-restricted-syntax": "warn",
+
+    // 要求 require() 出现在顶层模块作用域中
+    "global-require": "error",
+
+    // 禁止使用 javascript: url
+    "no-script-url": "error",
+
+    // 禁止混合使用不同的操作符
+    "no-mixed-operators": "error",
+
+    // 确保所有 import 语句出现在其他语句之前
+    "import/first": "warn",
+
+    // 强制 import 语句后面有一个空行
+    "import/newline-after-import": "error",
+
+    // Forbid webpack loader syntax in imports
+    "import/no-webpack-loader-syntax": "error",
+
+    // Forbid the use of extraneous packages
+    "import/no-extraneous-dependencies": "off",
+
+    // Report use of exported name as identifier of default export
+    "import/no-named-as-default": "error",
+
+    // Ensure imports point to a file/module that can be resolved
+    "import/no-unresolved": "off",
+
+    // Prefer a default export if module exports a single name
+    "import/prefer-default-export": "warn",
+
+    // Enforce all aria-* props are valid.
+    "jsx-a11y/aria-props": "error",
+
+    // Enforce heading (h1, h2, etc) elements contain accessible content
+    "jsx-a11y/heading-has-content": "error",
+
+    // Enforce all anchors to contain accessible content
+    "jsx-a11y/anchor-has-content": "error",
+
+    // Enforce that <label> elements have the htmlFor prop
+    "jsx-a11y/label-has-for": "error",
+
+    // Enforce that onMouseOver/onMouseOut are accompanied by onFocus/onBlur for keyboard-only users
+    "jsx-a11y/mouse-events-have-key-events": "error",
+
+    // Enforce that elements with ARIA roles must have all required attributes for that role.
+    "jsx-a11y/role-has-required-aria-props": "error",
+
+    // Enforce that elements with explicit or implicit roles defined contain only aria-* properties supported by that role.
+    "jsx-a11y/role-supports-aria-props": "error",
+
+    // Enforce that non-interactive, visible elements (such as <div>) that have click handlers use the role attribute
+    "jsx-a11y/no-static-element-interactions": "off",
+
+    // Enforce iframe elements have a title attribute.
+    "jsx-a11y/iframe-has-title": "off",
+
+    // Enforce a clickable non-interactive element has at least one keyboard event listener.
+    "jsx-a11y/click-events-have-key-events": "off",
+
+    // Non-interactive elements should not be assigned mouse or keyboard event listeners.
+    "jsx-a11y/no-noninteractive-element-interactions": "error",
+
+    // Enforce all anchors are valid, navigable elements
+    "jsx-a11y/anchor-is-valid": "error",
+
+    // Prevent missing props validation in a React component definition
+    "react/prop-types": ["warn", { "ignore": ["children", "dispatch"] }],
+
+    // Forbid certain propTypes
+    "react/forbid-prop-types": ["error", { "forbid": [] }],
+
+    "react/jsx-equals-spacing": [2, "never"],
+
+    // Enforce position of the first prop in JSX
+    "react/jsx-first-prop-new-line": [
+      "error",
+      "multiline"
+    ],
+
+    // Restrict file extensions that may contain JSX
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"]}],
+
+    // Prevent usage of unsafe target='_blank'
+    "react/jsx-no-target-blank": "error",
+
+    // Prevent using string references in ref attribute
+    "react/no-string-refs": 1,
+
+    // Enforce a defaultProps definition for every prop that is not a required prop
+    "react/require-default-props": "warn",
+
+    // Enforce ES5 or ES6 class for returning value in render function
+    "react/require-render-return": "error",
+
+    // Enforce style prop value being an object
+    "react/style-prop-object": "error",
+
+    // Prevent extra closing tags for components without children (fixable)
+    "react/self-closing-comp": "warn",
+
+    // Validate closing bracket location in JSX (fixable)
+    "react/jsx-closing-bracket-location": [
+      "error",
+      "tag-aligned"
+    ],
+
+    // Enforce stateless React Components to be written as a pure function
+    "react/prefer-stateless-function": ["error", { "ignorePureComponents": true }],
+
+    // Prevent multiple component definition per file
+    "react/no-multi-comp": ["error", { "ignoreStateless": true }],
+
+    // Prevent using Array index in key props
+    "react/no-array-index-key": "off",
+
+    /**
+     * 要求构造函数首字母大写
+     * 要求调用 new 操作符时有首字母大小的函数，
+     * 允许调用首字母大写的函数时没有 new 操作符。
+     */
+    "new-cap": "error"
+  }
+}
