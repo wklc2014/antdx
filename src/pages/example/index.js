@@ -3,7 +3,7 @@ import { Card } from 'antd';
 import Link from 'umi/link';
 
 import HForm from '../../../lib/HForm.jsx';
-import { configs } from './common/hformConfigExample.js';
+import { configs } from '../../../lib/example/hformConfigExample.js';
 
 import path_1 from '../common/1.jpg';
 import path_2 from '../common/2.jpg';
