@@ -1,10 +1,11 @@
 {
   "name": "hform",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "封装 antd 的表单",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env PORT=9001 BROWSER=none umi dev"
+    "start": "cross-env PORT=9001 BROWSER=none umi dev",
+    "build": "umi build"
   },
   "repository": {
     "type": "git",

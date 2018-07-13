@@ -1,5 +1,5 @@
-import HForm from './lib/HForm.jsx';
-import HPicture from './lib/HPicture.jsx';
+const HForm = require('./lib/HForm.jsx');
+const HPicture = require('./lib/HPicture.jsx');
 
-export default HForm;
-export HPicture;
+module.exports = HForm;
+exports.HPicture = HPicture;
