@@ -500,12 +500,6 @@ export const configs = [
       id: 'imageView',
       type: 'picture',
       api: {
-        rowApi: {
-
-        },
-        colApi: {
-          span: 3,
-        },
         toolTipApi: {
           placement: 'topRight',
         },
