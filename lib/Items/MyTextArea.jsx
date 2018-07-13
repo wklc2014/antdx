@@ -10,7 +10,6 @@ const { TextArea } = Input;
 export default function MyTextArea(props) {
   const {
     api,
-    // ext,
     onChange,
     value,
   } = props;
@@ -27,16 +26,11 @@ export default function MyTextArea(props) {
 
 MyTextArea.propTypes = {
   api: propTypes.object,
-  // ext: propTypes.object,
   onChange: propTypes.func.isRequired,
-  value: propTypes.oneOfType([
-    propTypes.number,
-    propTypes.string,
-  ]),
+  value: propTypes.any,
 }
 
 MyTextArea.defaultProps = {
   api: {},
-  // ext: {},
   value: '',
 }

@@ -1,5 +1,24 @@
-import Redirect from 'umi/redirect';
+import React from 'react';
+import Link from 'umi/link';
 
-const Index = () => <Redirect to="/example" />;
+export default function IndexPage() {
 
-export default Index;
+  return (
+    <div>
+      <p>
+        <Link to="/example">Go to Example page</Link>
+      </p>
+      <p>
+        <Link to="/picture">Go to Picture page</Link>
+      </p>
+    </div>
+  )
+}
+
+IndexPage.propTypes = {
+
+}
+
+IndexPage.defaultProps = {
+
+}

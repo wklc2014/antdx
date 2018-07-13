@@ -8,7 +8,6 @@ import { Slider } from 'antd';
 export default function MySlider(props) {
   const {
     api,
-    // ext,
     onChange,
     value,
   } = props;
@@ -24,7 +23,6 @@ export default function MySlider(props) {
 
 MySlider.propTypes = {
   api: propTypes.object,
-  // ext: propTypes.object,
   onChange: propTypes.func.isRequired,
   value: propTypes.oneOfType([
     propTypes.number,
@@ -34,6 +32,5 @@ MySlider.propTypes = {
 
 MySlider.defaultProps = {
   api: {},
-  // ext: {},
   value: 0,
 }

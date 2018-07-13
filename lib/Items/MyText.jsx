@@ -7,19 +7,11 @@ import is from 'is_js';
 
 export default function MyText(props) {
   const {
-    api,
     ext,
-    onChange,
     value,
   } = props;
 
   const { data, join = ',' } = ext;
-
-  const newProps = {
-    ...api,
-    value,
-    onChange: e => onChange(e.target.value),
-  };
 
   let textValue = value;
   if (is.function(ext.render)) {
@@ -44,19 +36,16 @@ export default function MyText(props) {
       }
     }
   }
-  // 新增一个[my-form-text]类，对 antd 样式做调整
-  return <span className="ant-form-text my-hform-text">{textValue}</span>;
+
+  return <span className="ant-form-text">{textValue}</span>;
 }
 
 MyText.propTypes = {
-  api: propTypes.object,
   ext: propTypes.object,
-  onChange: propTypes.func.isRequired,
   value: propTypes.any,
 }
 
 MyText.defaultProps = {
-  api: {},
   ext: {},
   value: undefined,
 }
