@@ -38,7 +38,7 @@ export default class HForm extends Component {
       this.setState({
         touched: {
           ...touched,
-          id: true,
+          [id]: true,
         },
       })
     }

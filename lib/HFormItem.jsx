@@ -79,7 +79,7 @@ export default function HFormItem(props) {
   // 表单元素的验证
   const formItemValidate = getFormItemValidate({
     values,
-    config: newConfig,
+    configs: newConfig,
     touched,
   });
 
