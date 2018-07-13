@@ -38,8 +38,8 @@ MyTreeSelect.propTypes = {
   ext: propTypes.object,
   onChange: propTypes.func.isRequired,
   value: propTypes.oneOfType([
-    propTypes.number,
     propTypes.string,
+    propTypes.arrayOf(propTypes.string),
   ]),
 }
 

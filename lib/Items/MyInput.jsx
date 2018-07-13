@@ -8,7 +8,6 @@ import { Input } from 'antd';
 export default function MyInput(props) {
   const {
     api,
-    // ext,
     onChange,
     value,
   } = props;
@@ -24,16 +23,11 @@ export default function MyInput(props) {
 
 MyInput.propTypes = {
   api: propTypes.object,
-  // ext: propTypes.object,
   onChange: propTypes.func.isRequired,
-  value: propTypes.oneOfType([
-    propTypes.number,
-    propTypes.string,
-  ]),
+  value: propTypes.any,
 }
 
 MyInput.defaultProps = {
   api: {},
-  // ext: {},
   value: '',
 }

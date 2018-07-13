@@ -8,7 +8,6 @@ import { Rate } from 'antd';
 export default function MyRate(props) {
   const {
     api,
-    // ext,
     onChange,
     value,
   } = props;
@@ -24,13 +23,11 @@ export default function MyRate(props) {
 
 MyRate.propTypes = {
   api: propTypes.object,
-  // ext: propTypes.object,
   onChange: propTypes.func.isRequired,
   value: propTypes.number,
 }
 
 MyRate.defaultProps = {
   api: {},
-  // ext: {},
   value: 0,
 }

@@ -21,6 +21,11 @@ let routes = [
     "path": "/",
     "exact": true,
     "component": require('../index.js').default
+  },
+  {
+    "path": "/picture",
+    "exact": true,
+    "component": require('../picture.js').default
   }
 ];
 

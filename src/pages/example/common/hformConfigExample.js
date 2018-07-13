@@ -475,53 +475,53 @@ export const configs = [
       },
     },
   },
+  {
+    label: '输入搜索',
+    config: {
+      id: 'searchData',
+      type: 'selectFetch',
+      api: {
+        allowClear: true,
+      },
+      ext: {
+        service: {
+          url: '/users',
+          params: 'a=1&b=22&keyword={{value}}',
+          method: 'post',
+          time: 300,
+          key: 'name',
+        },
+      },
+    },
+  },
+  {
+    label: '图片显示',
+    config: {
+      id: 'imageView',
+      type: 'picture',
+      api: {
+        rowApi: {
 
-  // {
-  //   label: '输入搜索',
-  //   config: {
-  //     id: 'fetchInput-1',
-  //     type: 'fetchInput',
-  //     api: {
-  //       allowClear: true,
-  //     },
-  //     ext: {
-  //       service: 'fetch',
-  //     },
-  //   },
-  // },
-  // {
-  //   label: '图片显示',
-  //   config: {
-  //     id: 'imageView',
-  //     type: 'imageView',
-  //     api: {
-  //       rowApi: {
+        },
+        colApi: {
+          span: 3,
+        },
+        toolTipApi: {
+          placement: 'topRight',
+        },
+        hPictureApi: {
+          picWidth: 100,
+        },
+        modalApi: {
 
-  //       },
-  //       colApi: {
-  //         span: 3,
-  //       },
-  //       toolTipApi: {
-  //         placement: 'topRight',
-  //       },
-  //       hPictureViewApi: {
-  //         picWidth: 100,
-  //       },
-  //       modalApi: {
+        },
+      },
+      ext: {
 
-  //       },
-  //       boxStyle: {
-  //         width: '100%',
-  //         // height: '80px',
-  //         borderRaduis: '5px',
-  //       },
-  //     },
-  //     ext: {
-
-  //     },
-  //   },
-  //   extMap: {
-  //     colspan: 2,
-  //   },
-  // },
+      },
+    },
+    extMap: {
+      colspan: 2,
+    },
+  },
 ];

@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import propTypes from 'prop-types';
-import moment from 'moment';
 import { TimePicker } from 'antd';
 
 export default function MyTimePicker(props) {
@@ -16,7 +15,7 @@ export default function MyTimePicker(props) {
   const newProps = {
     ...api,
     value,
-    onChange: (e, f) => onChange(f),
+    onChange,
   };
 
   return <TimePicker {...newProps} />;
@@ -25,13 +24,10 @@ export default function MyTimePicker(props) {
 MyTimePicker.propTypes = {
   api: propTypes.object,
   onChange: propTypes.func.isRequired,
-  value: propTypes.oneOfType([
-    propTypes.object,
-    propTypes.string,
-  ]),
+  value: propTypes.object,
 }
 
 MyTimePicker.defaultProps = {
   api: {},
-  value: moment(),
+  value: undefined,
 }

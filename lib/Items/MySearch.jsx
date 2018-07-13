@@ -26,10 +26,7 @@ export default function MySearch(props) {
 MySearch.propTypes = {
   api: propTypes.object,
   onChange: propTypes.func.isRequired,
-  value: propTypes.oneOfType([
-    propTypes.number,
-    propTypes.string,
-  ]),
+  value: propTypes.any,
 }
 
 MySearch.defaultProps = {
