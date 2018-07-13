@@ -2,6 +2,7 @@
 /node_modules
 
 .DS_Store
+/src/pages/.umi
 
 npm-debug.log*
 yarn-debug.log*
