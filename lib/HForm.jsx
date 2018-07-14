@@ -6,6 +6,7 @@ import HFormItem from './HFormItem.jsx';
 
 import getFormItemLayout from './utils/getFormItemLayout.js';
 import getGridLayout from './utils/getGridLayout.js';
+import getConfigIds from './utils/getConfigIds.js';
 
 /**
  * 通过一个 js 配置数组 array
@@ -43,6 +44,20 @@ export default class HForm extends Component {
       })
     }
     onChange({ id, value });
+  }
+
+  validateFields = () => {
+    const { configs } = this.props;
+    const ids = getConfigIds(configs);
+    const touched = {};
+    ids.forEach((id) => {
+      touched[id] = true;
+    })
+    this.setState({ touched });
+  }
+
+  resetFields = () => {
+    this.setState({ touched: {} });
   }
 
   render() {
