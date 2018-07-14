@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import is from 'is_js';
 import { Form, Row, Col } from 'antd';
 
 import HFormItem from './HFormItem.jsx';
@@ -7,6 +8,7 @@ import HFormItem from './HFormItem.jsx';
 import getFormItemLayout from './utils/getFormItemLayout.js';
 import getGridLayout from './utils/getGridLayout.js';
 import getConfigIds from './utils/getConfigIds.js';
+import getFormValidate from './utils/getFormValidate.js';
 
 /**
  * 通过一个 js 配置数组 array
@@ -28,36 +30,61 @@ export default class HForm extends Component {
        * 记录表单元素是否首次输入
        * @type {Object}
        */
-      touched: {},
+      touches: {},
     }
   }
 
   onChange = ({ id, value }) => {
     const { onChange } = this.props;
-    const { touched } = this.state;
-    if (!touched[id]) {
+    this.updateTouches(id);
+    onChange({ id, value });
+  }
+
+  updateTouches = (id) => {
+    const { touches } = this.state;
+    if (!touches[id]) {
       this.setState({
-        touched: {
-          ...touched,
+        touches: {
+          ...touches,
           [id]: true,
         },
       })
     }
-    onChange({ id, value });
   }
 
-  validateFields = () => {
+  getFieldsError = (fields) => {
+    const { configs, values } = this.props;
+    const formValidate = getFormValidate({ configs, values });
+    if (is.array(fields)) {
+      const errors = {};
+      fields.forEach((field) => {
+        if (formValidate[field]) {
+          errors[field] = formValidate[field];
+        }
+      })
+      return errors;
+    }
+    return formValidate;
+  }
+
+  validateFields = (fields) => {
     const { configs } = this.props;
     const ids = getConfigIds(configs);
-    const touched = {};
+    const touches = {};
     ids.forEach((id) => {
-      touched[id] = true;
+      if (is.array(fields)) {
+        if (is.inArray(id, fields)) {
+          touches[id] = true;
+        }
+      } else {
+        touches[id] = true;
+      }
     })
-    this.setState({ touched });
+    this.setState({ touches });
   }
 
   resetFields = () => {
-    this.setState({ touched: {} });
+    this.setState({ touches: {} });
   }
 
   render() {
@@ -70,7 +97,7 @@ export default class HForm extends Component {
       values,
     } = this.props;
 
-    const { touched } = this.state;
+    const { touches } = this.state;
 
     const ChildrenEle = configs.map((val, i) => {
       const key = `${layout}-${i}`;
@@ -94,7 +121,7 @@ export default class HForm extends Component {
         },
         onChange: this.onChange,
         values,
-        touched,
+        touches,
       };
 
       if (layout === 'inline') {

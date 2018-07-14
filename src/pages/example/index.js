@@ -53,6 +53,11 @@ export default class IndexPage extends Component {
     this.inst.resetFields();
   }
 
+  handleErrors = () => {
+    const errors = this.inst.getFieldsError();
+    console.log('errors>>>', errors);
+  }
+
   render() {
     const { values } = this.state;
     return (
@@ -67,6 +72,13 @@ export default class IndexPage extends Component {
               style={{ margin: '0 10px' }}
             >
               验证
+            </Button>
+            <Button
+              type="primary"
+              onClick={this.handleErrors}
+              style={{ margin: '0 10px' }}
+            >
+              获取错误
             </Button>
             <Button
               type="primary"

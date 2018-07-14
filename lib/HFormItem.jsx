@@ -9,9 +9,8 @@ import { Form, Row, Col } from 'antd';
 
 import HFormItemContent from './HFormItemContent.jsx';
 
-import getFormItemLayoutOffset from './utils/getFormItemLayoutOffset.js';
+import getFormItemOffset from './utils/getFormItemOffset.js';
 import getFormItemValidate from './utils/getFormItemValidate.js';
-// import * as _formItemLayouts from './common/_formItemLayouts.js';
 
 const FormItem = Form.Item;
 
@@ -23,7 +22,7 @@ export default function HFormItem(props) {
     extMap,
     values,
     onChange,
-    touched,
+    touches,
     children,
   } = props;
 
@@ -31,7 +30,7 @@ export default function HFormItem(props) {
   if (extMap.hide) return null;
 
   // 表单元素删格布局
-  const formItemlayout = getFormItemLayoutOffset({
+  const formItemlayout = getFormItemOffset({
     layout: extMap.layout,
     offset: extMap.offset,
   });
@@ -76,11 +75,10 @@ export default function HFormItem(props) {
       );
     });
 
-  // 表单元素的验证
   const formItemValidate = getFormItemValidate({
-    values,
     configs: newConfig,
-    touched,
+    touches,
+    values,
   });
 
   // 表单元素的扩展字段
@@ -93,6 +91,8 @@ export default function HFormItem(props) {
     ...formItemlayout,
     ...formItemValidate,
   }
+
+
   return (
     <FormItem {...FormItemProps}>
       { children ? children : (
@@ -135,10 +135,10 @@ HFormItem.propTypes = {
   onChange: propTypes.func.isRequired,
 
   /**
-   * 记录表单元素是否首次输入
+   * 记录表单元素是否是首次验证
    * @type {Object}
    */
-  touched: propTypes.object.isRequired,
+  touches: propTypes.object.isRequired,
 
   /**
    * 表单值
@@ -151,3 +151,4 @@ HFormItem.defaultProps = {
   label: '',
   extMap: {},
 }
+
