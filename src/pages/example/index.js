@@ -60,6 +60,7 @@ export default class IndexPage extends Component {
 
   render() {
     const { values } = this.state;
+    console.log('values>>>', values);
     return (
       <div style={{ padding: 16 }}>
         <Card>

@@ -29,8 +29,13 @@ export default class HFormItemContent extends Component {
 
   onChange = (e) => {
     const { id, ext, onChange } = this.props;
-    const value = getValue({ value: e, ext });
-    onChange({ id, value });
+    onChange({ id, value: e });
+  }
+
+  onBlur = (e) => {
+    const { id, ext, onChange } = this.props;
+    const newValue = getValue({ value: e, ext });
+    onChange({ id, value: newValue });
   }
 
   render() {
@@ -38,7 +43,6 @@ export default class HFormItemContent extends Component {
     const { placeholder, style } = api;
 
     // 计算一些必要的属性
-    const newValue = getValue({ type, value, ext });
     const newPlaceholder = getPlaceholder({ type, placeholder, label, id });
     const newStyle = getStyle({ type, ext, style });
     const newData = getData({ type, ext });
@@ -47,8 +51,9 @@ export default class HFormItemContent extends Component {
       type,
       api: { ...api, placeholder: newPlaceholder, style: newStyle },
       ext: { ...ext, data: newData },
-      value: newValue,
+      value,
       onChange: this.onChange,
+      onBlur: this.onBlur,
     });
   }
 }

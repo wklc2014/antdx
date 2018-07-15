@@ -5,12 +5,16 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Input } from 'antd';
 
+import checkIsBlur from '../utils/checkIsBlur.js';
+
 const { TextArea } = Input;
 
 export default function MyTextArea(props) {
   const {
     api,
+    ext,
     onChange,
+    onBlur,
     value,
   } = props;
 
@@ -21,16 +25,25 @@ export default function MyTextArea(props) {
     onChange: e => onChange(e.target.value),
   };
 
+  if (checkIsBlur({ ext })) {
+    Object.assign(newProps, {
+      onBlur: e => onBlur(e.target.value),
+    });
+  }
+
   return <TextArea {...newProps} />;
 }
 
 MyTextArea.propTypes = {
   api: propTypes.object,
+  ext: propTypes.object,
   onChange: propTypes.func.isRequired,
+  onBlur: propTypes.func.isRequired,
   value: propTypes.any,
 }
 
 MyTextArea.defaultProps = {
   api: {},
+  ext: {},
   value: '',
 }
