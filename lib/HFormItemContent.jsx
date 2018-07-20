@@ -28,7 +28,7 @@ export default class HFormItemContent extends Component {
   }
 
   onChange = (e) => {
-    const { id, ext, onChange } = this.props;
+    const { id, onChange } = this.props;
     onChange({ id, value: e });
   }
 
