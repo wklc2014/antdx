@@ -7,8 +7,17 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js"
   },
-  "keywords": [],
+  "keywords": ["antd", "form", "hform"],
   "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wklc2014/hform/issues"
+  },
+  "homepage": "https://github.com/wklc2014/hform#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wklc2014/hform.git"
+  },
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^9.0.2",
