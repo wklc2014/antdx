@@ -6,8 +6,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
-  entry: './src/entries/main.js',
   mode: 'production',
+  output: {
+    libraryTarget: 'commonjs2'
+  },
   module: {
     rules: [
       {
