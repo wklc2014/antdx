@@ -4,6 +4,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Checkbox } from 'antd';
+import styles from '../styles.less';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -18,6 +19,7 @@ export default function MyCheckbox(props) {
     ...api,
     value,
     onChange,
+    className: styles.checkbox,
   };
 
   return <CheckboxGroup {...newProps} />;
