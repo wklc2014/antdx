@@ -7,6 +7,8 @@ import { Input } from 'antd';
 
 import checkIsBlur from '../utils/checkIsBlur.js';
 
+let isComposition = false;
+
 export default function MyInput(props) {
   const {
     api,
@@ -19,7 +21,16 @@ export default function MyInput(props) {
   const newProps = {
     ...api,
     value,
-    onChange: e => onChange(e.target.value),
+    onChange: e => {
+      onChange(e.target.value, isComposition);
+    },
+    onCompositionStart: e => {
+      isComposition = true;
+    },
+    onCompositionEnd: e => {
+      isComposition = false;
+      onChange(e.target.value);
+    },
   };
 
   if (checkIsBlur({ ext })) {

@@ -8,6 +8,7 @@ import { Input } from 'antd';
 import checkIsBlur from '../utils/checkIsBlur.js';
 
 const { TextArea } = Input;
+let isComposition = false;
 
 export default function MyTextArea(props) {
   const {
@@ -22,7 +23,16 @@ export default function MyTextArea(props) {
     rows: 5,
     ...api,
     value,
-    onChange: e => onChange(e.target.value),
+    onChange: e => {
+      onChange(e.target.value, isComposition);
+    },
+    onCompositionStart: e => {
+      isComposition = true;
+    },
+    onCompositionEnd: e => {
+      isComposition = false;
+      onChange(e.target.value);
+    },
   };
 
   if (checkIsBlur({ ext })) {

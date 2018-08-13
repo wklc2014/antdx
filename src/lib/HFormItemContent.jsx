@@ -6,7 +6,7 @@ import renderItems from './Items/renderItems.js';
 import getPlaceholder from './utils/getPlaceholder.js';
 import getStyle from './utils/getStyle.js';
 import getData from './utils/getData.js';
-import getValue from './utils/getValue.js';
+import getValue, { getBlurValue } from './utils/getValue.js';
 
 /**
  * 表单元素输入的内容
@@ -27,14 +27,15 @@ export default class HFormItemContent extends Component {
     return next !== prev;
   }
 
-  onChange = (e) => {
-    const { id, onChange } = this.props;
-    onChange({ id, value: e });
+  onChange = (e, composition) => {
+    const { id, ext, onChange } = this.props;
+    const newValue = getValue({ value: e, ext, composition });
+    onChange({ id, value: newValue });
   }
 
-  onBlur = (e) => {
+ onBlur = (e) => {
     const { id, ext, onChange } = this.props;
-    const newValue = getValue({ value: e, ext });
+    const newValue = getBlurValue({ value: e, ext });
     onChange({ id, value: newValue });
   }
 

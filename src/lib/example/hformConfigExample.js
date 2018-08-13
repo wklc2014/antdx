@@ -30,6 +30,7 @@ export default [
           rules: [
             { required: true, message: '城市备注不能为空' },
           ],
+          trim: true,
         },
       },
     ],

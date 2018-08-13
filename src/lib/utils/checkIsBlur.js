@@ -4,8 +4,8 @@
  * @return {Boolean}            [是否需要绑定Blur事件]
  */
 export default function checkIsBlur({ ext }) {
-  const { toUpperCase, toLowerCase, trim } = ext;
-  const isBlur = toUpperCase || toLowerCase || trim;
+  const { trim } = ext;
+  const isBlur = trim;
 
   return isBlur;
 }
