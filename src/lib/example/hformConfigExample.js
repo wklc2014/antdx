@@ -90,6 +90,7 @@ export default [
         api: {
           placeholder: '请选择用户国籍',
           disabled: false,
+          mode: 'tags',
         },
         ext: {
           data: [
@@ -129,7 +130,7 @@ export default [
       id: 'reportDate',
       type: 'date',
       api: {
-        format: 'YYYY-MM-DD HH:mm:ss',
+        format: 'YYYY-MM-DD',
         renderExtraFooter: () => 'footer',
       },
     },

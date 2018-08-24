@@ -10,6 +10,9 @@ export default function Nav() {
         <Link to="/about">关于我们</Link>
       </li>
       <li>
+        <Link to="/help">帮助我们</Link>
+      </li>
+      <li>
         <Link to="/404">404</Link>
       </li>
     </ul>

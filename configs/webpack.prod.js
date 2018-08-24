@@ -7,15 +7,14 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   mode: 'production',
-  output: {
-    libraryTarget: 'commonjs2'
-  },
+  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.(less$|css)/,
-        include: path.resolve(__dirname, 'src'),
+        include: path.join(__dirname, '../src/'),
         use: [
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -37,25 +36,12 @@ module.exports = merge(common, {
           'less-loader'
         ]
       },
-      // 单独给 antd 样式处理
-      {
-        test: /\.(less|css)$/,
-        include: path.resolve(__dirname, 'node_modules'),
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: "less-loader",
-            options: {
-              javascriptEnabled: true
-            }
-          }
-        ]
-      },
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin([
+      include: path.join(__dirname, '../dist/'),
+    ]),
     new UglifyJSPlugin({
       sourceMap: true,
       uglifyOptions: {
@@ -63,6 +49,10 @@ module.exports = merge(common, {
           comments: false,
        },
       }
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     })
   ]
 });

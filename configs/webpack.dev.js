@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
@@ -8,7 +7,7 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, '../dist/'),
     compress: true,
     port: 12000,
     hot: true,
@@ -17,7 +16,7 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.(less|css)$/,
-        include: path.resolve(__dirname, 'src'),
+        include: path.join(__dirname, '../src/'),
         use: [
           'style-loader',
           {
@@ -33,12 +32,12 @@ module.exports = merge(common, {
             loader: 'postcss-loader',
             options: {
               config: {
-                path: path.resolve(__dirname, 'postcss.config.js')
+                path: path.join(__dirname, 'postcss.config.js')
               }
             }
           },
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               javascriptEnabled: true
             }
@@ -48,12 +47,12 @@ module.exports = merge(common, {
       // 单独给 antd 样式处理
       {
         test: /\.(less|css)$/,
-        include: path.resolve(__dirname, 'node_modules'),
+        include: path.join(__dirname, '../node_modules/'),
         use: [
           'style-loader',
           'css-loader',
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               javascriptEnabled: true
             }
@@ -63,11 +62,6 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'hform',
-      template: path.resolve(__dirname, 'src/entries/index.html'),
-      favicon: path.resolve(__dirname, 'src/entries/favicon.ico'),
-    }),
     new webpack.HotModuleReplacementPlugin()
   ],
 });
