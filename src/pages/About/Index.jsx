@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'antd';
 
-import HForm from '../../lib/HForm.jsx';
-import configs from '../../lib/example/hformConfigExample.js';
+import FormGroup from '../../lib/HForm/FormGroup.jsx';
+import configs from '../../lib/HForm/exampleConfig/exampleConfig.js';
 
 export default class IndexPage extends Component {
 
@@ -55,7 +55,7 @@ export default class IndexPage extends Component {
               重置
             </Button>
           </p>
-          <HForm
+          <FormGroup
             configs={configs}
             cols={2}
             onChange={this.onChange}

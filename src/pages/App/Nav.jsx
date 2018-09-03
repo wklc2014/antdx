@@ -7,7 +7,7 @@ export default function Nav() {
   return (
     <ul>
       <li>
-        <Link to="/about">关于我们</Link>
+        <Link to="/about">Demo</Link>
       </li>
       <li>
         <Link to="/help">帮助我们</Link>
