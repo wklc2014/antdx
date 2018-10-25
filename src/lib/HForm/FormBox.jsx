@@ -62,7 +62,7 @@ const FormBox = (props) => {
         if (pbottom !== undefined) {
           ColProps.style.paddingBottom = pbottom;
         } else if (i < config.length - 1) {
-          ColProps.style.paddingBottom = 8;
+          ColProps.style.paddingBottom = 3;
         }
       }
 

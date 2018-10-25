@@ -57,12 +57,10 @@ export default class IndexPage extends Component {
           </p>
           <FormGroup
             configs={configs}
-            cols={3}
+            cols={2}
             onChange={this.onChange}
             values={values}
             itemSpace={16}
-            itemStyle={{ marginBottom: 0 }}
-            layout="vertical"
             ref={inst => this.inst = inst}
           />
         </Card>
