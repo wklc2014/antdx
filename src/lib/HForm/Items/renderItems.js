@@ -72,7 +72,7 @@ export default function renderItems(params = {}) {
     case 'treeSelect':
       return <MyTreeSelect {...restProps} />;
     default:
-      throw Error(`form item type: '${type}' is error`);
+      console.log(`form item type: '${type}' is undefined`);
   }
 
 }

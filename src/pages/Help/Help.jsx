@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import { DatePicker, Select } from 'antd';
-import moment from 'moment';
 
 class Help extends Component {
 
@@ -12,26 +10,13 @@ class Help extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: moment(),
     }
   }
 
-  onChange = (date, dateString) => {
-    console.log(date, dateString);
-    this.setState({
-      date,
-    })
-  }
-
   render() {
-    const { date } = this.state;
     return (
       <div>
-        <DatePicker
-          onChange={this.onChange}
-          placeholder="Select month"
-          value={date}
-        />
+        Help
       </div>
     )
   }

@@ -21,7 +21,7 @@ export default function getFormItemLayout(params) {
    * 表单元素才采用栅格布局
    */
   if (layout !== 'horizontal') {
-    return null;
+    return {};
   }
 
   /**

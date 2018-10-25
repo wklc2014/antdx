@@ -38,25 +38,35 @@ const FormBox = (props) => {
   // 如果 config 是对象, 则转换成数组, 统一处理
   const newConfig = is.array(config) ? config : [config];
 
-  const ChildrenEle = newConfig
-    // 过滤表单输入元素的隐藏字段
-    .filter((val) => {
-      const { ext = {} } = val;
-      return !ext.hide;
-    })
-    .map((val, i) => {
+  // 过滤表单输入元素的隐藏字段
+  const filterConfig = newConfig.filter((val) => {
+    const { ext = {} } = val;
+    return !ext.hide;
+  })
+
+  const ChildrenEle = filterConfig.map((val, i) => {
       const key = `formItem-${i}`;
       const { ext = {} } = val;
-      const { span = 24, pright, center } = ext;
+      const { span = 24, pright, pbottom, center } = ext;
       const ColProps = { key, span, style: {} };
 
       // 计算 Col 右边内间距
-      if (pright) {
-        ColProps.style.paddingRight = pright;
+      if (pright !== undefined) {
+        ColProps.style.paddingRight = pright
       } else if (i < config.length - 1) {
-        ColProps.style.paddingRight = 8;
+        ColProps.style.paddingRight = 8
       }
 
+      // 计算 Col 下边内间距
+      if (filterConfig.length > 2) {
+        if (pbottom !== undefined) {
+          ColProps.style.paddingBottom = pbottom;
+        } else if (i < config.length - 1) {
+          ColProps.style.paddingBottom = 8;
+        }
+      }
+
+      // 计算 Col 元素对其方式
       if (center) {
         ColProps.style.textAlign = 'center';
       }
@@ -82,12 +92,14 @@ const FormBox = (props) => {
   });
 
   // 表单元素的扩展字段
-  const { space, extra, colon } = extMap;
+  const { space, extra, colon, className, style } = extMap;
 
   const FormItemProps = {
-    label,
-    extra,
+    className,
     colon,
+    extra,
+    label,
+    style,
     ...formItemlayout,
     ...formItemValidate,
   }

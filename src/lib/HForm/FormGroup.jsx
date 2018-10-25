@@ -91,8 +91,10 @@ class FormGroup extends Component {
       cols,
       configs,
       layout,
+      itemClassName,
       itemLayout,
       itemSpace,
+      itemStyle,
       values,
     } = this.props;
 
@@ -114,8 +116,10 @@ class FormGroup extends Component {
         label,
         config,
         extMap: {
+          className: itemClassName,
           layout: newItemLayout,
           space: itemSpace,
+          style: itemStyle,
           ...extMap,
         },
         onChange: this.onChange,
@@ -174,6 +178,18 @@ FormGroup.propTypes = {
     'vertical',
     'inline',
   ]),
+
+  /**
+   * 表单元素附加的 css 类
+   * @type {String}
+   */
+  itemClassName: propTypes.string,
+
+  /**
+   * 表单元素附加的 css 样式
+   * @type {Object}
+   */
+  itemStyle: propTypes.object,
 
   /**
    * 表单元素栅格布局
