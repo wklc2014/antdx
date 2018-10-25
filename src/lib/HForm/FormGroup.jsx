@@ -53,10 +53,12 @@ class FormGroup extends Component {
 
   getFieldsError = (fields = []) => {
     const { configs, values } = this.props;
+    const ids = getConfigIds(configs);
+    const targetFields = fields.length ? fields : ids;
     const formValidate = getFormValidate({ configs, values });
-    if (is.array(fields)) {
+    if (is.array(targetFields)) {
       const errors = {};
-      fields.forEach((field) => {
+      targetFields.forEach((field) => {
         if (formValidate[field]) {
           errors[field] = formValidate[field];
         }
@@ -72,7 +74,7 @@ class FormGroup extends Component {
     const touches = {};
     ids.forEach((id) => {
       if (is.array(fields)) {
-        if (is.inArray(id, fields)) {
+        if (fields.length === 0 || is.inArray(id, fields)) {
           touches[id] = true;
         }
       } else {
