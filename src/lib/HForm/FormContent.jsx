@@ -1,9 +1,8 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import propTypes from 'prop-types';
 
-import renderItems from './Items/index.js';
+import FormItems from './FormItems/index.js';
 
-import getPlaceholder from './utils/getPlaceholder.js';
 import getStyle from './utils/getStyle.js';
 import getData from './utils/getData.js';
 import getValue, { getBlurValue } from './utils/getValue.js';
@@ -15,7 +14,6 @@ import getValue, { getBlurValue } from './utils/getValue.js';
 class FormContent extends Component {
 
   static defaultProps = {
-    label: '',
     api: {},
     ext: {},
     value: undefined,
@@ -40,33 +38,32 @@ class FormContent extends Component {
   }
 
   render() {
-    const { id, type, label, api, ext, value } = this.props;
+    const { id, type, api, ext, value } = this.props;
     const { placeholder, style } = api;
 
     // 计算一些必要的属性
-    const newPlaceholder = getPlaceholder({ type, placeholder, label, id });
-    const newStyle = getStyle({ type, ext, style });
-    const newData = getData({ type, ext });
+    const newStyle = getStyle({ type, api, ext });
+    const newData = getData({ type, api, ext });
 
-    return renderItems({
-      type,
-      api: { ...api, placeholder: newPlaceholder, style: newStyle },
+    const params = {
+      api: { ...api, style: newStyle },
       ext: { ...ext, data: newData },
       value,
       onChange: this.onChange,
       onBlur: this.onBlur,
-    });
+    };
+
+    if (FormItems[type]) {
+      return FormItems[type](params);
+    }
+
+    return null;
+    console.log('type>>>', type);
+
   }
 }
 
 FormContent.propTypes = {
-  /**
-   * 表单元素 label 属性
-   * 标识表单元素的名称
-   * @type {String}
-   */
-  label: propTypes.string,
-
   /**
    * 表单元素 id 属性
    * 标识表单元素的唯一 ID
@@ -105,3 +102,4 @@ FormContent.propTypes = {
 }
 
 export default FormContent;
+
