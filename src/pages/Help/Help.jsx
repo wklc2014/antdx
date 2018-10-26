@@ -10,13 +10,21 @@ class Help extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      values: {},
     }
+  }
+
+  onChange = ({ id, value }) => {
+    console.log(`id>>>${id}_____value>>>${value}`);
+    const { values } = this.state;
+    this.setState({ values: { ...values, [id]: value } });
   }
 
   render() {
     return (
       <div>
-        Help
+        <h2>Help</h2>
+
       </div>
     )
   }

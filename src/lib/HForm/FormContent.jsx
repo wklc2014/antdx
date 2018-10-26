@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import propTypes from 'prop-types';
 
-import renderItems from './Items/renderItems.js';
+import renderItems from './Items/index.js';
 
 import getPlaceholder from './utils/getPlaceholder.js';
 import getStyle from './utils/getStyle.js';

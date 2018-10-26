@@ -2,10 +2,8 @@
  * 多选框
  */
 import React from 'react';
-import classnames from 'classnames';
 import propTypes from 'prop-types';
 import { Checkbox } from 'antd';
-import styles from '../styles.less';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -16,11 +14,8 @@ const MyCheckbox = (props) => {
     value,
   } = props;
 
-  const cls = classnames(styles.myCheckbox, api.className);
-
   const newProps = {
     ...api,
-    className: cls,
     onChange,
     value,
   };
