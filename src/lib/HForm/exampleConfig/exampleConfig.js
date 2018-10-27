@@ -128,7 +128,7 @@ export default [
     label: '报案日期',
     config: {
       id: 'reportDate',
-      type: 'date',
+      type: 'datePicker',
       api: {
         format: 'YYYY-MM-DD',
         renderExtraFooter: () => 'footer',
@@ -139,7 +139,7 @@ export default [
     label: '报名年月',
     config: {
       id: 'reportMonth',
-      type: 'month',
+      type: 'monthPicker',
     },
   },
   {
@@ -186,7 +186,7 @@ export default [
     label: '运输日期',
     config: {
       id: 'translateDate',
-      type: 'range',
+      type: 'rangePicker',
       api: {
         showTime: true,
         format: 'YYYY-MM-DD HH:mm:ss',
@@ -309,7 +309,7 @@ export default [
     label: '就餐时间',
     config: {
       id: 'dinnerTime',
-      type: 'time',
+      type: 'timePicker',
     },
   },
   {

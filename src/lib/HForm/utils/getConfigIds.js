@@ -7,14 +7,17 @@ import is from 'is_js';
  */
 export default function getConfigIds(configs = []) {
   const ids = [];
+  if (is.not.array(configs)) {
+    return ids;
+  }
   configs.forEach((val) => {
     const { config } = val;
     if (is.array(config)) {
       config.forEach((v) => {
-        ids.push(v.id);
+        v.id && ids.push();
       })
     } else {
-      ids.push(config.id);
+      config.id && ids.push(config.id);
     }
   })
   return ids;

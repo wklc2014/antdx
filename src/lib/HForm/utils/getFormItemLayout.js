@@ -8,7 +8,7 @@ import * as _formItemLayouts from './_formItemLayouts.js';
  * @param  {number} params.colspan    [某个表单元素横跨几列, 默认为1]
  * @return {object/null}              [表单元素栅格化布局属性]
  */
-export default function getFormItemLayout(params) {
+export default function getFormItemLayout(params = {}) {
   const {
     layout = 'horizontal',
     itemLayout = '',

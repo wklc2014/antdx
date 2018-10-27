@@ -72,7 +72,26 @@ module.exports = {
         use: [
           'xml-loader'
         ]
-      }
+      },
+      // 单独给 antd 样式处理
+      {
+        test: /\.(less|css)$/,
+        include: path.join(__dirname, '../node_modules/'),
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              modifyVars: {
+                'primary-color': '#1DA57A',
+                'font-size-base': '12px',
+              },
+              javascriptEnabled: true
+            }
+          }
+        ]
+      },
     ]
   },
 };

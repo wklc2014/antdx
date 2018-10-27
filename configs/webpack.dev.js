@@ -11,7 +11,7 @@ module.exports = merge(common, {
     compress: true,
     port: 12000,
     hot: true,
-    open: true,
+    // open: true,
   },
   module: {
     rules: [
@@ -37,21 +37,6 @@ module.exports = merge(common, {
               }
             }
           },
-          {
-            loader: 'less-loader',
-            options: {
-              javascriptEnabled: true
-            }
-          }
-        ]
-      },
-      // 单独给 antd 样式处理
-      {
-        test: /\.(less|css)$/,
-        include: path.join(__dirname, '../node_modules/'),
-        use: [
-          'style-loader',
-          'css-loader',
           {
             loader: 'less-loader',
             options: {

@@ -22,10 +22,10 @@ export default function getStyle({ type, ext = {}, style = {} }) {
   // 部分表单元素类型默认设置 width: 100%
   switch (type) {
     case 'cascader':
-    case 'date':
-    case 'range':
-    case 'month':
-    case 'time':
+    case 'datePicker':
+    case 'rangePicker':
+    case 'monthPicker':
+    case 'timePicker':
     case 'number':
     case 'select':
     case 'editor':

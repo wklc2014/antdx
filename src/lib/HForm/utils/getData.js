@@ -1,3 +1,4 @@
+import is from 'is_js';
 import _chineseCities from './_chineseCities.js';
 
 /**
@@ -6,23 +7,27 @@ import _chineseCities from './_chineseCities.js';
  * @param  {Object} options.ext  [表单元素扩展配置]
  * @return {array}               [新的表单元素的 data 属性]
  */
-export default function getData({ type, ext = {} }) {
+export default function getData({ type, api = {}, ext = {} }) {
 
-  const { data, city } = ext;
-
-  let newData = data || [];
-  switch (type) {
-    case 'cascader':
-    case 'treeSelect':
-      if (city && _chineseCities[city]) {
-        newData = [..._chineseCities[city]];
-      }
-      if (type === 'treeSelect') {
-        // 接口变化，需要重新组装数据
-        newData = newData.map((v) => ({ title: v.label, value: v.value }));
-      }
-      break;
-    default:
+  if (type === 'cascader') {
+    const { options } = api;
+    const { city } = ext;
+    if (is.array(options)) {
+      return options;
+    } else if (city && _chineseCities[city] && is.array(_chineseCities[city])) {
+      return _chineseCities[city];
+    }
   }
-  return newData;
+
+  else if (type === 'treeSelect') {
+    const { treeData } = api;
+    const { data } = ext;
+    if (is.array(treeData)) {
+      return treeData;
+    } else if (is.array(data)) {
+      return data.map((v) => ({ title: v.label, value: v.value }));
+    }
+  }
+
+  return [];
 }

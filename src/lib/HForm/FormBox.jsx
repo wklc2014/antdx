@@ -23,7 +23,6 @@ const FormBox = (props) => {
     values,
     onChange,
     touches,
-    children,
   } = props;
 
   // 表单元素的扩展字段配置隐藏属性
@@ -107,11 +106,9 @@ const FormBox = (props) => {
 
   return (
     <FormItem {...FormItemProps}>
-      { children ? children : (
-        <Row type="flex" style={{ paddingRight: space }}>
-          {ChildrenEle}
-        </Row>
-      ) }
+      <Row type="flex" style={{ paddingRight: space }}>
+        {ChildrenEle}
+      </Row>
     </FormItem>
   )
 }
