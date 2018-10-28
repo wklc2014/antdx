@@ -5,10 +5,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Input } from 'antd';
 
-import shouldBlurEvent from '../utils/shouldBlurEvent.js';
+import shouldBindBlurEvent from '../utils/shouldBindBlurEvent.js';
 
 const { Search } = Input;
-let isComposition = false;
 
 const MySearch = (props) => {
   const {
@@ -22,19 +21,12 @@ const MySearch = (props) => {
   const newProps = {
     ...api,
     onChange: e => {
-      onChange(e.target.value, isComposition);
-    },
-    onCompositionStart: e => {
-      isComposition = true;
-    },
-    onCompositionEnd: e => {
-      isComposition = false;
       onChange(e.target.value);
     },
     value,
   };
 
-  if (shouldBlurEvent({ ext })) {
+  if (shouldBindBlurEvent({ ext })) {
     Object.assign(newProps, {
       onBlur: e => onBlur(e.target.value),
     });

@@ -63,6 +63,7 @@
     "is_js": "^0.9.0",
     "lodash": "^4.17.10",
     "mithril": "^1.1.6",
+    "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",

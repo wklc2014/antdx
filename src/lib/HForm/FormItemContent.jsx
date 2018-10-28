@@ -5,15 +5,17 @@ import FormItems from './FormItems/index.js';
 
 import getStyle from './utils/getStyle.js';
 import getData from './utils/getData.js';
-import getValue, { getBlurValue } from './utils/getValue.js';
+import getPlaceholder from './utils/getPlaceholder.js';
+import { getOnBlurValue } from './utils/getValue.js';
 
 /**
  * 表单元素输入的内容
  * 被 HFormItem 包裹
  */
-class FormContent extends Component {
+class FormItemContent extends Component {
 
   static defaultProps = {
+    label: '',
     api: {},
     ext: {},
     value: undefined,
@@ -26,27 +28,27 @@ class FormContent extends Component {
   }
 
   onChange = (e, composition) => {
-    const { id, ext, onChange } = this.props;
-    const newValue = getValue({ value: e, ext, composition });
-    onChange({ id, value: newValue });
+    const { id, onChange } = this.props;
+    onChange({ id, value: e });
   }
 
  onBlur = (e) => {
     const { id, ext, onChange } = this.props;
-    const newValue = getBlurValue({ value: e, ext });
+    const newValue = getOnBlurValue({ value: e, ext });
     onChange({ id, value: newValue });
   }
 
   render() {
-    const { id, type, api, ext, value } = this.props;
+    const { id, label, type, api, ext, value } = this.props;
     const { placeholder, style } = api;
 
     // 计算一些必要的属性
     const newStyle = getStyle({ type, api, ext });
     const newData = getData({ type, api, ext });
+    const newPlaceholder = getPlaceholder({ type, api, ext, label, id });
 
     const params = {
-      api: { ...api, style: newStyle },
+      api: { ...api, placeholder: newPlaceholder, style: newStyle },
       ext: { ...ext, data: newData },
       value,
       onChange: this.onChange,
@@ -63,7 +65,14 @@ class FormContent extends Component {
   }
 }
 
-FormContent.propTypes = {
+FormItemContent.propTypes = {
+  /**
+   * 表单元素 label 属性
+   * 标识表单元素的名称
+   * @type {String}
+   */
+  label: propTypes.string,
+
   /**
    * 表单元素 id 属性
    * 标识表单元素的唯一 ID
@@ -101,5 +110,5 @@ FormContent.propTypes = {
   value: propTypes.any,
 }
 
-export default FormContent;
+export default FormItemContent;
 

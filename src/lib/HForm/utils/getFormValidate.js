@@ -1,29 +1,28 @@
 import is from 'is_js';
-import getValidateByRules from './getValidateByRules.js';
+import getFormItemValidateByRules from './getFormItemValidateByRules.js';
 
 /**
  * 自定义表单验证
- * @param  {Array}   options.configs   [表单配置]
- * @param  {Object} options.validates  [表单元素是否首次验证]
- * @param  {Object} options.values     [表单元素值]
- * @return {Object}                    [当前表单元素验证结果]
+ * @param  {Array}  options.formConfigs    [表单配置]
+ * @param  {Object} options.formValues     [表单元素值]
+ * @return {Object}                        [当前表单元素验证结果]
  */
 export default function getFormValidate({
-  configs = [],
-  values = {},
+  formConfigs = [],
+  formValues = {},
 }) {
 
   const formValidates = {};
 
-  configs.forEach((val) => {
-    const { config } = val;
-    const newConfig = is.array(config) ? config : [config];
+  formConfigs.forEach((val) => {
+    const { config: formItemConfig } = val;
+    const newFormItemConfig = is.array(formItemConfig) ? formItemConfig : [formItemConfig];
 
-    newConfig.forEach((c) => {
+    newFormItemConfig.forEach((c) => {
+
       const { id, ext = {} } = c;
       const { rules } = ext;
 
-      // eslint-disable-next-line
       if (!rules) return ;
 
       /**
@@ -34,11 +33,13 @@ export default function getFormValidate({
       }
 
       // 待验证的值
-      const value = values[id];
+      const formItemValue = formValues[id];
 
-      const validate = getValidateByRules({ value, rules });
+      formValidates[id] = getFormItemValidateByRules({
+        formItemValue,
+        formItemRules: rules,
+      });
 
-      formValidates[id] = validate;
     })
   })
 

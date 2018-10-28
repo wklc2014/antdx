@@ -5,10 +5,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Input } from 'antd';
 
-import shouldBlurEvent from '../utils/shouldBlurEvent.js';
+import shouldBindBlurEvent from '../utils/shouldBindBlurEvent.js';
 
 const { TextArea } = Input;
-let isComposition = false;
 
 const MyTextArea = (props) => {
   const {
@@ -23,19 +22,12 @@ const MyTextArea = (props) => {
     rows: 5,
     ...api,
     onChange: e => {
-      onChange(e.target.value, isComposition);
-    },
-    onCompositionStart: e => {
-      isComposition = true;
-    },
-    onCompositionEnd: e => {
-      isComposition = false;
       onChange(e.target.value);
     },
     value,
   };
 
-  if (shouldBlurEvent({ ext })) {
+  if (shouldBindBlurEvent({ ext })) {
     Object.assign(newProps, {
       onBlur: e => onBlur(e.target.value),
     });

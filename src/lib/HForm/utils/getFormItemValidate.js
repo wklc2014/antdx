@@ -1,17 +1,17 @@
 import is from 'is_js';
-import getValidateByRules from './getValidateByRules.js';
+import getFormItemValidateByRules from './getFormItemValidateByRules.js';
 
 /**
  * 自定义表单验证
- * @param  {Array}   options.configs   [表单配置]
- * @param  {Object} options.validates  [表单元素是否首次验证]
- * @param  {Object} options.values     [表单元素值]
- * @return {Object}                    [当前表单元素验证结果]
+ * @param  {Array}  options.formItemConfigs   [表单配置]
+ * @param  {Object} options.formItemTouches   [表单元素是否首次验证]
+ * @param  {Object} options.formValues        [表单元素值]
+ * @return {Object}                           [当前表单元素验证结果]
  */
 export default function getFormItemValidate({
-  configs = [],
-  touches = {},
-  values = {},
+  formItemConfigs: configs = [],
+  formItemTouches: touches = {},
+  formValues: values = {},
 }) {
 
   const validates = {};
@@ -23,7 +23,6 @@ export default function getFormItemValidate({
     // 错误标识
     let isError = false;
 
-    // eslint-disable-next-line
     if (!rules) return ;
 
     /**
@@ -40,7 +39,10 @@ export default function getFormItemValidate({
     validates.required = rules.some(rule => rule.required);
 
     if (touches[id]) {
-      const validate = getValidateByRules({ value, rules });
+      const validate = getFormItemValidateByRules({
+        formItemValue: value,
+        formItemRules: rules,
+      });
       Object.assign(validates, validate);
       isError = is.not.empty(validate);
     }

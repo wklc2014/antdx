@@ -2,26 +2,27 @@ import is from 'is_js';
 
 /**
  * 对表单元素值进行验证
- * @param  {any} options.value    [待验证的表单值]
- * @param  {Array}  options.rules [表单验证规则]
- * @return {Object}               [验证结果]
+ * @param  {any}    options.formItemValue    [待验证的表单值]
+ * @param  {Array}  options.formItemRules    [表单验证规则]
+ * @return {Object}                          [验证结果]
  */
-export default function getValidateByRules({ value, rules }) {
+export default function getFormItemValidateByRules({
+  formItemValue: value,
+  formItemRules: rules,
+}) {
+
   const validate = {};
 
-  // eslint-disable-next-line
   if (!rules) return validate;
 
-  /**
-   * 如果验证规则不是数组，直接抛异常
-   */
+  // 如果验证规则不是数组，直接抛异常
   if (is.not.array(rules)) {
     throw Error('表单元素验证规则必须是数组');
   }
 
   // 验证规则一条没通过后, 就不再验证
   rules.some((rule) => {
-    const result = validateRule(rule, value);
+    const result = validateRule({ rule, value });
     if (result) {
       Object.assign(validate, result);
     }
@@ -37,10 +38,11 @@ export default function getValidateByRules({ value, rules }) {
  * @param  {Any} value    [待验证的表单值]
  * @return {Object}       [验证结果]
  */
-function validateRule(rule, value) {
+function validateRule({ rule, value }) {
   // 必填性验证
-  const isEmptyArray = is.array(value) && !value.length;
-  if (rule.required && (isEmptyArray || !value)) {
+  const isEmptyArray = is.array(value) && value.length === 0;
+  const isEmpty = is.not.number(value) && !value;
+  if (rule.required && (isEmptyArray || isEmpty)) {
     return {
       validateStatus: 'error',
       help: rule.message,

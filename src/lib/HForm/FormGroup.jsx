@@ -3,11 +3,11 @@ import propTypes from 'prop-types';
 import is from 'is_js';
 import { Form, Row, Col } from 'antd';
 
-import FormBox from './FormBox.jsx';
+import FormItemBox from './FormItemBox.jsx';
 
 import getFormItemLayout from './utils/getFormItemLayout.js';
-import getGridLayout from './utils/getGridLayout.js';
-import getConfigIds from './utils/getConfigIds.js';
+import getFormGridLayout from './utils/getFormGridLayout.js';
+import getFormConfigIds from './utils/getFormConfigIds.js';
 import getFormValidate from './utils/getFormValidate.js';
 
 /**
@@ -17,10 +17,12 @@ import getFormValidate from './utils/getFormValidate.js';
 class FormGroup extends Component {
 
   static defaultProps = {
-    cols: 1,
-    layout: 'horizontal',
-    itemLayout: '',
-    itemSpace: 0,
+    formCols: 1,
+    formLayout: 'horizontal',
+    formItemClassName: '',
+    formItemStyle: {},
+    formItemLayout: '',
+    formItemSpace: 0,
   }
 
   constructor(props) {
@@ -30,7 +32,7 @@ class FormGroup extends Component {
        * 记录表单元素是否首次输入
        * @type {Object}
        */
-      touches: {},
+      formItemTouches: {},
     }
   }
 
@@ -40,11 +42,11 @@ class FormGroup extends Component {
   }
 
   updateTouches = (id) => {
-    const { touches } = this.state;
-    if (!touches[id]) {
+    const { formItemTouches } = this.state;
+    if (!formItemTouches[id]) {
       this.setState({
-        touches: {
-          ...touches,
+        formItemTouches: {
+          ...formItemTouches,
           [id]: true,
         },
       })
@@ -52,10 +54,10 @@ class FormGroup extends Component {
   }
 
   getFieldsError = (fields = []) => {
-    const { configs, values } = this.props;
-    const ids = getConfigIds(configs);
+    const { formConfigs, formValues } = this.props;
+    const ids = getFormConfigIds(formConfigs);
     const targetFields = fields.length ? fields : ids;
-    const formValidate = getFormValidate({ configs, values });
+    const formValidate = getFormValidate({ formConfigs, formValues });
     if (is.array(targetFields)) {
       const errors = {};
       targetFields.forEach((field) => {
@@ -69,8 +71,8 @@ class FormGroup extends Component {
   }
 
   validateFields = (fields = []) => {
-    const { configs } = this.props;
-    const ids = getConfigIds(configs);
+    const { formConfigs } = this.props;
+    const ids = getFormConfigIds(formConfigs);
     const touches = {};
     ids.forEach((id) => {
       if (is.array(fields)) {
@@ -81,73 +83,76 @@ class FormGroup extends Component {
         touches[id] = true;
       }
     })
-    this.setState({ touches });
+    this.setState({ formItemTouches: touches });
   }
 
   resetFields = () => {
-    this.setState({ touches: {} });
+    this.setState({ formItemTouches: {} });
   }
 
   render() {
     const {
-      cols,
-      configs,
-      layout,
-      itemClassName,
-      itemLayout,
-      itemSpace,
-      itemStyle,
-      values,
+      formCols,
+      formConfigs,
+      formLayout,
+      formValues,
+      formItemClassName,
+      formItemLayout,
+      formItemSpace,
+      formItemStyle,
     } = this.props;
 
-    const { touches } = this.state;
+    const { formItemTouches } = this.state;
 
-    const ChildrenEle = configs.map((val, i) => {
-      const key = `${layout}-${i}`;
+    const ChildrenEle = formConfigs.map((val, i) => {
+      const key = `${formLayout}-${i}`;
       const { label, config, extMap = {} } = val;
       const { colspan } = extMap;
 
-      const newItemLayout = getFormItemLayout({
-        layout,
-        itemLayout,
-        cols,
-        colspan,
+      const newFormItemLayout = getFormItemLayout({
+        formCols,
+        formLayout,
+        formItemLayout,
+        formItemColspan: colspan,
       });
 
-      const FormBoxProps = {
-        label,
-        config,
-        extMap: {
-          className: itemClassName,
-          layout: newItemLayout,
-          space: itemSpace,
-          style: itemStyle,
+      const FormItemBoxProps = {
+        formValues,
+        formItemConfig: config,
+        formItemExtMap: {
+          className: formItemClassName,
+          layout: newFormItemLayout,
+          space: formItemSpace,
+          style: formItemStyle,
           ...extMap,
         },
+        formItemLabel: label,
+        formItemTouches,
         onChange: this.onChange,
-        values,
-        touches,
       };
 
-      if (layout === 'inline') {
+      if (formLayout === 'inline') {
         return (
           <div key={key} style={{ display: 'inline-block' }}>
-            <FormBox {...FormBoxProps} />
+            <FormItemBox {...FormItemBoxProps} />
           </div>
         )
       }
 
-      const ColProps = getGridLayout({ cols, colspan });
+      const ColProps = getFormGridLayout({
+        formCols,
+        formItemColspan: colspan
+      });
       return (
         <Col key={key} {...ColProps}>
-          <FormBox {...FormBoxProps} />
+          <FormItemBox {...FormItemBoxProps} />
         </Col>
       );
     });
 
     return (
       <section>
-        <Form layout={layout}>
+        <Form layout={formLayout}>
           <Row type="flex">{ChildrenEle}</Row>
         </Form>
       </section>
@@ -158,58 +163,64 @@ class FormGroup extends Component {
 
 FormGroup.propTypes = {
   /**
-   * 表单列数
+   * 表单组列数
    * 表单组一行显示表单元素的个数
    * @type {Number}
    */
-  cols: propTypes.number,
+  formCols: propTypes.number,
 
   /**
    * 表单配置数组
    * @type {Array}
    */
-  configs: propTypes.array.isRequired,
+  formConfigs: propTypes.array.isRequired,
 
   /**
    * 表单布局类型
-   * 包括 antd 提供的表单布局 horizontal vertical inline 三种
+   * 仅支持 antd 提供的表单布局 horizontal vertical inline 三种
    * @type {String}
    */
-  layout: propTypes.oneOf([
+  formlayout: propTypes.oneOf([
     'horizontal',
     'vertical',
     'inline',
   ]),
 
   /**
+   * 整个表单值
+   * @type {Object}
+   */
+  formValues: propTypes.object.isRequired,
+
+  /**
    * 表单元素附加的 css 类
    * @type {String}
    */
-  itemClassName: propTypes.string,
+  formItemClassName: propTypes.string,
 
   /**
    * 表单元素附加的 css 样式
    * @type {Object}
    */
-  itemStyle: propTypes.object,
+  formItemStyle: propTypes.object,
 
   /**
    * 表单元素栅格布局
-   * 表单为 horizontal 布局时,
-   * 表单元素的 label 元素和 表单输入区域的栅格布局
-   * 采用 antd 提供的栅格布局, 或内置的栅格布局映射值
+   * 仅当表单为 horizontal 布局时,
+   * 设置表单元素的 label 元素和 表单输入区域的栅格布局
+   * 值为 antd 提供的栅格布局, 或内置的栅格布局映射值
    * @type {String or object}
    */
-  itemLayout: propTypes.oneOfType([
+  formItemLayout: propTypes.oneOfType([
     propTypes.object,
     propTypes.string,
   ]),
 
   /**
-   * 表单元素间隔距离
+   * 表单元素水平间隔距离
    * @type {Number}
    */
-  itemSpace: propTypes.number,
+  formItemSpace: propTypes.number,
 
   /**
    * 可控表单搜集表单值的事件方法,
@@ -217,12 +228,6 @@ FormGroup.propTypes = {
    * @type {func}
    */
   onChange: propTypes.func.isRequired,
-
-  /**
-   * 整个表单值
-   * @type {Object}
-   */
-  values: propTypes.object.isRequired,
 };
 
 export default FormGroup;

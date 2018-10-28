@@ -9,9 +9,10 @@ import _chineseCities from './_chineseCities.js';
  */
 export default function getData({ type, api = {}, ext = {} }) {
 
+  const { data, city } = ext;
+
   if (type === 'cascader') {
     const { options } = api;
-    const { city } = ext;
     if (is.array(options)) {
       return options;
     } else if (city && _chineseCities[city] && is.array(_chineseCities[city])) {
@@ -21,12 +22,15 @@ export default function getData({ type, api = {}, ext = {} }) {
 
   else if (type === 'treeSelect') {
     const { treeData } = api;
-    const { data } = ext;
     if (is.array(treeData)) {
       return treeData;
-    } else if (is.array(data)) {
-      return data.map((v) => ({ title: v.label, value: v.value }));
+    } else if (city && _chineseCities[city] && is.array(_chineseCities[city])) {
+      return _chineseCities[city].map((v) => ({ title: v.label, value: v.value }));
     }
+  }
+
+  if (is.array(data)) {
+    return data;
   }
 
   return [];

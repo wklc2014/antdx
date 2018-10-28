@@ -3,9 +3,9 @@
  * @param  {Object} options.ext [表单元素扩展配置]
  * @return {Boolean}            [是否需要绑定Blur事件]
  */
-export default function shouldBlurEvent({ ext }) {
-  const { trim } = ext;
-  const isBlur = trim;
+export default function shouldBindBlurEvent({ ext }) {
+  const { trim, toUpperCase, toLowerCase } = ext;
+  const isBlur = trim || toUpperCase || toLowerCase;
 
   return isBlur;
 }

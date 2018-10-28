@@ -1,29 +1,38 @@
 /**
  * 某些表单元素不设置 label
  * 则该表单元素布局还需要一个 offset 属性
- * @param  {Object} options.layout  [表单元素布局]
- * @param  {Boolean} options.offset [是否设置 offset]
  * @return {Object}                 [新的表单元素布局]
  */
-export default function getFormItemOffset({ layout, offset }) {
+export default function getFormItemOffsetLayout(params = {}) {
+
+  const {
+    formItemLayout,
+    formItemOffset,
+  } = params;
 
   // 如果不需要设置 offset 属性，则直接返回表单元素布局
-  if (!offset) return layout;
+  if (!formItemOffset) return formItemLayout;
 
   // 给表单元素布局对象的 wrapperCol 值添加 offset 属性
-  const newLayout = {};
-  Object.keys(layout).forEach((val) => {
-    const { labelCol = {}, wrapperCol = {} } = layout;
+  const newFormItemLayout = {};
+  Object.keys(formItemLayout).forEach((val) => {
+    const { labelCol = {}, wrapperCol = {} } = formItemLayout;
     if (val === 'labelCol') {
-      newLayout.wrapperCol = setWrapper(labelCol, wrapperCol);
+      newFormItemLayout.wrapperCol = setWrapperCol({ labelCol, wrapperCol });
     }
   })
 
-  return newLayout;
+  return newFormItemLayout;
 }
 
 // 给一个布局对象的 wrapperCol 属性添加 offset 属性
-function setWrapper(labelCol = {}, wrapperCol = {}) {
+function setWrapperCol(params = {}) {
+
+  const {
+    labelCol = {},
+    wrapperCol = {}
+  } = params;
+
   const newWrapperCol = {};
   Object.keys(labelCol).forEach((id) => {
     const x = labelCol[id];
@@ -34,5 +43,6 @@ function setWrapper(labelCol = {}, wrapperCol = {}) {
       newWrapperCol[id] = x;
     }
   })
+
   return newWrapperCol;
 }

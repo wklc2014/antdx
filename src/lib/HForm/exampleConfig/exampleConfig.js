@@ -82,6 +82,7 @@ export default [
             { required: true, message: '用户姓必填' },
           ],
           span: 12,
+          toUpperCase: true,
         },
       },
       {
@@ -101,7 +102,7 @@ export default [
             { required: true, message: '请选择用户国籍' },
           ],
           span: 12,
-          pright: 8,
+          pright: 0,
         },
       },
       {
@@ -133,6 +134,11 @@ export default [
         format: 'YYYY-MM-DD',
         renderExtraFooter: () => 'footer',
       },
+      ext: {
+        rules: [
+          { required: true, message: '报案日期必填' },
+        ],
+      }
     },
   },
   {
@@ -196,6 +202,11 @@ export default [
           三月内: [moment().subtract(3, 'months'), moment()],
         },
       },
+      ext: {
+        rules: [
+          { required: true, message: '运输日期不能为空' },
+        ],
+      }
     },
   },
   {
@@ -491,11 +502,16 @@ export default [
       },
       ext: {
         service: {
-          url: 'http://localhost:15000/spa-for-all/user',
+          url: '/user',
           params: 'a=1&b=22&keyword={{value}}',
           method: 'post',
           time: 300,
-          key: 'name',
+          map: (resp) => {
+            if (resp.success) {
+              return resp.data.map(v => v.label)
+            }
+            return [];
+          },
         },
       },
     },

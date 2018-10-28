@@ -7,43 +7,43 @@ import propTypes from 'prop-types';
 import is from 'is_js';
 import { Form, Row, Col } from 'antd';
 
-import FormContent from './FormContent.jsx';
+import FormItemContent from './FormItemContent.jsx';
 
-import getFormItemOffset from './utils/getFormItemOffset.js';
+import getFormItemOffsetLayout from './utils/getFormItemOffsetLayout.js';
 import getFormItemValidate from './utils/getFormItemValidate.js';
 
 const FormItem = Form.Item;
 
-const FormBox = (props) => {
+const FormItemBox = (props) => {
 
   const {
-    label,
-    config,
-    extMap,
-    values,
+    formItemConfig,
+    formItemLabel,
+    formItemExtMap,
+    formItemTouches,
+    formValues,
     onChange,
-    touches,
   } = props;
 
   // 表单元素的扩展字段配置隐藏属性
-  if (extMap.hide) return null;
+  if (formItemExtMap.hide) return null;
 
   // 表单元素删格布局
-  const formItemlayout = getFormItemOffset({
-    layout: extMap.layout,
-    offset: extMap.offset,
+  const formItemlayout = getFormItemOffsetLayout({
+    formItemLayout: formItemExtMap.layout,
+    formItemOffset: formItemExtMap.offset,
   });
 
   // 如果 config 是对象, 则转换成数组, 统一处理
-  const newConfig = is.array(config) ? config : [config];
+  const newFormItemConfig = is.array(formItemConfig) ? formItemConfig : [formItemConfig];
 
   // 过滤表单输入元素的隐藏字段
-  const filterConfig = newConfig.filter((val) => {
+  const newFormItemFilterConfig = newFormItemConfig.filter((val) => {
     const { ext = {} } = val;
     return !ext.hide;
   })
 
-  const ChildrenEle = filterConfig.map((val, i) => {
+  const ChildrenEle = newFormItemFilterConfig.map((val, i) => {
       const key = `formItem-${i}`;
       const { ext = {} } = val;
       const { span = 24, pright, pbottom, center } = ext;
@@ -52,15 +52,15 @@ const FormBox = (props) => {
       // 计算 Col 右边内间距
       if (pright !== undefined) {
         ColProps.style.paddingRight = pright
-      } else if (i < config.length - 1) {
+      } else if (i < newFormItemFilterConfig.length - 1) {
         ColProps.style.paddingRight = 8
       }
 
       // 计算 Col 下边内间距
-      if (filterConfig.length > 2) {
+      if (newFormItemFilterConfig.length > 2) {
         if (pbottom !== undefined) {
           ColProps.style.paddingBottom = pbottom;
-        } else if (i < config.length - 1) {
+        } else if (i < newFormItemFilterConfig.length - 1) {
           ColProps.style.paddingBottom = 3;
         }
       }
@@ -70,34 +70,37 @@ const FormBox = (props) => {
         ColProps.style.textAlign = 'center';
       }
 
-      const FormContentProps = {
-        ...val,
-        label,
+      const FormItemContentProps = {
+        label: formItemLabel,
+        id: val.id,
+        type: val.type,
+        api: val.api,
+        ext: val.ext,
         onChange,
-        value: values[val.id],
+        value: formValues[val.id],
       }
 
       return (
         <Col {...ColProps}>
-          <FormContent {...FormContentProps} />
+          <FormItemContent {...FormItemContentProps} />
         </Col>
       );
     });
 
   const formItemValidate = getFormItemValidate({
-    configs: newConfig,
-    touches,
-    values,
+    formItemConfigs: newFormItemFilterConfig,
+    formItemTouches,
+    formValues,
   });
 
   // 表单元素的扩展字段
-  const { space, extra, colon, className, style } = extMap;
+  const { space, extra, colon, className, style } = formItemExtMap;
 
   const FormItemProps = {
     className,
     colon,
     extra,
-    label,
+    label: formItemLabel,
     style,
     ...formItemlayout,
     ...formItemValidate,
@@ -113,12 +116,12 @@ const FormBox = (props) => {
   )
 }
 
-FormBox.propTypes = {
+FormItemBox.propTypes = {
   /**
    * 表单元素配置
    * @type {Array/object}
    */
-  config: propTypes.oneOfType([
+  formItemConfig: propTypes.oneOfType([
     propTypes.object,
     propTypes.array,
   ]).isRequired,
@@ -128,13 +131,19 @@ FormBox.propTypes = {
    * 标识表单元素的名称
    * @type {String}
    */
-  label: propTypes.string,
+  formItemLabel: propTypes.string,
 
   /**
    * 表单元素扩展配置
    * @type {Object}
    */
-  extMap: propTypes.object,
+  formItemExtMap: propTypes.object,
+
+  /**
+   * 记录表单元素是否是首次验证
+   * @type {Object}
+   */
+  formItemTouches: propTypes.object,
 
   /**
    * 可控表单搜集表单值的事件方法,
@@ -144,21 +153,16 @@ FormBox.propTypes = {
   onChange: propTypes.func.isRequired,
 
   /**
-   * 记录表单元素是否是首次验证
-   * @type {Object}
-   */
-  touches: propTypes.object.isRequired,
-
-  /**
    * 表单值
    * @type {Object}
    */
-  values: propTypes.object.isRequired,
+  formValues: propTypes.object.isRequired,
 };
 
-FormBox.defaultProps = {
-  label: '',
-  extMap: {},
+FormItemBox.defaultProps = {
+  formItemLabel: '',
+  formItemExtMap: {},
+  formItemTouches: {},
 }
 
-export default FormBox;
+export default FormItemBox;
