@@ -84,7 +84,7 @@ module.exports = {
             loader: 'less-loader',
             options: {
               modifyVars: {
-                'primary-color': '#f00',
+                'primary-color': '#12ba05',
                 'font-size-base': '12px',
               },
               javascriptEnabled: true

@@ -40,9 +40,8 @@ class FormItemContent extends Component {
 
   render() {
     const { id, label, type, api, ext, value } = this.props;
-    const { placeholder, style } = api;
 
-    // 计算一些必要的属性
+    // 计算一些内置的属性
     const newStyle = getStyle({ type, api, ext });
     const newData = getData({ type, api, ext });
     const newPlaceholder = getPlaceholder({ type, api, ext, label, id });
@@ -60,7 +59,8 @@ class FormItemContent extends Component {
     }
 
     return null;
-    console.log('type>>>', type);
+    console.error(`type>>>${type} is error type!`);
+
 
   }
 }
@@ -68,7 +68,7 @@ class FormItemContent extends Component {
 FormItemContent.propTypes = {
   /**
    * 表单元素 label 属性
-   * 标识表单元素的名称
+   * 主要用来生成 placeholder 属性
    * @type {String}
    */
   label: propTypes.string,
@@ -82,7 +82,7 @@ FormItemContent.propTypes = {
 
   /**
    * 表单元素 type 属性
-   * 标识表单元素的输入类别
+   * 标识表单元素的输入类型
    * @type {String}
    */
   type: propTypes.string.isRequired,
@@ -107,8 +107,11 @@ FormItemContent.propTypes = {
    */
   onChange: propTypes.func.isRequired,
 
+  /**
+   * 表单元素值
+   * @type {Any}
+   */
   value: propTypes.any,
 }
 
 export default FormItemContent;
-

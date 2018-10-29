@@ -3,11 +3,11 @@ import is from 'is_js';
 /**
  * 获取表单元素的 style 属性
  * @param  {string} options.type [表单元素输入类型]
+ * @param  {Object} options.api  [表单元素 api属性]
  * @param  {Object} options.ext  [表单元素扩展配置]
- * @param  {Object} style        [表单元素配置 style 属性]
  * @return {object}              [新的表单元素的 style 属性]
  */
-export default function getStyle({ type, ext = {}, api = {} }) {
+export default function getStyle({ type, api = {}, ext = {} }) {
 
   const { style = {} } = api;
   const { toUpperCase, toLowerCase } = ext;
