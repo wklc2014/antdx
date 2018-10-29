@@ -385,7 +385,7 @@ export default class HPicture extends Component {
 HPicture.propTypes = {
   /**
    * 组件容器 css 类
-   * @type {string}
+   * @type {String}
    */
   className: propTypes.string,
 
@@ -401,7 +401,7 @@ HPicture.propTypes = {
 
   /**
    * 图片 url 地址
-   * @type {string}
+   * @type {String}
    */
   src: propTypes.string,
 

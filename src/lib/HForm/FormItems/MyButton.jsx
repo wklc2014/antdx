@@ -32,6 +32,7 @@ const MyButton = (props) => {
       type: btn.type || api.type,
       onClick: e => onChange(btn.value),
     };
+
     return (
       <span style={btnStyle} key={i}>
         <Button {...newProps}>{btn.label}</Button>

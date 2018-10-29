@@ -35,7 +35,7 @@ export default class MyService extends Component {
     const that = this;
     const { ext = {} } = this.props;
     const { service = {} } = ext;
-    const { url, method, params, time, map = () => [] } = service;
+    const { url, method, params, time, key = 'name' } = service;
 
     if (timeout) {
       window.clearTimeout(timeout);
@@ -52,8 +52,10 @@ export default class MyService extends Component {
           querystring.parse(newParams),
           { method },
         );
-        const data = map(resp);
-        that.setState({ data });
+        if (resp.success) {
+          const data = resp.data.map(v => v[key]);
+          that.setState({ data });
+        }
       } catch (e) {
       }
     }

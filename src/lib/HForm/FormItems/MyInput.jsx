@@ -18,9 +18,7 @@ const MyInput = (props) => {
 
   const newProps = {
     ...api,
-    onChange: e => {
-      onChange(e.target.value);
-    },
+    onChange: e => onChange(e.target.value),
     value,
   };
 

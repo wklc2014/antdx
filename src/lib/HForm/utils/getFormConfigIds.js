@@ -17,7 +17,7 @@ export default function getFormConfigIds(formConfigs = []) {
     const { config } = val;
     if (is.array(config)) {
       config.forEach((v) => {
-        v.id && ids.push();
+        v.id && ids.push(v.id);
       })
     } else {
       config.id && ids.push(config.id);

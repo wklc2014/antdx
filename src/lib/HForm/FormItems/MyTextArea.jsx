@@ -21,9 +21,7 @@ const MyTextArea = (props) => {
   const newProps = {
     rows: 5,
     ...api,
-    onChange: e => {
-      onChange(e.target.value);
-    },
+    onChange: e => onChange(e.target.value),
     value,
   };
 

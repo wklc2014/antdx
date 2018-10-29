@@ -4,6 +4,26 @@ import moment from 'moment';
 // 用户调查字段配置
 export default [
   {
+    config: {
+      id: 'mybtn',
+      type: 'button',
+      api: {
+        type: 'primary',
+      },
+      ext: {
+        data: [
+          { label: '选择', value: '001' },
+          { label: '北京', value: '002', type: 'default' },
+          { label: '西安', value: '003', type: 'dashed' },
+          { label: '绵阳', value: '004', type: 'danger' },
+        ],
+      },
+    },
+    extMap: {
+      offset: true,
+    },
+  },
+  {
     label: '出险城市',
     config: [
       {
@@ -49,11 +69,9 @@ export default [
           { label: '车身左侧', value: '05' },
           { label: '车身右侧', value: '06' },
           { label: '正后方', value: '07' },
-          { label: '车身顶部', value: '08' },
           { label: '汽车排气管', value: '09' },
           { label: '雨刮器', value: '10' },
           { label: '左后视镜', value: '11' },
-          { label: '右后视镜', value: '12' },
           { label: '后备箱', value: '13' },
         ],
       },
@@ -506,12 +524,7 @@ export default [
           params: 'a=1&b=22&keyword={{value}}',
           method: 'post',
           time: 300,
-          map: (resp) => {
-            if (resp.success) {
-              return resp.data.map(v => v.label)
-            }
-            return [];
-          },
+          path: 'name',
         },
       },
     },
