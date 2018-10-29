@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import { Collapse } from 'antd';
 import ApiFormGroup from './ApiFormGroup.jsx';
 
 class Api extends Component {
@@ -17,10 +18,11 @@ class Api extends Component {
 
   render() {
     return (
-      <div style={{ padding: 16 }}>
-        <h2>Api</h2>
-        <ApiFormGroup />
-      </div>
+      <Collapse>
+        <Panel header="<FormGroup />">
+          <ApiFormGroup />
+        </Panel>
+      </Collapse>
     )
   }
 }

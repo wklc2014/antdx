@@ -12,7 +12,6 @@ const ApiFormGroup = (props) => {
 
   const TableProps = {
     rowKey: 'id',
-    title: () => '<FormGroup />',
     ...commonTabpeProps,
     dataSource,
     columns,

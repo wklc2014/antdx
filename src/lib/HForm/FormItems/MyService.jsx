@@ -53,7 +53,7 @@ export default class MyService extends Component {
           { method },
         );
         if (resp.success) {
-          const data = resp.data.map(v => v[key]);
+          const data = resp.data.map(v => lodash.get(v, path));
           that.setState({ data });
         }
       } catch (e) {
