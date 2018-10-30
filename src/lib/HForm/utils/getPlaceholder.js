@@ -31,6 +31,7 @@ export default function getPlaceholder({ type, api = {}, ext = {}, label, id }) 
     'input',
     'textarea',
     'search',
+    'service',
     'number',
     'fetchInput',
   ];

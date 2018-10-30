@@ -260,12 +260,6 @@ export default class HPicture extends Component {
           rotate: num,
         });
         break;
-      case 'prev':
-        onPrev && onPrev();
-        break;
-      case 'next':
-        onNext && onNext();
-        break;
       default:
     }
   }

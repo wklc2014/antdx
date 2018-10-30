@@ -5,10 +5,10 @@ import { Form, Row, Col } from 'antd';
 
 import FormItemBox from './FormItemBox.jsx';
 
-import getFormItemLayout from './utils/getFormItemLayout.js';
 import getFormGridLayout from './utils/getFormGridLayout.js';
 import getFormConfigIds from './utils/getFormConfigIds.js';
 import getFormValidate from './utils/getFormValidate.js';
+import getFormItemLayout from './utils/getFormItemLayout.js';
 
 /**
  * 通过一个 js 配置数组 array

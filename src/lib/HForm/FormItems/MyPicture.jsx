@@ -104,8 +104,8 @@ export default class MyPicture extends Component {
     });
 
     const actions = [
-      { value: 'prev', label: '上一张' },
-      { value: 'next', label: '下一张' },
+      { value: 'prev', label: '上一张', onClick: this.onPrev },
+      { value: 'next', label: '下一张', onClick: this.onNext },
       ..._actions,
     ];
 
@@ -114,8 +114,6 @@ export default class MyPicture extends Component {
       ...pictureApi,
       src,
       actions,
-      onPrev: this.onPrev,
-      onNext: this.onNext,
     }
 
     const ModalProps = {

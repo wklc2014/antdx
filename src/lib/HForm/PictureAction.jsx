@@ -43,7 +43,7 @@ export default function HPictureAction (props) {
     return (
       <Button
         key={i}
-        onClick={() => onChange(val.value)}
+        onClick={() => val.onClick && val.onClick()}
         disabled={val.disabled}
       >
         {val.label}

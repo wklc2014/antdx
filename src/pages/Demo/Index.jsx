@@ -10,6 +10,13 @@ export default class IndexPage extends Component {
 
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      formLayout: 'horizontal',
+    }
+  }
+
   onChange = ({ id, value }) => {
     this.props.onUpdate({ id, value });
   }
@@ -27,8 +34,13 @@ export default class IndexPage extends Component {
     console.log('errors>>>', errors);
   }
 
+  handleClick = (e) => {
+    this.setState({ formLayout: e });
+  }
+
   render() {
     const { values } = this.props;
+    const { formLayout } = this.state;
 
     return (
       <div style={{ padding: 16 }}>
@@ -55,12 +67,19 @@ export default class IndexPage extends Component {
               重置
             </Button>
           </p>
+          <p>
+            <span>改变布局：</span>
+            <Button type="primary" onClick={() => this.handleClick('horizontal')}>horizontal</Button>、
+            <Button type="primary" onClick={() => this.handleClick('vertical')}>vertical</Button>、
+            <Button type="primary" onClick={() => this.handleClick('inline')}>inline</Button>
+          </p>
           <FormGroup
             formConfigs={configs}
             formCols={2}
-            onChange={this.onChange}
+            formLayout={formLayout}
             formValues={values}
             formItemSpace={16}
+            onChange={this.onChange}
             ref={inst => this.inst = inst}
           />
         </Card>

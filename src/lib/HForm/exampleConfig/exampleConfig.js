@@ -4,26 +4,6 @@ import moment from 'moment';
 // 用户调查字段配置
 export default [
   {
-    config: {
-      id: 'mybtn',
-      type: 'button',
-      api: {
-        type: 'primary',
-      },
-      ext: {
-        data: [
-          { label: '选择', value: '001' },
-          { label: '北京', value: '002', type: 'default' },
-          { label: '西安', value: '003', type: 'dashed' },
-          { label: '绵阳', value: '004', type: 'danger' },
-        ],
-      },
-    },
-    extMap: {
-      offset: true,
-    },
-  },
-  {
     label: '出险城市',
     config: [
       {
@@ -69,10 +49,16 @@ export default [
           { label: '车身左侧', value: '05' },
           { label: '车身右侧', value: '06' },
           { label: '正后方', value: '07' },
-          { label: '汽车排气管', value: '09' },
-          { label: '雨刮器', value: '10' },
-          { label: '左后视镜', value: '11' },
+          { label: '后方左侧', value: '08' },
+          { label: '后方右侧', value: '09' },
+          { label: '汽车排气管', value: '10' },
+          { label: '雨刮器', value: '11' },
+          { label: '左后视镜', value: '12' },
           { label: '后备箱', value: '13' },
+          { label: '左后轮胎', value: '14' },
+          { label: '右后轮胎', value: '15' },
+          { label: '左前轮胎', value: '16' },
+          { label: '右前轮胎', value: '17' },
         ],
       },
       ext: {
@@ -109,7 +95,7 @@ export default [
         api: {
           placeholder: '请选择用户国籍',
           disabled: false,
-          mode: 'tags',
+          // mode: 'tags',
         },
         ext: {
           data: [
@@ -551,6 +537,26 @@ export default [
     },
     extMap: {
       colspan: 2,
+    },
+  },
+  {
+    config: {
+      id: 'mybtn',
+      type: 'button',
+      api: {
+        type: 'primary',
+      },
+      ext: {
+        data: [
+          { label: '选择', value: '001' },
+          { label: '北京', value: '002', type: 'default' },
+          { label: '西安', value: '003', type: 'dashed' },
+          { label: '绵阳', value: '004', type: 'danger' },
+        ],
+      },
+    },
+    extMap: {
+      offset: true,
     },
   },
 ];
