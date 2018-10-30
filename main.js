@@ -1,4 +1,4 @@
-var HForm = require('../lib/HForm.jsx').default;
+var FormGroup = require('./src/lib/HForm/FormGroup.jsx').default;
 
-module.exports = HForm;
-module.exports.default = HForm;
+module.exports = FormGroup;
+module.exports.default = FormGroup;
