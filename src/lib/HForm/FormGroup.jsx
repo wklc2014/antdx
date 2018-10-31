@@ -112,7 +112,7 @@ class FormGroup extends Component {
       const newFormItemLayout = getFormItemLayout({
         formCols,
         formLayout,
-        formItemLayout,
+        formItemLayout: formItemLayout || extMap.layout,
         formItemColspan: colspan,
       });
 
@@ -121,10 +121,10 @@ class FormGroup extends Component {
         formItemConfig: config,
         formItemExtMap: {
           className: formItemClassName,
-          layout: newFormItemLayout,
           space: formItemSpace,
           style: formItemStyle,
           ...extMap,
+          layout: newFormItemLayout,
         },
         formItemLabel: label,
         formItemTouches,

@@ -28,8 +28,8 @@ export default function getFormItemLayout(params = {}) {
    * 如果直接配置了表单元素栅格布局
    * 则优先采用
    */
-  if (formItemLayout && _formItemLayouts[formItemLayout]) {
-    return _formItemLayouts[formItemLayout];
+  if (formItemLayout) {
+    return _formItemLayouts[formItemLayout] || formItemLayout;
   }
 
   // 一个表单元素最多横跨列数, 最多和表单组列数相同
