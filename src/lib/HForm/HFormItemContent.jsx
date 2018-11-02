@@ -12,7 +12,7 @@ import { getOnBlurValue } from './utils/getValue.js';
  * 表单元素输入的内容
  * 被 HFormItem 包裹
  */
-class FormItemContent extends Component {
+class HFormItemContent extends Component {
 
   static defaultProps = {
     label: '',
@@ -32,7 +32,7 @@ class FormItemContent extends Component {
     onChange({ id, value: e });
   }
 
- onBlur = (e) => {
+  onBlur = (e) => {
     const { id, ext, onChange } = this.props;
     const newValue = getOnBlurValue({ value: e, ext });
     onChange({ id, value: newValue });
@@ -58,20 +58,21 @@ class FormItemContent extends Component {
       return FormItems[type](params);
     }
 
-    return null;
     console.error(`type>>>${type} is error type!`);
-
-
+    return null;
   }
 }
 
-FormItemContent.propTypes = {
+HFormItemContent.propTypes = {
   /**
    * 表单元素 label 属性
    * 主要用来生成 placeholder 属性
-   * @type {String}
+   * @type {String/Boolean}
    */
-  label: propTypes.string,
+  label: propTypes.oneOfType([
+    propTypes.string,
+    propTypes.bool,
+  ]),
 
   /**
    * 表单元素 id 属性
@@ -114,4 +115,4 @@ FormItemContent.propTypes = {
   value: propTypes.any,
 }
 
-export default FormItemContent;
+export default HFormItemContent;

@@ -1,44 +1,44 @@
 import is from 'is_js';
 
 /**
- * 对表单元素值进行验证
+ * 给定表单值, 根据规则数组, 返回验证结果
  * @param  {any}    options.formItemValue    [待验证的表单值]
  * @param  {Array}  options.formItemRules    [表单验证规则]
  * @return {Object}                          [验证结果]
  */
-export default function getFormItemValidateByRules({
-  formItemValue: value,
-  formItemRules: rules,
-}) {
+export default function getValidateByRules({ rules, value }) {
 
-  const validate = {};
+  // 验证结果
+  const validateResult = {};
 
-  if (!rules) return validate;
+  // 如果
+  if (!rules) return {};
 
-  // 如果验证规则不是数组，直接抛异常
+  // 如果验证规则不是数组, 返回空对象, 输出错误提示
   if (is.not.array(rules)) {
-    throw Error('表单元素验证规则必须是数组');
+    return {}
+    console.error('表单元素验证规则必须是数组');
   }
 
   // 验证规则一条没通过后, 就不再验证
   rules.some((rule) => {
-    const result = validateRule({ rule, value });
+    const result = validateByRule({ rule, value });
     if (result) {
-      Object.assign(validate, result);
+      Object.assign(validateResult, result);
     }
     return !!result;
   });
 
-  return validate;
+  return validateResult;
 }
 
 /**
- * 具体的表单验证结果
+ * 返回验证结果
  * @param  {Object} rule  [验证规则]
  * @param  {Any} value    [待验证的表单值]
  * @return {Object}       [验证结果]
  */
-function validateRule({ rule, value }) {
+function validateByRule({ rule, value }) {
   // 必填性验证
   const isEmptyArray = is.array(value) && value.length === 0;
   const isEmpty = is.not.number(value) && !value;

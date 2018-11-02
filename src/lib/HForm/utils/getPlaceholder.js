@@ -54,7 +54,7 @@ export default function getPlaceholder({ type, api = {}, ext = {}, label, id }) 
     prePlaceholder = placeholder || `请选择${label || id}`;
   }
 
-  if (type === 'range') {
+  if (type === 'rangePicker') {
     /**
      * 区间时间的 placeholder 属性是个数组
      * 单独处理 range 类型

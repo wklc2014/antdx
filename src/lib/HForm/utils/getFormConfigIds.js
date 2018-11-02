@@ -2,18 +2,20 @@ import is from 'is_js';
 
 /**
  * 获取配置表单元素的 id
- * @param  {Array}  formConfigs [表单配置]
+ * @param  {Array}  configs     [表单配置]
  * @return {Array}              [表单元素ids]
  */
-export default function getFormConfigIds(formConfigs = []) {
+export default function getFormConfigIds(params = {}) {
+
+  const { configs = [] } = params;
 
   const ids = [];
 
-  if (is.not.array(formConfigs)) {
+  if (is.not.array(configs)) {
     return ids;
   }
 
-  formConfigs.forEach((val) => {
+  configs.forEach((val) => {
     const { config } = val;
     if (is.array(config)) {
       config.forEach((v) => {

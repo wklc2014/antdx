@@ -1,5 +1,5 @@
 import is from 'is_js';
-import getFormItemValidateByRules from './getFormItemValidateByRules.js';
+import getValidateByRules from './getValidateByRules.js';
 
 /**
  * 自定义表单验证
@@ -8,40 +8,29 @@ import getFormItemValidateByRules from './getFormItemValidateByRules.js';
  * @return {Object}                        [当前表单元素验证结果]
  */
 export default function getFormValidate({
-  formConfigs = [],
-  formValues = {},
+  configs = [],
+  values = {},
 }) {
 
-  const formValidates = {};
+  const validates = {};
 
-  formConfigs.forEach((val) => {
-    const { config: formItemConfig } = val;
-    const newFormItemConfig = is.array(formItemConfig) ? formItemConfig : [formItemConfig];
+  configs.forEach((val) => {
+    const { config } = val;
+    const newConfig = is.array(config) ? config : [config];
 
-    newFormItemConfig.forEach((c) => {
+    newConfig.filter((val) => {
+      const { ext = {} } = val;
+      return !ext.hide;
+    }).forEach((val) => {
 
-      const { id, ext = {} } = c;
+      const { id, ext = {} } = val;
       const { rules } = ext;
 
-      if (!rules) return ;
-
-      /**
-       * 如果验证规则不是数组，直接抛异常
-       */
-      if (is.not.array(rules)) {
-        throw Error('表单元素验证规则必须是数组');
-      }
-
       // 待验证的值
-      const formItemValue = formValues[id];
-
-      formValidates[id] = getFormItemValidateByRules({
-        formItemValue,
-        formItemRules: rules,
-      });
-
+      const value = values[id];
+      validates[id] = getValidateByRules({ value, rules });
     })
   })
 
-  return formValidates;
+  return validates;
 }

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 /**
  * 中国城市数据
  */

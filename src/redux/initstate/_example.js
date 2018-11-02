@@ -7,6 +7,7 @@ import path_6 from '../../pages/Demo/images/6.jpg';
 
 export default {
   myName: ['111', '444'],
+  payMoney: 180,
   imageView: [
     { path: path_1 },
     { path: path_2 },

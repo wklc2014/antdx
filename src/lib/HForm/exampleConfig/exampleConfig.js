@@ -4,19 +4,17 @@ import moment from 'moment';
 // 用户调查字段配置
 export default [
   {
-    label: '出险城市',
     config: [
       {
         id: 'accidentCity',
         type: 'cascader',
-        api: {
-        },
+        api: {},
         ext: {
           city: 'quanGuo',
+          span: 12,
           rules: [
             { required: true, message: '出险城市不能为空' },
           ],
-          span: 12,
         },
       },
       {
@@ -27,16 +25,18 @@ export default [
         },
         ext: {
           span: 12,
+          trim: true,
           rules: [
             { required: true, message: '城市备注不能为空' },
           ],
-          trim: true,
         },
       },
     ],
+    extMap: {
+      label: '出险城市',
+    },
   },
   {
-    label: '受损部位',
     config: {
       id: 'loosPart',
       type: 'checkbox',
@@ -69,10 +69,10 @@ export default [
     },
     extMap: {
       colspan: 2,
+      label: '受损部位',
     },
   },
   {
-    label: '用户姓名',
     config: [
       {
         id: 'surname',
@@ -127,10 +127,10 @@ export default [
     ],
     extMap: {
       extra: '这里是帮助提示信息',
+      label: '用户姓名',
     },
   },
   {
-    label: '报案日期',
     config: {
       id: 'reportDate',
       type: 'datePicker',
@@ -144,16 +144,20 @@ export default [
         ],
       }
     },
+    extMap: {
+      label: '报案日期',
+    }
   },
   {
-    label: '报名年月',
     config: {
       id: 'reportMonth',
       type: 'monthPicker',
     },
+    extMap: {
+      label: '报名年月',
+    }
   },
   {
-    label: '赔付金额',
     config: {
       id: 'payMoney',
       type: 'number',
@@ -163,9 +167,11 @@ export default [
         ],
       },
     },
+    extMap: {
+      label: '赔付金额',
+    }
   },
   {
-    label: '性别',
     config: {
       id: 'sex',
       type: 'radio',
@@ -178,9 +184,11 @@ export default [
         ],
       },
     },
+    extMap: {
+      label: '性别',
+    }
   },
   {
-    label: '险种类型',
     config: {
       id: 'accidentType',
       type: 'radioButton',
@@ -191,9 +199,11 @@ export default [
         ],
       },
     },
+    extMap: {
+      label: '险种类型',
+    }
   },
   {
-    label: '运输日期',
     config: {
       id: 'translateDate',
       type: 'rangePicker',
@@ -212,9 +222,11 @@ export default [
         ],
       }
     },
+    extMap: {
+      label: '运输日期',
+    }
   },
   {
-    label: '打分',
     config: {
       id: 'score',
       type: 'rate',
@@ -222,9 +234,11 @@ export default [
         allowHalf: true,
       },
     },
+    extMap: {
+      label: '打分',
+    }
   },
   {
-    label: '搜索框',
     config: {
       id: 'carNumber',
       type: 'search',
@@ -235,9 +249,11 @@ export default [
         toUpperCase: true,
       },
     },
+    extMap: {
+      label: '搜索框',
+    }
   },
   {
-    label: '汽车类型',
     config: {
       id: 'carMarkType',
       type: 'select',
@@ -262,9 +278,11 @@ export default [
         ],
       },
     },
+    extMap: {
+      label: '汽车类型',
+    }
   },
   {
-    label: '滑动输入',
     config: {
       id: 'sliderInput',
       type: 'slider',
@@ -279,9 +297,11 @@ export default [
         },
       },
     },
+    extMap: {
+      label: '滑动输入',
+    }
   },
   {
-    label: '开关',
     config: {
       id: 'onOff',
       type: 'switch',
@@ -290,9 +310,11 @@ export default [
         unCheckedChildren: 'NO',
       },
     },
+    extMap: {
+      label: '开关',
+    }
   },
   {
-    label: '出险描述',
     config: [
       {
         id: 'accidentDescription',
@@ -318,17 +340,19 @@ export default [
     ],
     extMap: {
       colspan: 2,
+      label: '出险描述',
     },
   },
   {
-    label: '就餐时间',
     config: {
       id: 'dinnerTime',
       type: 'timePicker',
     },
+    extMap: {
+      label: '就餐时间',
+    }
   },
   {
-    label: '公司地址',
     config: [
       {
         id: 'companyAddress',
@@ -360,7 +384,7 @@ export default [
       },
     ],
     extMap: {
-
+      label: '公司地址',
     },
   },
   {
@@ -380,11 +404,10 @@ export default [
       },
     },
     extMap: {
-      offset: true,
+      label: false,
     },
   },
   {
-    label: '文本显示',
     config: {
       id: 'myName',
       type: 'text',
@@ -397,9 +420,11 @@ export default [
         ],
       },
     },
+    extMap: {
+      label: '文本显示',
+    }
   },
   {
-    label: '联系人电话',
     config: [
       {
         id: 'contactPhone',
@@ -426,9 +451,11 @@ export default [
         },
       },
     ],
+    extMap: {
+      label: '联系人电话',
+    }
   },
   {
-    label: '手机号码',
     config: [
       {
         id: 'phoneNumber',
@@ -457,9 +484,11 @@ export default [
         },
       },
     ],
+    extMap: {
+      label: '手机号码',
+    }
   },
   {
-    label: '描述模版',
     config: [
       {
         id: 'accidentCreate',
@@ -484,10 +513,10 @@ export default [
     ],
     extMap: {
       colspan: 2,
+      label: '描述模版',
     },
   },
   {
-    label: '树形选择',
     config: {
       id: 'treeSelect',
       type: 'treeSelect',
@@ -495,9 +524,11 @@ export default [
         city: 'quanGuo',
       },
     },
+    extMap: {
+      label: '树形选择',
+    }
   },
   {
-    label: '输入搜索',
     config: {
       id: 'searchData',
       type: 'service',
@@ -514,9 +545,11 @@ export default [
         },
       },
     },
+    extMap: {
+      label: '输入搜索',
+    }
   },
   {
-    label: '图片显示',
     config: {
       id: 'imageView',
       type: 'picture',
@@ -537,6 +570,7 @@ export default [
     },
     extMap: {
       colspan: 2,
+      label: '图片显示',
     },
   },
   {
@@ -556,7 +590,7 @@ export default [
       },
     },
     extMap: {
-      offset: true,
+      label: false,
     },
   },
 ];

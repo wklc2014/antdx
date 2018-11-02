@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'antd';
 
-import FormGroup from '../../lib/HForm/FormGroup.jsx';
+import HForm from '../../lib/HForm/HForm.jsx';
 import configs from '../../lib/HForm/exampleConfig/exampleConfig.js';
 
 export default class IndexPage extends Component {
@@ -73,12 +73,15 @@ export default class IndexPage extends Component {
             <Button type="primary" onClick={() => this.handleClick('vertical')}>vertical</Button>、
             <Button type="primary" onClick={() => this.handleClick('inline')}>inline</Button>
           </p>
-          <FormGroup
-            formConfigs={configs}
-            formCols={2}
-            formLayout={formLayout}
-            formValues={values}
-            formItemSpace={16}
+          <HForm
+            cols={3}
+            configs={configs}
+            layout={formLayout}
+            values={values}
+            extMap={{
+              space: 16,
+              layout: values.payMoney,
+            }}
             onChange={this.onChange}
             ref={inst => this.inst = inst}
           />
