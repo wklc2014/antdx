@@ -38,7 +38,7 @@ class Api extends Component {
           <Panel header="<HFormItemContent />" key="3">
             <ApiHFormItemContent />
           </Panel>
-          <Panel header="<Picture />" key="4">
+          <Panel header="<HPicture />" key="4">
             <ApiHPicture />
           </Panel>
         </Collapse>

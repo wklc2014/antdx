@@ -64,7 +64,7 @@ export const dataSource = [
   },
   {
     id: 12,
-    params: 'actions',
+    params: 'operations',
     description: '图片操作按钮',
     type: 'Array/Boolean',
     defaultValue: '-',

@@ -276,15 +276,15 @@ export default class HPicture extends Component {
    * 操作按钮
    */
   getOperations = () => {
-    const { btns } = this.props;
+    const { operations } = this.props;
     const { tips } = this.state;
-    if (is.boolean(btns)) {
-      if (!btns) {
+    if (is.boolean(operations)) {
+      if (!operations) {
         return [];
       }
       return setActions(_operations);
     }
-    return setActions(btns);
+    return setActions(operations);
 
     function setActions(array = []) {
       return array.map((btn) => {
@@ -449,7 +449,7 @@ HPicture.propTypes = {
    * 图片操作按钮
    * @type {array/boolean}
    */
-  actions: propTypes.oneOfType([
+  operations: propTypes.oneOfType([
     propTypes.arrayOf(propTypes.shape({
       value: propTypes.string.isRequired,
       label: propTypes.string.isRequired,
