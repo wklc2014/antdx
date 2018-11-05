@@ -15,7 +15,7 @@ const ButtonGroup = Button.Group;
 export default function HPictureAction (props) {
 
   const {
-    actions,
+    operations,
     rotate,
     zoom,
     onChange,
@@ -24,7 +24,7 @@ export default function HPictureAction (props) {
   const PopoverStyle = { width: 400 };
   const values = { rotate, zoom };
 
-  const actionsEle = actions.map((val, i) => {
+  const operationsEle = operations.map((val, i) => {
     const content = getPopoverContent(val.value, values, onChange);
     const title = getPopoverTitle(val.value);
     if (val.value === 'rotate' || val.value === 'zoom') {
@@ -52,8 +52,8 @@ export default function HPictureAction (props) {
   })
 
   return (
-    <div className={styles.actions}>
-      <ButtonGroup>{actionsEle}</ButtonGroup>
+    <div className={styles.operations}>
+      <ButtonGroup>{operationsEle}</ButtonGroup>
     </div>
   )
 }
@@ -63,7 +63,7 @@ HPictureAction.propTypes = {
    * 图片操作按钮
    * @type {array/boolean}
    */
-  actions: propTypes.array,
+  operations: propTypes.array,
 
   /**
    * 图片旋转角度
@@ -85,7 +85,7 @@ HPictureAction.propTypes = {
 }
 
 HPictureAction.defaultProps = {
-  actions: [],
+  operations: [],
   rotate: 0,
   zoom: 100,
 }

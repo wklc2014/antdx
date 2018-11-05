@@ -3,7 +3,7 @@ export const dataSource = [
     id: 1,
     params: 'label',
     description: '表单元素 label 属性，主要用来生成 placeholder 属性',
-    type: 'String',
+    type: 'String/Boolean',
     defaultValue: '-',
   },
   {

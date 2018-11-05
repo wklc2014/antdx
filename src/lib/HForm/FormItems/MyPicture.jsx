@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Tooltip, Modal, message } from 'antd';
 
-import Picture from '../Picture.jsx';
-import _actions from '../utils/_actions.js';
+import HPicture from '../HPicture.jsx';
+import _operations from '../utils/_operations.js';
 
 import styles from '../styles.less';
 
@@ -80,7 +80,7 @@ export default class MyPicture extends Component {
     const { visible, index } = this.state;
     const {
       toolTipApi= {},
-      pictureApi = {},
+      hPictureApi = {},
       modalApi = {},
       boxStyle = {},
     } = api;
@@ -103,17 +103,17 @@ export default class MyPicture extends Component {
       );
     });
 
-    const actions = [
+    const operations = [
       { value: 'prev', label: '上一张', onClick: this.onPrev },
       { value: 'next', label: '下一张', onClick: this.onNext },
-      ..._actions,
+      ..._operations,
     ];
 
     const src = value[index] && value[index].path;
-    const PictureProps = {
-      ...pictureApi,
+    const HPictureProps = {
+      ...hPictureApi,
       src,
-      actions,
+      operations,
     }
 
     const ModalProps = {
@@ -128,7 +128,7 @@ export default class MyPicture extends Component {
       <div className={styles.picture}>
         {pictureEle}
         <Modal {...ModalProps}>
-          <Picture {...PictureProps} />
+          <HPicture {...HPictureProps} />
         </Modal>
       </div>
     )

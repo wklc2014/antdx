@@ -6,11 +6,11 @@ import propTypes from 'prop-types';
 import lodash from 'lodash';
 import is from 'is_js';
 
-import PictureView from './PictureView.jsx';
-import PictureAction from './PictureAction.jsx';
+import HPictureView from './HPictureView.jsx';
+import HPictureOperation from './HPictureOperation.jsx';
 
 import asyncLoadImage from './utils/asyncLoadImage.js';
-import _actions from './utils/_actions.js';
+import _operations from './utils/_operations.js';
 
 import styles from './styles.less';
 
@@ -231,8 +231,6 @@ export default class HPicture extends Component {
     this.operating('reset');
   }
 
-  //
-  // zoom, rotate, prev, next, reset
   /**
    * 图片执行各种变化
    * @param  {string} type [图片变化类型]
@@ -277,16 +275,16 @@ export default class HPicture extends Component {
   /**
    * 操作按钮
    */
-  getActions = () => {
-    const { actions } = this.props;
+  getOperations = () => {
+    const { btns } = this.props;
     const { tips } = this.state;
-    if (is.boolean(actions)) {
-      if (!actions) {
+    if (is.boolean(btns)) {
+      if (!btns) {
         return [];
       }
-      return setActions(_actions);
+      return setActions(_operations);
     }
-    return setActions(actions);
+    return setActions(btns);
 
     function setActions(array = []) {
       return array.map((btn) => {
@@ -343,10 +341,10 @@ export default class HPicture extends Component {
     } = this.state;
 
     const zoom = this.getPicZoom();
-    const actions = this.getActions();
+    const operations = this.getOperations();
     const view = this.getPicViews();
 
-    const PictureViewProps = {
+    const HPictureViewProps = {
       src,
       width,
       rotate,
@@ -358,19 +356,19 @@ export default class HPicture extends Component {
       onWheel: this.onWheel,
     }
 
-    const PictureActionProps = {
+    const HPictureOperationProps = {
       rotate,
       zoom,
-      actions,
+      operations,
       onChange: this.operating,
     }
 
     return (
       <section className={`${className} ${styles.wraper}`}>
         <div style={view} ref={inst => this.inst = inst}>
-          <PictureView {...PictureViewProps} />
+          <HPictureView {...HPictureViewProps} />
         </div>
-        <PictureAction {...PictureActionProps} />
+        <HPictureOperation {...HPictureOperationProps} />
       </section>
     )
   }

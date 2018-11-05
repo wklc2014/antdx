@@ -1,7 +1,6 @@
 /**
  * 异步加载图片
  */
-
 export default function asyncLoadImage(url) {
   return new Promise(function(resolve, reject) {
     const image = new Image();

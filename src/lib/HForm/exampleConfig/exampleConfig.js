@@ -563,6 +563,9 @@ export default [
         modalApi: {
 
         },
+        boxStyle: {
+
+        },
       },
       ext: {
 

@@ -1,9 +1,7 @@
 import is from 'is_js';
 
 /**
- * 获取配置表单元素的 id
- * @param  {Array}  configs     [表单配置]
- * @return {Array}              [表单元素ids]
+ * 获取所有表单元素的配置 id
  */
 export default function getFormConfigIds(params = {}) {
 
@@ -15,16 +13,24 @@ export default function getFormConfigIds(params = {}) {
     return ids;
   }
 
-  configs.forEach((val) => {
-    const { config } = val;
-    if (is.array(config)) {
-      config.forEach((v) => {
-        v.id && ids.push(v.id);
-      })
-    } else {
-      config.id && ids.push(config.id);
-    }
-  })
+  configs
+    .filter((val) => {
+      const { extMap = {} } = val;
+      return !extMap.hide;
+    })
+    .forEach((val) => {
+      const { config } = val;
+      const newConfig = is.array(config) ? config : [config];
+
+      newConfig
+        .filter((val) => {
+          const { ext = {} } = val;
+          return !ext.hide;
+        })
+        .forEach((v) => {
+          v.id && ids.push(v.id);
+        })
+    })
 
   return ids;
 }

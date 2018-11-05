@@ -1,5 +1,5 @@
 /**
- * Picture 组件内置的按钮操作类型
+ * HPicture 组件内置的按钮操作类型
  */
 
 export default [
@@ -7,4 +7,3 @@ export default [
   { label: '旋转', value: 'rotate' },
   { label: '还原', value: 'reset' },
 ]
-

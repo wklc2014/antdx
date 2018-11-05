@@ -2,9 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Table } from 'antd';
 import { commonTabpeProps, columns } from './common/index.js';
-import { dataSource } from './common/_apiFormItemContent.js';
+import { dataSource } from './common/_apiHPicture.js';
 
-const ApiFormItemContent = (props) => {
+const ApiHPicture = (props) => {
 
   const {
 
@@ -20,12 +20,12 @@ const ApiFormItemContent = (props) => {
   return <Table {...TableProps} />;
 }
 
-ApiFormItemContent.propTypes = {
+ApiHPicture.propTypes = {
 
 }
 
-ApiFormItemContent.defaultProps = {
+ApiHPicture.defaultProps = {
 
 }
 
-export default ApiFormItemContent;
+export default ApiHPicture;

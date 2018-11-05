@@ -2,9 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Table } from 'antd';
 import { commonTabpeProps, columns } from './common/index.js';
-import { dataSource } from './common/_apiFormGroup.js';
+import { dataSource } from './common/_apiHForm.js';
 
-const ApiFormGroup = (props) => {
+const ApiHForm = (props) => {
 
   const {
 
@@ -20,12 +20,12 @@ const ApiFormGroup = (props) => {
   return <Table {...TableProps} />;
 }
 
-ApiFormGroup.propTypes = {
+ApiHForm.propTypes = {
 
 }
 
-ApiFormGroup.defaultProps = {
+ApiHForm.defaultProps = {
 
 }
 
-export default ApiFormGroup;
+export default ApiHForm;

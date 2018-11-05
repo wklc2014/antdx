@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Collapse } from 'antd';
-import ApiFormGroup from './ApiFormGroup.jsx';
-import ApiFormItemBox from './ApiFormItemBox.jsx';
-import ApiFormItemContent from './ApiFormItemContent.jsx';
-import ApiPicture from './ApiPicture.jsx';
+import ApiHForm from './ApiHForm.jsx';
+import ApiHFormItem from './ApiHFormItem.jsx';
+import ApiHFormItemContent from './ApiHFormItemContent.jsx';
+import ApiHPicture from './ApiHPicture.jsx';
 
 const { Panel } = Collapse;
 
@@ -29,17 +29,17 @@ class Api extends Component {
     return (
       <div style={{ padding: 16 }}>
         <Collapse accordion>
-          <Panel header="<FormGroup />" key="1">
-            <ApiFormGroup />
+          <Panel header="<HForm />" key="1">
+            <ApiHForm />
           </Panel>
-          <Panel header="<FormItemBox />" key="2">
-            <ApiFormItemBox />
+          <Panel header="<HFormItem />" key="2">
+            <ApiHFormItem />
           </Panel>
-          <Panel header="<FormItemContent />" key="3">
-            <ApiFormItemContent />
+          <Panel header="<HFormItemContent />" key="3">
+            <ApiHFormItemContent />
           </Panel>
-          <Panel header="<ApiPicture />" key="4">
-            <ApiPicture />
+          <Panel header="<Picture />" key="4">
+            <ApiHPicture />
           </Panel>
         </Collapse>
       </div>

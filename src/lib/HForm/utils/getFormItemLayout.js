@@ -9,7 +9,7 @@ export default function getFormItemLayout(params = {}) {
     pLayout = '',
   } = params;
 
-  // 如果表单不是
+  // 如果表单不是 horizontal 布局, 不需要布局属性
   if (pLayout !== 'horizontal') {
     return null;
   }

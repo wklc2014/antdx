@@ -94,7 +94,10 @@ class HForm extends Component {
 
     const { touches } = this.state;
 
-    const Children = configs.map((val, i) => {
+    const Children = configs.filter((val) => {
+      const { extMap = {} } = val;
+      return !extMap.hide;
+    }).map((val, i) => {
       const key = `${layout}-${i}`;
       const style = lodash.get(val, 'extMap.style', {});
       const HFormItemProps = {

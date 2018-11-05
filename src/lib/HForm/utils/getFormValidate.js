@@ -28,7 +28,10 @@ export default function getFormValidate({
 
       // 待验证的值
       const value = values[id];
-      validates[id] = getValidateByRules({ value, rules });
+      const result = getValidateByRules({ value, rules });
+      if (is.not.empty(result)) {
+        validates[id] = {...result};
+      }
     })
   })
 

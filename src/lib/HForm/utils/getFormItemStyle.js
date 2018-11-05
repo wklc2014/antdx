@@ -9,7 +9,7 @@ export default function getFormItemStyle(params = {}) {
     pLayout = '',
   } = params;
 
-  // 如果表单不是 horizontal 布局
+  // 如果表单不是 horizontal 布局, 返回原始 style 配置
   if (pLayout !== 'horizontal') {
     return { style };
   }
@@ -17,7 +17,7 @@ export default function getFormItemStyle(params = {}) {
   return {
     style: {
       ...style,
-      display: 'flex'
+      display: 'flex',
     }
   }
 }
