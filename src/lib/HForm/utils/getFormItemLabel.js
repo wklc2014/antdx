@@ -6,7 +6,7 @@ import is from 'is_js';
  */
 export default function getFormItemLabel(params = {}) {
 
-  const { label, pLayout } = params;
+  const { label, pLayout, colon = true } = params;
 
   // 如果设置 label === false
   // 设置一个隐藏的占位元素, 且冒号不显示
@@ -18,7 +18,7 @@ export default function getFormItemLabel(params = {}) {
   }
 
   // 如果表单是 vertical 布局, 冒号显示
-  if (pLayout === 'vertical') {
+  if (pLayout === 'vertical' && colon) {
     return {
       label: `${label}：`,
     };

@@ -3,10 +3,10 @@ import propTypes from 'prop-types';
 
 import FormItems from './FormItems/index.js';
 
-import getStyle from './utils/getStyle.js';
-import getData from './utils/getData.js';
-import getPlaceholder from './utils/getPlaceholder.js';
-import { getOnBlurValue } from './utils/getValue.js';
+import getContentStyle from './utils/getContentStyle.js';
+import getContentData from './utils/getContentData.js';
+import getContentPlaceholder from './utils/getContentPlaceholder.js';
+import { getOnBlurValue } from './utils/getContentValue.js';
 
 /**
  * 表单元素输入的内容
@@ -42,9 +42,9 @@ class HFormItemContent extends Component {
     const { id, label, type, api, ext, value } = this.props;
 
     // 计算一些内置的属性
-    const newStyle = getStyle({ type, api, ext });
-    const newData = getData({ type, api, ext });
-    const newPlaceholder = getPlaceholder({ type, api, ext, label, id });
+    const newStyle = getContentStyle({ type, api, ext });
+    const newData = getContentData({ type, api, ext });
+    const newPlaceholder = getContentPlaceholder({ type, api, ext, label, id });
 
     const params = {
       api: { ...api, placeholder: newPlaceholder, style: newStyle },

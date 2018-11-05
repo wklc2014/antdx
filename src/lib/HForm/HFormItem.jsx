@@ -42,7 +42,11 @@ const HFormItem = (props) => {
       const key = `formItem-${i}`;
       const { ext = {} } = val;
       const { span = 24 } = ext;
-      const ColProps = { key, span };
+      const ColProps = { key, span, style: {} };
+
+      if (extMap.pLayout === 'vertical') {
+        ColProps.style.paddingBottom = 4;
+      }
 
       const HFormItemContentProps = {
         label: extMap.label,

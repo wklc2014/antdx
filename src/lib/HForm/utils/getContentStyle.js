@@ -7,7 +7,7 @@ import is from 'is_js';
  * @param  {Object} options.ext  [表单元素扩展配置]
  * @return {object}              [新的表单元素的 style 属性]
  */
-export default function getStyle({ type, api = {}, ext = {} }) {
+export default function getContentStyle({ type, api = {}, ext = {} }) {
 
   const { style = {} } = api;
   const { toUpperCase, toLowerCase } = ext;

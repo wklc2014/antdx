@@ -8,7 +8,7 @@ import is from 'is_js';
  * @param  {string} options.id          [表单元素配置 id 属性]
  * @return {string or array}            [新的表单元素的 placeholder 属性]
  */
-export default function getPlaceholder({ type, api = {}, ext = {}, label, id }) {
+export default function getContentPlaceholder({ type, api = {}, ext = {}, label, id }) {
 
   const { placeholder } = api;
 

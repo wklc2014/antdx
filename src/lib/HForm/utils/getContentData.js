@@ -4,7 +4,7 @@ import _chineseCities from './_chineseCities.js';
 /**
  * 内置一些表单元素的 data 属性
  */
-export default function getData({ type, api = {}, ext = {} }) {
+export default function getContentData({ type, api = {}, ext = {} }) {
 
   const { data, city } = ext;
 
