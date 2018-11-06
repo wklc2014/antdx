@@ -1,5 +1,12 @@
 export const dataSource = [
   {
+    id: -1,
+    params: 'grid',
+    description: '表单组是否采用自适应的栅格布局',
+    type: 'Boolean',
+    defaultValue: 'true',
+  },
+  {
     id: 1,
     params: 'cols',
     description: '表单组列数, 表单组一行显示表单元素的个数',

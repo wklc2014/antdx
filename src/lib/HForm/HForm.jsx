@@ -19,6 +19,7 @@ import getFormValidate from './utils/getFormValidate.js';
 class HForm extends Component {
 
   static defaultProps = {
+    grid: true,
     cols: 1,
     layout: 'horizontal',
     extMap: {},
@@ -90,7 +91,7 @@ class HForm extends Component {
   }
 
   render() {
-    const { cols, configs, layout, values, extMap } = this.props;
+    const { cols, grid, configs, layout, values, extMap } = this.props;
 
     const { touches } = this.state;
 
@@ -118,7 +119,7 @@ class HForm extends Component {
       }
 
       const colspan = lodash.get(val, 'extMap.colspan', 1);
-      const ColProps = getGridLayout({ cols, colspan });
+      const ColProps = getGridLayout({ grid, cols, colspan });
       return (
         <Col key={key} {...ColProps}>
           <HFormItem {...HFormItemProps} />
@@ -140,6 +141,12 @@ class HForm extends Component {
 }
 
 HForm.propTypes = {
+  /**
+   * 表单组是否栅格布局
+   * @type {Boolean}
+   */
+  grid: propTypes.bool,
+
   /**
    * 表单组列数
    * 表单组一行显示表单元素的个数

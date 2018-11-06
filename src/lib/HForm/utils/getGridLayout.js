@@ -1,10 +1,14 @@
 /**
  * 获取 Form 表单栅格布局
- * @param  {Number} options.cols          [表单布局列数]
- * @param  {Number} options.colspan   [某个表单元素横跨几列, 默认为1]
  * @return {object}                           [表单栅格化布局属性]
  */
-export default function getFormGridLayout({ cols = 1, colspan = 1 }) {
+export default function getGridLayout({ grid = true, cols = 1, colspan = 1 }) {
+
+  if (!grid) {
+    return {
+      span: parseInt(24 / cols, 10) * colspan,
+    }
+  }
 
   // 一个表单元素最多横跨列数，最多和表单组列数相同
   const newColspan = Math.min(cols, colspan);
