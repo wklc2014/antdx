@@ -21,13 +21,9 @@ class Api extends Component {
     }
   }
 
-  onChange = () => {
-
-  }
-
   render() {
     return (
-      <div style={{ padding: 16 }}>
+      <div>
         <Collapse accordion>
           <Panel header="<HForm />" key="1">
             <ApiHForm />
