@@ -18,6 +18,7 @@ module.exports = merge(common, {
       {
         test: /\.(less|css)$/,
         include: path.join(__dirname, '../src/'),
+        exclude: path.join(__dirname, '../src/assets/'),
         use: [
           'style-loader',
           {

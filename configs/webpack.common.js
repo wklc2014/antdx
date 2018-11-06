@@ -92,6 +92,15 @@ module.exports = {
           }
         ]
       },
+      {
+        test: /\.(less|css)$/,
+        include: path.join(__dirname, '../src/assets/'),
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader'
+        ]
+      },
     ]
   },
 };

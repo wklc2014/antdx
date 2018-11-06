@@ -6,6 +6,7 @@ import store from '../redux/store/index.js';
 import App from '../pages/App/AppContainer.jsx';
 
 import '../mock/index.js';
+import '../assets/index.less';
 
 render(
   <Provider store={store}>
