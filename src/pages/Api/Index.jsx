@@ -5,6 +5,7 @@ import ApiHForm from './ApiHForm.jsx';
 import ApiHFormItem from './ApiHFormItem.jsx';
 import ApiHFormItemContent from './ApiHFormItemContent.jsx';
 import ApiHPicture from './ApiHPicture.jsx';
+import HFormExamples from './HFormExamples.jsx';
 
 const { Panel } = Collapse;
 
@@ -38,6 +39,7 @@ class Api extends Component {
             <ApiHPicture />
           </Panel>
         </Collapse>
+        <HFormExamples />
       </div>
     )
   }
