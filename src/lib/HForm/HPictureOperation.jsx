@@ -25,9 +25,9 @@ export default function HPictureAction (props) {
   const values = { rotate, zoom };
 
   const operationsEle = operations.map((val, i) => {
-    const content = getPopoverContent(val.value, values, onChange);
-    const title = getPopoverTitle(val.value);
     if (val.value === 'rotate' || val.value === 'zoom') {
+      const content = getPopoverContent(val.value, values, onChange);
+      const title = getPopoverTitle(val.value);
       return (
         <Popover
           key={i}
@@ -40,10 +40,17 @@ export default function HPictureAction (props) {
         </Popover>
       )
     }
+    const onClick = () => {
+      if (val.value === 'reset') {
+        onChange(val.value);
+      } else {
+        val.onClick && val.onClick(val.value);
+      }
+    }
     return (
       <Button
         key={i}
-        onClick={() => val.onClick && val.onClick()}
+        onClick={onClick}
         disabled={val.disabled}
       >
         {val.label}

@@ -6,6 +6,8 @@ import Demo from '../Demo/IndexContainer.jsx';
 import Api from '../Api/Index.jsx';
 import Home from '../Home/Home.jsx';
 
+import WarterMark from '../../lib/WarterMark/WarterMark.jsx';
+
 import AuthRoute from './AuthRoute.jsx';
 
 import navConfigs from '../../lib/MainLayout/exampleConfig/exampleConfig.js';
@@ -18,6 +20,7 @@ const App = (props) => {
 
   return (
     <MainLayout {...MainLayoutProps}>
+      <WarterMark text="WANG KUN" />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/demo" component={Demo} />
