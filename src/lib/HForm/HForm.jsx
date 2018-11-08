@@ -62,7 +62,11 @@ class HForm extends Component {
       const errors = {};
       target.forEach((field) => {
         if (validate[field]) {
-          errors[field] = validate[field];
+          errors[field] = {
+            type: 'error',
+            message: validate[field].help,
+            value: values[field],
+          };
         }
       })
       return errors;

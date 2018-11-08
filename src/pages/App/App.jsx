@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import MainLayout from '../../lib/MainLayout/MainLayout.jsx';
 import Demo from '../Demo/IndexContainer.jsx';
 import Api from '../Api/Index.jsx';
-import Home from '../Home/Home.jsx';
+import Home from '../Home/HomeContainer.jsx';
 
 import WarterMark from '../../lib/WarterMark/WarterMark.jsx';
 
@@ -20,7 +20,7 @@ const App = (props) => {
 
   return (
     <MainLayout {...MainLayoutProps}>
-      <WarterMark text="WANG KUN" />
+      <WarterMark text={props.warterMarkText} />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/demo" component={Demo} />

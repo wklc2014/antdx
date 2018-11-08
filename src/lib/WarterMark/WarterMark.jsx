@@ -33,6 +33,12 @@ class WarterMark extends Component {
     this.checkWarterMark();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
+      this.renderWarterMark(nextProps);
+    }
+  }
+
   checkWarterMark = () => {
     const mutationObserver = new MutationObserver((mutations, instance) => {
       const dom = document.getElementById(WARTER_MARK_DOM_ID);
@@ -66,10 +72,13 @@ class WarterMark extends Component {
       maskOpacity: props.maskOpacity,
     };
     const warterMark = generateDataBase64ByCanvas(params);
-    const dom = document.createElement('div');
-    dom.id = WARTER_MARK_DOM_ID;
+    let dom = document.getElementById(WARTER_MARK_DOM_ID);
+    if (!dom) {
+      dom = document.createElement('div');
+      dom.id = WARTER_MARK_DOM_ID;
+      dom.className = styles.warterMark;
+    }
     dom.style.backgroundImage = `url(${warterMark})`;
-    dom.className = styles.warterMark;
     document.body.appendChild(dom);
   }
 

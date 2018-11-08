@@ -30,5 +30,5 @@ export default function getContentData({ type, api = {}, ext = {} }) {
     return data;
   }
 
-  return [];
+  return data;
 }

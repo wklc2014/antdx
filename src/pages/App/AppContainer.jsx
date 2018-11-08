@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { bindActionCreators } from 'redux';
 import App from './App.jsx';
 
 function mapStateToProps(state) {
   return {
+    warterMarkText: state._example.warterMarkText,
   };
 }
 

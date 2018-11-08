@@ -16,4 +16,5 @@ export default {
     { path: path_5 },
     { path: path_6 },
   ],
+  warterMarkText: 'WANG KUN 123',
 }
