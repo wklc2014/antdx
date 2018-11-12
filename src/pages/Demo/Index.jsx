@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'antd';
+import { Card, Menu, Dropdown, Button, Icon } from 'antd';
 
 import HForm from '../../lib/HForm/HForm.jsx';
 import configs from '../../lib/HForm/exampleConfig/exampleConfig.js';
@@ -35,12 +35,20 @@ export default class IndexPage extends Component {
   }
 
   handleClick = (e) => {
-    this.setState({ formLayout: e });
+    this.setState({ formLayout: e.key });
   }
 
   render() {
     const { values } = this.props;
     const { formLayout } = this.state;
+
+    const menu = (
+      <Menu onClick={this.handleClick}>
+        <Menu.Item key="horizontal">horizontal</Menu.Item>
+        <Menu.Item key="vertical">vertical</Menu.Item>
+        <Menu.Item key="inline">inline</Menu.Item>
+      </Menu>
+    );
 
     return (
       <div style={{ padding: 16 }}>
@@ -68,10 +76,12 @@ export default class IndexPage extends Component {
             </Button>
           </p>
           <p>
-            <span>改变布局：</span>
-            <Button type="primary" onClick={() => this.handleClick('horizontal')}>horizontal</Button>、
-            <Button type="primary" onClick={() => this.handleClick('vertical')}>vertical</Button>、
-            <Button type="primary" onClick={() => this.handleClick('inline')}>inline</Button>
+            <Dropdown overlay={menu}>
+              <Button type="primary">
+                改变布局
+                <Icon type="down" />
+              </Button>
+            </Dropdown>
           </p>
           <HForm
             cols={3}
