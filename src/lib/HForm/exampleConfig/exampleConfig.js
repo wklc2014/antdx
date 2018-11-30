@@ -70,6 +70,7 @@ export default [
     extMap: {
       colspan: 2,
       label: '受损部位',
+      maxWidth: 400,
     },
   },
   {

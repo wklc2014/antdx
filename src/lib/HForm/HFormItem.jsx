@@ -13,6 +13,7 @@ import getFormItemValidate from './utils/getFormItemValidate.js';
 import getFormItemLayout from './utils/getFormItemLayout.js';
 import getFormItemLabel from './utils/getFormItemLabel.js';
 import getFormItemStyle from './utils/getFormItemStyle.js';
+import getFormItemRowStyle from './utils/getFormItemRowStyle.js';
 
 const FormItem = Form.Item;
 
@@ -85,9 +86,11 @@ const HFormItem = (props) => {
     ...newFormItemLayout,
   }
 
+  const RowStyle = getFormItemRowStyle(extMap);
+
   return (
     <FormItem {...FormItemProps}>
-      <Row type="flex" gutter={8} style={{ paddingRight: extMap.space }}>
+      <Row type="flex" gutter={8} style={RowStyle}>
         {Children}
       </Row>
     </FormItem>

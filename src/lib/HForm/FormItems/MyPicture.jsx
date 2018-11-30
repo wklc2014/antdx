@@ -93,13 +93,15 @@ export default class MyPicture extends Component {
         backgroundImage: `url(${path})`,
       };
       return (
-        <Tooltip {...toolTipApi} title="点击显示详图" key={key}>
-          <div
-            className={styles.pictureItem}
-            style={newBoxStyle}
-            onClick={() => this.handleClick(i)}
-          />
-        </Tooltip>
+        <div className={styles.pictureItemWraper}>
+          <Tooltip {...toolTipApi} title="点击显示详图" key={key}>
+            <div
+              className={styles.pictureItem}
+              style={newBoxStyle}
+              onClick={() => this.handleClick(i)}
+            />
+          </Tooltip>
+        </div>
       );
     });
 
