@@ -93,8 +93,8 @@ export default class MyPicture extends Component {
         backgroundImage: `url(${path})`,
       };
       return (
-        <div className={styles.pictureItemWraper}>
-          <Tooltip {...toolTipApi} title="点击显示详图" key={key}>
+        <div className={styles.pictureItemWraper} key={key}>
+          <Tooltip {...toolTipApi} title="点击显示详图">
             <div
               className={styles.pictureItem}
               style={newBoxStyle}
