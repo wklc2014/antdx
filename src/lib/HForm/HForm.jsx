@@ -23,6 +23,7 @@ class HForm extends Component {
     cols: 1,
     layout: 'horizontal',
     extMap: {},
+    onChange: () => {},
   }
 
   constructor(props) {
@@ -186,7 +187,7 @@ HForm.propTypes = {
    * 绑定到 onChange/onBlur 事件
    * @type {func}
    */
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
 
   /**
    * 整个表单值

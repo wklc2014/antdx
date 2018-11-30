@@ -124,7 +124,7 @@ HFormItem.propTypes = {
    * 绑定到 onChange/onBlur 事件
    * @type {func}
    */
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
 
   /**
    * 表单值
@@ -136,6 +136,7 @@ HFormItem.propTypes = {
 HFormItem.defaultProps = {
   extMap: {},
   touches: {},
+  onChange: () => {},
 }
 
 export default HFormItem;

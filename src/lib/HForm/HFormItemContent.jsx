@@ -19,6 +19,7 @@ class HFormItemContent extends Component {
     api: {},
     ext: {},
     value: undefined,
+    onChange: () => {},
   }
 
   shouldComponentUpdate(nextProps) {
@@ -106,7 +107,7 @@ HFormItemContent.propTypes = {
    * 绑定到 onChange/onBlur 事件
    * @type {func}
    */
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
 
   /**
    * 表单元素值
