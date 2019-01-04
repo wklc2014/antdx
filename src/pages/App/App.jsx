@@ -1,37 +1,39 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import MainLayout from '../../lib/MainLayout/MainLayout.jsx';
-import Demo from '../Demo/IndexContainer.jsx';
+import Home from '../Home/Home.jsx';
+import ExampleHForm from '../Example/ExampleHForm.jsx';
+import ExampleHPicture from '../Example/ExampleHPicture.jsx';
+import ExampleWarterMark from '../Example/ExampleWarterMark.jsx';
+import ExampleHTagGroup from '../Example/ExampleHTagGroup.jsx';
 import Api from '../Api/Index.jsx';
-import Home from '../Home/HomeContainer.jsx';
+import MainLayout from '../../lib/MainLayout/MainLayout.jsx';
+import antdx from '../../../lib/antdx.js';
+import exampleConfig from './common/index.js';
 
-import WarterMark from '../../lib/WarterMark/WarterMark.jsx';
+console.log('antdx>>>', antdx);
 
-import AuthRoute from './AuthRoute.jsx';
-
-import navConfigs from '../../lib/MainLayout/exampleConfig/exampleConfig.js';
+// const { MainLayout } = antdx;
 
 const App = (props) => {
 
-  const MainLayoutProps = {
-    configs: navConfigs,
-  }
-
   return (
-    <MainLayout {...MainLayoutProps}>
-      <WarterMark text={props.warterMarkText} />
+    <MainLayout configs={exampleConfig}>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/demo" component={Demo} />
+        <Route path="/example/hform" component={ExampleHForm} />
+        <Route path="/example/hpicture" component={ExampleHPicture} />
+        <Route path="/example/wartermark" component={ExampleWarterMark} />
+        <Route path="/example/taggroup" component={ExampleHTagGroup} />
         <Route path="/api" component={Api} />
-        <Route path="/a" render={() => <h1>Page A</h1>} />
-        <Route path="/b" render={() => <h1>Page B</h1>} />
-        <Route path="/c" render={() => <h1>Page C</h1>} />
-        <Route render={() => <h1>NoMatch</h1>} />
+        <Route path="/help" render={() => <h2>帮助我们</h2>} />
+        <Route path="/b" render={() => <h2>Page B</h2>} />
+        <Route path="/c" render={() => <h2>Page C</h2>} />
+        <Route render={() => <h3>Not Found</h3>} />
       </Switch>
     </MainLayout>
   );
 }
 
 export default App;
+

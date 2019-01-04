@@ -31,18 +31,4 @@ const MyInput = (props) => {
   return <Input {...newProps} />;
 }
 
-MyInput.propTypes = {
-  api: propTypes.object,
-  ext: propTypes.object,
-  onBlur: propTypes.func.isRequired,
-  onChange: propTypes.func.isRequired,
-  value: propTypes.any,
-}
-
-MyInput.defaultProps = {
-  api: {},
-  ext: {},
-  value: undefined,
-}
-
 export default MyInput;

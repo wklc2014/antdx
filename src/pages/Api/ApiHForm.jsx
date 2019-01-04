@@ -6,9 +6,7 @@ import { dataSource } from './common/_apiHForm.js';
 
 const ApiHForm = (props) => {
 
-  const {
-
-  } = props;
+  const {} = props;
 
   const TableProps = {
     rowKey: 'id',

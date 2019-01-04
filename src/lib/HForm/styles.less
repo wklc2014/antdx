@@ -1,51 +1,3 @@
-/* HPicture 组件 */
-.wraper {
-
-  .box {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #ddd;
-    overflow: hidden;
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .drag {
-    display: inline-block;
-    .pic {
-      z-index: 1;
-      background-color: transparent;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      &:after {
-        content: '';
-        display: block;
-        padding-bottom: 100%;
-      }
-    }
-    .handle {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 2;
-      background-color: transparent;
-      cursor: pointer;
-    }
-  }
-
-  .operations {
-    margin-top: 16px;
-    text-align: center;
-  }
-
-}
-
 /* MyPicture */
 .picture {
   display: flex;
@@ -70,14 +22,3 @@
   overflow: hidden;
   cursor: pointer;
 }
-
-.row {
-  display: flex;
-
-}
-
-.col {
-  padding-bottom: 3px;
-  padding-right: 3px;
-}
-

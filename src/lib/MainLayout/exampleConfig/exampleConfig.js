@@ -9,28 +9,18 @@ export default [
     path: '/',
   },
   {
-    icon: 'login',
-    title: '示例文档',
-    path: '/demo',
-  },
-  {
-    icon: 'book',
-    title: '接口文档',
-    path: '/api',
-  },
-  {
     title: {
-      name: '理赔审核',
+      name: '示例',
       icon: 'user',
     },
     subMenus: [
-      { icon: 'user', title: '自营审核', path: '/a' },
-      { icon: 'user', title: '子工单审核', path: '/b' },
-      { icon: 'user', title: '质检审核', path: '/c' },
+      { icon: 'user', title: 'HForm', path: '/example/hform' },
+      { icon: 'user', title: '二级页面 B', path: '/b' },
+      { icon: 'user', title: '二级页面 C', path: '/c' },
     ]
   },
   {
-    icon: 'copy',
+    icon: 'phone',
     title: '错误页面',
     path: '/error',
   },

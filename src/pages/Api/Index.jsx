@@ -5,7 +5,9 @@ import ApiHForm from './ApiHForm.jsx';
 import ApiHFormItem from './ApiHFormItem.jsx';
 import ApiHFormItemContent from './ApiHFormItemContent.jsx';
 import ApiHPicture from './ApiHPicture.jsx';
-import HFormExamples from './HFormExamples.jsx';
+import ApiHPictureWraper from './ApiHPictureWraper.jsx';
+import ApiWarterMark from './ApiWarterMark.jsx';
+import ApiHTagGroup from './ApiHTagGroup.jsx';
 
 const { Panel } = Collapse;
 
@@ -38,8 +40,16 @@ class Api extends Component {
           <Panel header="<HPicture />" key="4">
             <ApiHPicture />
           </Panel>
+          <Panel header="<HPictureWraper />" key="5">
+            <ApiHPictureWraper />
+          </Panel>
+          <Panel header="<WarterMark />" key="6">
+            <ApiWarterMark />
+          </Panel>
+          <Panel header="<HTagGroup />" key="7">
+            <ApiHTagGroup />
+          </Panel>
         </Collapse>
-        <HFormExamples />
       </div>
     )
   }

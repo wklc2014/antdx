@@ -5,8 +5,16 @@
     "stage-0"
   ],
   "plugins": [
-    ["transform-runtime"],
-    ["import", { "libraryName": "antd", "style": true }],
-    ["transform-decorators-legacy"]
+    [
+      "import", {
+        "libraryName": "antd",
+        "style": true
+      }
+    ],
+    // [
+    //   "transform-react-jsx", {
+    //     "pragma": "m"
+    //   }
+    // ]
   ]
 }

@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
-import propTypes from 'prop-types';
-
-import FormItems from './FormItems/index.js';
-
-import getContentStyle from './utils/getContentStyle.js';
-import getContentData from './utils/getContentData.js';
-import getContentPlaceholder from './utils/getContentPlaceholder.js';
-import { getOnBlurValue } from './utils/getContentValue.js';
-
 /**
  * 表单元素输入的内容
  * 被 HFormItem 包裹
  */
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
+import is from 'is_js';
+
+import FormItemTypes from './FormItems/index.js';
+import CHINESE_CITIES from './utils/_chineseCities.js';
+
 class HFormItemContent extends Component {
 
   static defaultProps = {
     label: '',
     api: {},
     ext: {},
-    value: undefined,
     onChange: () => {},
+    value: undefined,
   }
 
   shouldComponentUpdate(nextProps) {
@@ -28,38 +25,199 @@ class HFormItemContent extends Component {
     return next !== prev;
   }
 
+  /**
+   * 表单元素 onChange 事件
+   */
   onChange = (e, composition) => {
     const { id, onChange } = this.props;
     onChange({ id, value: e });
   }
 
+  /**
+   * 表单元素 Blur 事件
+   */
   onBlur = (e) => {
     const { id, ext, onChange } = this.props;
-    const newValue = getOnBlurValue({ value: e, ext });
+    const { toUpperCase, toLowerCase, trim } = ext;
+    let newValue = value;
+
+    // 删空格
+    if (trim) {
+      newValue = lodash.trim(newValue);
+    }
+
+    // 大小写转换
+    if (toUpperCase && is.string(value)) {
+      newValue = value.toUpperCase();
+    } else if (toLowerCase && is.string(value)) {
+      newValue = value.toLowerCase();
+    }
+
     onChange({ id, value: newValue });
   }
 
+  /**
+   * 获取表单元素 style 属性
+   * @return {Object} 表单元素 style 属性
+   */
+  getStyleProps() {
+    const { type, api = {}, ext = {} } = this.props;
+    const { style = {} } = api;
+    const { toUpperCase, toLowerCase } = ext;
+    const newStyle = {};
+
+    // css 大小写处理
+    if (toUpperCase) {
+      Object.assign(newStyle, { textTransform: 'uppercase' });
+    } else if (toLowerCase) {
+      Object.assign(newStyle, { textTransform: 'lowercase' });
+    }
+
+    // 部分表单元素类型默认设置 width: 100%
+    switch (type) {
+      case 'cascader':
+      case 'datePicker':
+      case 'rangePicker':
+      case 'monthPicker':
+      case 'timePicker':
+      case 'number':
+      case 'select':
+      case 'editor':
+      case 'treeSelect':
+        Object.assign(newStyle, { width: '100%' });
+        break;
+      default:
+    }
+
+    // 最后合并表单元素配置的属性
+    Object.assign(newStyle, style);
+
+    // 空样式不返回
+    if (is.empty(newStyle)) {
+      return null;
+    }
+
+    return newStyle;
+  }
+
+  /**
+   * 获取表单元素 data 属性
+   * @return {Object} 表单元素 data 属性
+   */
+  getDataProps() {
+    const { type, api = {}, ext = {} } = this.props;
+    const { data, city } = ext;
+
+    if (is.array(data)) {
+      return data;
+    }
+
+    if (type === 'cascader') {
+      const { options } = api;
+      if (is.array(options)) {
+        return options;
+      } else if (city && CHINESE_CITIES[city] && is.array(CHINESE_CITIES[city])) {
+        return CHINESE_CITIES[city];
+      }
+    }
+
+    else if (type === 'treeSelect') {
+      const { treeData } = api;
+      if (is.array(treeData)) {
+        return treeData;
+      } else if (city && CHINESE_CITIES[city] && is.array(CHINESE_CITIES[city])) {
+        return CHINESE_CITIES[city].map((v) => ({ title: v.label, value: v.value }));
+      }
+    }
+
+    return data;
+  }
+
+  /**
+   * 获取表单元素 placeholder 属性
+   * @return {Object} 表单元素 placeholder 属性
+   */
+  getPlaceholderProps() {
+    const { id, type, api = {}, ext = {}, label } = this.props;
+    const { placeholder } = api;
+
+    if (placeholder === 'NULL') {
+      // 手动设置 placeholder 为 NULL 字符串
+      // 则不显示 placeholder
+      return '';
+    }
+
+    if (!placeholder && !label && !id) {
+      // 如果 placeholder、label、id 都没有设置
+      // 也不显示 placeholder
+      return '';
+    }
+
+    let newPlaceholder = '';
+
+    // 表单元素类型 - 输入
+    const inputType = [
+      'input',
+      'textarea',
+      'search',
+      'service',
+      'number',
+      'fetchInput',
+    ];
+
+    // 表单元素类型 - 选择
+    const selectType = [
+      'select',
+      'treeSelect',
+      'cascader',
+      'datePicker',
+      'monthPicker',
+      'timePicker',
+    ];
+
+    // 预定义 placeholder 属性
+    let prePlaceholder = '';
+    if (is.inArray(type, inputType)) {
+      prePlaceholder = placeholder || `请输入${label || id}`;
+    } else if (is.inArray(type, selectType)) {
+      prePlaceholder = placeholder || `请选择${label || id}`;
+    }
+
+    if (type === 'rangePicker') {
+      /**
+       * 区间时间的 placeholder 属性是个数组
+       * 单独处理 range 类型
+       */
+      newPlaceholder = placeholder || [`开始${label || id}`, `开始${label || id}`];
+    } else {
+      // 否则不处理
+      // 直接采用预定义 placeholder
+      newPlaceholder = prePlaceholder;
+    }
+
+    return newPlaceholder;
+  }
+
   render() {
-    const { id, label, type, api, ext, value } = this.props;
+    const { id, type, label, api, ext, value } = this.props;
 
     // 计算一些内置的属性
-    const newStyle = getContentStyle({ type, api, ext });
-    const newData = getContentData({ type, api, ext });
-    const newPlaceholder = getContentPlaceholder({ type, api, ext, label, id });
+    const newStyle = this.getStyleProps();
+    const newData = this.getDataProps();
+    const newPlaceholder = this.getPlaceholderProps();
 
     const params = {
       api: { ...api, placeholder: newPlaceholder, style: newStyle },
       ext: { ...ext, data: newData },
-      value,
       onChange: this.onChange,
       onBlur: this.onBlur,
+      value,
     };
 
-    if (FormItems[type]) {
-      return FormItems[type](params);
+    if (FormItemTypes && FormItemTypes[type]) {
+      return FormItemTypes[type](params);
     }
 
-    console.error(`type>>>${type} is error type!`);
     return null;
   }
 }
@@ -71,6 +229,7 @@ HFormItemContent.propTypes = {
    * @type {String/Boolean}
    */
   label: propTypes.oneOfType([
+    propTypes.element,
     propTypes.string,
     propTypes.bool,
   ]),

@@ -1,14 +1,13 @@
 /**
- * 主体布局
- * 包括左侧导航菜单和右侧内容区域
+ * 带侧边栏导航的布局组件
  */
 import React, { Fragment, Component } from 'react';
-import is from 'is_js';
 import propTypes from 'prop-types';
+import is from 'is_js';
+import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { Layout, Menu, Icon } from 'antd';
 
-import Logo from './Logo.jsx';
 import MyNavLink from './MyNavLink.jsx';
 
 import styles from './styles.less';
@@ -19,7 +18,9 @@ const { SubMenu, Item } = Menu;
 class MainLayout extends Component {
 
   static defaultProps = {
-    className: '',
+    configs: [],
+    menuProps: {},
+    siderProps: {},
   }
 
   constructor(props) {
@@ -33,7 +34,7 @@ class MainLayout extends Component {
     this.setState({ collapsed });
   }
 
-  getMenuTitle = (title) => {
+  renderMenuTitle = (title) => {
     if (is.object(title)) {
       const { icon, name, className } = title;
       return (
@@ -47,7 +48,7 @@ class MainLayout extends Component {
     return title;
   }
 
-  getSubMenuChildren = (subMenus) => {
+  renderSubMenuChildren = (subMenus) => {
     const subMenuChildren = subMenus.map((s, j) => {
       return (
         <Item key={s.path}>
@@ -58,95 +59,109 @@ class MainLayout extends Component {
     return subMenuChildren;
   }
 
-  getMenuChildren = () => {
+  renderMenuChildren = () => {
     const { configs } = this.props;
-    const menuChildren = configs.filter((c) => !c.hide).map((c, i) => {
-      const { title, subMenus } = c;
+    return configs.filter(menu => !menu.hide).map((menu, i) => {
       const key = `${i}`;
-      const subTitle = this.getMenuTitle(title);
+      const { title, subMenus } = menu;
+      const subTitle = this.renderMenuTitle(title);
 
       if (subMenus) {
         return (
           <SubMenu key={subMenus[0].path} title={subTitle}>
-            {this.getSubMenuChildren(subMenus)}
+            {this.renderSubMenuChildren(subMenus)}
           </SubMenu>
         );
       }
 
       return (
-        <Item key={c.path}>
-          <MyNavLink {...c} />
+        <Item key={menu.path}>
+          <MyNavLink {...menu} />
         </Item>
       );
     });
-
-    return menuChildren;
   }
 
-  getSelectedNav = () => {
+  getMenuSelectedKeys = () => {
     const { location = {}, configs } = this.props;
     const { pathname } = location;
     const selectedKeys = [];
-    configs.filter((c) => !c.hide).some((c) => {
-      if (c.subMenus) {
-        return c.subMenus.some(s => {
-          if (s.path === pathname) {
-            selectedKeys.push(s.path);
+
+    configs.filter(menu => !menu.hide).some(menu => {
+      if (menu.subMenus) {
+        return menu.subMenus.some(subMenu => {
+          if (subMenu.path === pathname) {
+            selectedKeys.push(subMenu.path);
           }
-          return s.path === pathname;
+          return subMenu.path === pathname;
         })
       }
-      if (pathname === c.path) {
-        selectedKeys.push(c.path);
+      if (pathname === menu.path) {
+        selectedKeys.push(menu.path);
       }
-      return pathname === c.path;
+      return pathname === menu.path;
     })
+
     return selectedKeys;
   }
 
   render() {
     const { collapsed } = this.state;
-    const { className, sideMenus } = this.props;
+    const { menuProps, sideMenus, siderProps } = this.props;
 
-    const LogoProps = {
-      title: collapsed ? 'HForm' : 'learn-hform',
-    }
+    const SideProps = {
+      collapsible: true,
+      ...siderProps,
+      collapsed,
+      onCollapse: this.handleCollapse,
+    };
 
     const MenuProps = {
       theme: 'dark',
       mode: 'vertical',
-      selectedKeys: this.getSelectedNav(),
-    }
-
-    const SideProps = {
-      collapsible: true,
-      collapsed,
-      onCollapse: this.handleCollapse,
-    }
+      ...menuProps,
+      selectedKeys: this.getMenuSelectedKeys(),
+    };
 
     return (
-      <section className={className}>
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sider {...SideProps}>
-            <Logo {...LogoProps} />
-            <Menu {...MenuProps}>
-              {this.getMenuChildren()}
-            </Menu>
-          </Sider>
-          <Layout>
-            <div className={styles.mainlayoutWraper}>
-              {this.props.children}
-            </div>
-          </Layout>
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sider {...SideProps}>
+          <div className={styles.box}>
+            <Link to="/" className={styles.logo}>antdx</Link>
+          </div>
+          <Menu {...MenuProps}>
+            {this.renderMenuChildren()}
+          </Menu>
+        </Sider>
+        <Layout>
+          <div className={styles.wraper}>
+            {this.props.children}
+          </div>
         </Layout>
-      </section>
+      </Layout>
     );
   }
 }
 
 MainLayout.propTypes = {
-  className: propTypes.string,
-  configs: propTypes.array.isRequired,
+  /**
+   * 导航配置
+   * @type {Array}
+   */
+  configs: propTypes.array,
+
+  /**
+   * antd Menu 组件配置
+   * @type {Object}
+   */
+  menuProps: propTypes.object,
+
+
+  /**
+   * antd Sider 组件配置
+   * @type {Object}
+   */
+  siderProps: propTypes.object,
 };
 
 export default withRouter(MainLayout);

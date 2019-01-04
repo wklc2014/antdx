@@ -9,44 +9,11 @@ module.exports = merge(common, {
   devServer: {
     contentBase: path.join(__dirname, '../dist/'),
     compress: true,
-    port: 12000,
+    port: 9000,
     hot: true,
-    // open: true,
   },
   module: {
-    rules: [
-      {
-        test: /\.(less|css)$/,
-        include: path.join(__dirname, '../src/'),
-        exclude: path.join(__dirname, '../src/assets/'),
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              camelCase: true,
-              modules: true,
-              importLoaders: 1,
-              localIdentName: '[name]--[local]--[hash:base64]'
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: {
-                path: path.join(__dirname, 'postcss.config.js')
-              }
-            }
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              javascriptEnabled: true
-            }
-          }
-        ]
-      },
-    ]
+    rules: []
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

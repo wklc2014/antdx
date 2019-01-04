@@ -25,13 +25,13 @@ export const dataSource = [
     params: 'onChange',
     description: '可控表单搜集表单值的事件方法，绑定到 onChange/onBlur 事件',
     type: 'Func',
-    defaultValue: '必填',
+    defaultValue: 'null',
   },
   {
     id: 6,
     params: 'values',
     description: '表单值',
     type: 'Object',
-    defaultValue: '必填',
+    defaultValue: '{}',
   },
 ]

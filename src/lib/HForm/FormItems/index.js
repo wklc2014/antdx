@@ -2,6 +2,7 @@
  * 统一处理各种表单输入类型
  */
 import React from 'react';
+import is from 'is_js';
 
 import MyButton from './MyButton.jsx';
 import MyCascader from './MyCascader.jsx';
@@ -25,26 +26,28 @@ import MyTextArea from './MyTextArea.jsx';
 import MyTimePicker from './MyTimePicker.jsx';
 import MyTreeSelect from './MyTreeSelect.jsx';
 
-export default {
-  button: (props) => <MyButton {...props} />,
-  cascader: (props) => <MyCascader {...props} />,
-  datePicker: (props) => <MyDatePicker {...props} />,
-  monthPicker: (props) => <MyMonthPicker {...props} />,
-  rangePicker: (props) => <MyRangePicker {...props} />,
-  timePicker: (props) => <MyTimePicker {...props} />,
-  input: (props) => <MyInput {...props} />,
-  textarea: (props) => <MyTextArea {...props} />,
-  number: (props) => <MyNumber {...props} />,
-  checkbox: (props) => <MyCheckbox {...props} />,
-  radio: (props) => <MyRadio {...props} />,
-  radioButton: (props) => <MyRadioButton {...props} />,
-  rate: (props) => <MyRate {...props} />,
-  search: (props) => <MySearch {...props} />,
-  select: (props) => <MySelect {...props} />,
-  service: (props) => <MyService {...props} />,
-  slider: (props) => <MySlider {...props} />,
-  switch: (props) => <MySwitch {...props} />,
-  text: (props) => <MyText {...props} />,
-  picture: (props) => <MyPicture {...props} />,
-  treeSelect: (props) => <MyTreeSelect {...props} />,
+const FormItemTypes = {
+  button: MyButton,
+  cascader: MyCascader,
+  datePicker: MyDatePicker,
+  monthPicker: MyMonthPicker,
+  rangePicker: MyRangePicker,
+  timePicker: MyTimePicker,
+  input: MyInput,
+  textarea: MyTextArea,
+  number: MyNumber,
+  checkbox: MyCheckbox,
+  radio: MyRadio,
+  radioButton: MyRadioButton,
+  rate: MyRate,
+  search: MySearch,
+  select: MySelect,
+  service: props => <MyService {...props} />,
+  slider: MySlider,
+  switch: MySwitch,
+  text: MyText,
+  picture: props => <MyPicture {...props} />,
+  treeSelect: MyTreeSelect,
 }
+
+export default FormItemTypes;

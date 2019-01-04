@@ -1,20 +1,18 @@
-import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from '../redux/store/index.js';
-import App from '../pages/App/AppContainer.jsx';
+import App from '../pages/App/App.jsx';
+import '../common/less/index.less';
 
-import '../mock/index.js';
-import '../utils/global.js';
-import '../assets/index.less';
+import env from '../common/js/env.js';
+
+if (env === 'development') {
+  require('../mocks/index.js');
+}
 
 render(
-  <Provider store={store}>
-    <Router>
-      <App/>
-    </Router>
-  </Provider>,
+  <Router>
+    <App/>
+  </Router>,
   document.getElementById("root")
 );

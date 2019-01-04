@@ -42,20 +42,21 @@ export default class MyService extends Component {
       timeout = null;
     }
 
-    async function search() {
+    function search() {
       try {
         lodash.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
         const compiled = lodash.template(params);
         const newParams = compiled({ value });
-        const resp = await request(
+        request(
           url,
           querystring.parse(newParams),
           { method },
-        );
-        if (resp.success) {
-          const data = resp.data.map(v => lodash.get(v, key));
-          that.setState({ data });
-        }
+        ).then(resp => {
+          if (resp.success) {
+            const data = resp.data.map(v => lodash.get(v, key));
+            that.setState({ data });
+          }
+        })
       } catch (e) {
       }
     }

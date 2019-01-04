@@ -5,12 +5,11 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Tooltip, Modal, message } from 'antd';
 
-import HPicture from '../HPicture.jsx';
-import _operations from '../utils/_operations.js';
-
+import HPictureWraper from '../../HPicture/HPictureWraper.jsx';
+import hocModal from '../../Hoc/hocModal.js';
 import styles from '../styles.less';
 
-export default class MyPicture extends Component {
+class MyPicture extends Component {
 
   static defaultProps = {
     api: {},
@@ -20,67 +19,22 @@ export default class MyPicture extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
       index: 0,
     }
   }
 
-  /**
-   * 点击图片弹出 Modal 框，显示详图
-   * @param  {Number} index [当前图片序号]
-   */
-  handleClick = (index) => {
+  handleClick = (idx) => {
     this.setState({
-      visible: true,
-      index,
-    })
-  }
-
-  /**
-   * 隐藏 Modal 弹框
-   */
-  onCancel = () => {
-    this.setState({ visible: false });
-  }
-
-  /**
-   * 下一张图片
-   */
-  onNext = () => {
-    const { value } = this.props;
-    const { index } = this.state;
-    const length = value.length;
-    if (index === length - 1) {
-      message.destroy();
-      message.info('已经是最后一张了');
-    } else {
-      this.setState({
-        index: index + 1,
-      })
-    }
-  }
-
-  /**
-   * 上一张图片
-   */
-  onPrev = () => {
-    const { index } = this.state;
-    if (index === 0) {
-      message.destroy();
-      message.info('已经是第一张了');
-    } else {
-      this.setState({
-        index: index - 1,
-      })
-    }
+      index: idx,
+    }, this.props.onVisible);
   }
 
   render() {
-    const { value, api } = this.props;
-    const { visible, index } = this.state;
+    const { value, api, visible } = this.props;
+    const { index } = this.state;
     const {
-      toolTipApi= {},
-      hPictureApi = {},
+      tooltipApi= {},
+      pictureApi = {},
       modalApi = {},
       boxStyle = {},
     } = api;
@@ -94,7 +48,7 @@ export default class MyPicture extends Component {
       };
       return (
         <div className={styles.pictureItemWraper} key={key}>
-          <Tooltip {...toolTipApi} title="点击显示详图">
+          <Tooltip {...tooltipApi} title="点击显示详图">
             <div
               className={styles.pictureItem}
               style={newBoxStyle}
@@ -105,17 +59,10 @@ export default class MyPicture extends Component {
       );
     });
 
-    const operations = [
-      { value: 'prev', label: '上一张', onClick: this.onPrev },
-      { value: 'next', label: '下一张', onClick: this.onNext },
-      ..._operations,
-    ];
-
-    const src = value[index] && value[index].path;
-    const HPictureProps = {
-      ...hPictureApi,
-      src,
-      operations,
+    const source = value.map(v => v.path);
+    const HPictureWraperProps = {
+      source,
+      index,
     }
 
     const ModalProps = {
@@ -123,14 +70,15 @@ export default class MyPicture extends Component {
       ...modalApi,
       footer: false,
       visible,
-      onCancel: this.onCancel,
+      onCancel: this.props.onCancel,
+      onOk: this.props.onOk,
     }
 
     return (
       <div className={styles.picture}>
         {pictureEle}
         <Modal {...ModalProps}>
-          <HPicture {...HPictureProps} />
+          <HPictureWraper {...HPictureWraperProps} />
         </Modal>
       </div>
     )
@@ -142,3 +90,5 @@ MyPicture.propTypes = {
   value: propTypes.arrayOf(propTypes.object),
   api: propTypes.object,
 }
+
+export default hocModal(MyPicture);

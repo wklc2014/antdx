@@ -93,7 +93,7 @@ WarterMark.propTypes = {
    * 水印文本-内容
    * @type {String}
    */
-  text: propTypes.string.isRequired,
+  text: propTypes.string,
 
   /**
    * 水印文本-对其方式
