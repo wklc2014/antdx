@@ -8,12 +8,7 @@ import ExampleWarterMark from '../Example/ExampleWarterMark.jsx';
 import ExampleHTagGroup from '../Example/ExampleHTagGroup.jsx';
 import Api from '../Api/Index.jsx';
 import MainLayout from '../../lib/MainLayout/MainLayout.jsx';
-import antdx from '../../../lib/antdx.js';
 import exampleConfig from './common/index.js';
-
-console.log('antdx>>>', antdx);
-
-// const { MainLayout } = antdx;
 
 const App = (props) => {
 

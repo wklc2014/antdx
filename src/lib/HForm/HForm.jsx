@@ -31,6 +31,9 @@ class HForm extends Component {
    */
   getColSpanProps = (colspan = 1) => {
     const { cols } = this.props;
+    if (cols < 1) {
+      return 24;
+    }
     const span = parseInt(24 / cols, 10) * colspan;
     return Math.min(span, 24);
   }
