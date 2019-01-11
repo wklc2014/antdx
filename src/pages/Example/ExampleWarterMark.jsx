@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import HForm from '../../lib/HForm/HForm.jsx';
-import WarterMark from '../../lib/WarterMark/WarterMark.jsx';
+import HForm from '../../components/HForm/HForm.jsx';
+import WarterMark from '../../components/WarterMark/WarterMark.jsx';
 
 class ExampleWarterMark extends Component {
 

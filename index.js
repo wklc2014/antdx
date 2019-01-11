@@ -1,11 +1,11 @@
-import HForm from './src/lib/HForm/HForm.jsx';
-import getConfigInitValues from './src/lib/HForm/lib/getConfigInitValues.js';
-import hocModal from './src/lib/Hoc/hocModal.js';
-import HPicture from './src/lib/HPicture/HPicture.jsx';
-import HPictureWraper from './src/lib/HPicture/HPictureWraper.jsx';
-import HTagGroup from './src/lib/HTagGroup/HTagGroup.jsx';
-import MainLayout from './src/lib/MainLayout/MainLayout.jsx';
-import WarterMark from './src/lib/WarterMark/WarterMark.jsx';
+import HForm from './src/components/HForm/HForm.jsx';
+import getConfigInitValues from './src/components/HForm/lib/getConfigInitValues.js';
+import hocModal from './src/components/Hoc/hocModal.js';
+import HPicture from './src/components/HPicture/HPicture.jsx';
+import HPictureWraper from './src/components/HPicture/HPictureWraper.jsx';
+import HTagGroup from './src/components/HTagGroup/HTagGroup.jsx';
+import MainLayout from './src/components/MainLayout/MainLayout.jsx';
+import WarterMark from './src/components/WarterMark/WarterMark.jsx';
 
 const antdx = {
   HForm,

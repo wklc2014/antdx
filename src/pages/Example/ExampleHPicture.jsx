@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Card, message } from 'antd';
-import HPictureWraper from '../../lib/HPicture/HPictureWraper.jsx';
+import HPictureWraper from '../../components/HPicture/HPictureWraper.jsx';
 import path_1 from './images/1.jpg';
 import path_2 from './images/2.jpg';
 import path_3 from './images/3.jpg';
