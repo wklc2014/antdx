@@ -502,4 +502,19 @@ export default [
       label: '输入搜索',
     }
   },
+  {
+    config: {
+      id: 'operators',
+      type: 'tag',
+      api: {
+
+      },
+      ext: {
+
+      },
+    },
+    extMap: {
+      label: '基础标签',
+    }
+  }
 ]
