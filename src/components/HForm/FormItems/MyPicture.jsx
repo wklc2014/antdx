@@ -77,9 +77,11 @@ class MyPicture extends Component {
     return (
       <div className={styles.picture}>
         {pictureEle}
-        <Modal {...ModalProps}>
-          <HPictureWraper {...HPictureWraperProps} />
-        </Modal>
+        {visible && (
+          <Modal {...ModalProps}>
+            <HPictureWraper {...HPictureWraperProps} />
+          </Modal>
+        )}
       </div>
     )
   }

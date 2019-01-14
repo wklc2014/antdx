@@ -510,7 +510,12 @@ export default [
 
       },
       ext: {
-
+        data: [
+          { value: 'cheng_du', label: '成都' },
+          { value: 'shang_hai', label: '上海' },
+          { value: 'bei_jing', label: '北京' },
+          { value: 'wu_lu_mu_qi', label: '乌鲁木齐' },
+        ],
       },
     },
     extMap: {

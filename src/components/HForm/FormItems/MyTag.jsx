@@ -6,6 +6,8 @@ import propTypes from 'prop-types';
 import is from 'is_js';
 import { Tag } from 'antd';
 
+const { CheckableTag } = Tag;
+
 const MyTag = (props) => {
   const {
     api,
@@ -20,32 +22,39 @@ const MyTag = (props) => {
     data = [];
   }
 
-  const newProps = {
-    ...api,
-    onChange: e => onChange(e.target.value),
-    value,
-  };
+  const Children = data.map((v, i) => {
+    const key = `my-tag-${i}`;
+    const newProps = {
+      key,
+      ...api,
+      onChange: checked => {
+        const newValue = checked ? [...value, v.value] : value.filter(f => f !== v.value);
+        onChange(newValue);
+      },
+      checked: value.indexOf(v.value) > -1,
+    };
 
-  const Children = data.map((v, i) => (
-    <Radio key={i} value={v.value}>
-      {v.label}
-    </Radio>
-  ));
+    return (
+      <CheckableTag {...newProps}>
+        {v.label}
+      </CheckableTag>
+    )
+  });
 
-  return <RadioGroup {...newProps}>{Children}</RadioGroup>;
+  return <span>{Children}</span>;
 }
 
 MyTag.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
   onChange: propTypes.func.isRequired,
-  value: propTypes.any,
+  value: propTypes.array,
 }
 
 MyTag.defaultProps = {
   api: {},
   ext: {},
-  value: undefined,
+  value: [],
 }
 
 export default MyTag;
