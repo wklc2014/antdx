@@ -6,7 +6,6 @@ import HForm from '../../components/HForm/HForm.jsx';
 import exampleConfigs from '../../components/HForm/exampleConfigs/exampleConfigs.js';
 import getConfigInitValue from '../../components/HForm/lib/getConfigInitValues.js';
 import controlConfigs from './common/index.js';
-import hocModal from '../../components/Hoc/hocModal.js';
 import path_1 from './images/1.jpg';
 import path_2 from './images/2.jpg';
 import path_3 from './images/3.jpg';
@@ -40,6 +39,7 @@ class ExampleHForm extends Component {
         ...controls,
       },
       result: '',
+      visible: false,
     }
   }
 
@@ -59,7 +59,7 @@ class ExampleHForm extends Component {
       this.inst.resetForm();
     } else if (id === 'errorForm') {
       const result = this.inst.getFormValidate();
-      this.setState({ result }, this.props.onVisible);
+      this.setState({ result, visible: true });
     } else {
       this.setState({
         controls: {
@@ -70,8 +70,16 @@ class ExampleHForm extends Component {
     }
   }
 
+  onModalOk = () => {
+    this.setState({ visible: false });
+  }
+
+  onModalCancel = () => {
+    this.setState({ visible: false });
+  }
+
   render() {
-    const { controls, result } = this.state;
+    const { controls, result, visible } = this.state;
 
     const HFormPropsRight = {
       ref: inst => this.inst = inst,
@@ -96,9 +104,9 @@ class ExampleHForm extends Component {
     const ModalProps = {
       title: '表单验证结果',
       width: 500,
-      visible: this.props.visible,
-      onOk: this.props.onOk,
-      onCancel: this.props.onCancel,
+      visible,
+      onOk: this.onModalOk,
+      onCancel: this.onModalCancel,
     }
 
     return (
@@ -124,4 +132,4 @@ ExampleHForm.propTypes = {
 
 }
 
-export default hocModal(ExampleHForm);
+export default ExampleHForm;

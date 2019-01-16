@@ -6,7 +6,6 @@ import propTypes from 'prop-types';
 import { Tooltip, Modal, message } from 'antd';
 
 import HPictureWraper from '../../HPicture/HPictureWraper.jsx';
-import hocModal from '../../Hoc/hocModal.js';
 import styles from '../styles.less';
 
 class MyPicture extends Component {
@@ -19,6 +18,7 @@ class MyPicture extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      visible: false,
       index: 0,
     }
   }
@@ -26,12 +26,13 @@ class MyPicture extends Component {
   handleClick = (idx) => {
     this.setState({
       index: idx,
-    }, this.props.onVisible);
+      visible: true,
+    });
   }
 
   render() {
-    const { value, api, visible } = this.props;
-    const { index } = this.state;
+    const { value, api } = this.props;
+    const { index, visible } = this.state;
     const {
       tooltipApi= {},
       pictureApi = {},
@@ -70,8 +71,8 @@ class MyPicture extends Component {
       ...modalApi,
       footer: false,
       visible,
-      onCancel: this.props.onCancel,
-      onOk: this.props.onOk,
+      onCancel: () => this.setState({ visible: false }),
+      onOk: () => this.setState({ visible: false }),
     }
 
     return (
@@ -93,4 +94,4 @@ MyPicture.propTypes = {
   api: propTypes.object,
 }
 
-export default hocModal(MyPicture);
+export default MyPicture;
