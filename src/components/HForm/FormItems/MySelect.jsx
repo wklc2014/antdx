@@ -4,9 +4,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import is from 'is_js';
+import lodash from 'lodash';
 import { Select } from 'antd';
 
-const { Option } = Select;
+const { Option, OptGroup } = Select;
 
 const MySelect = (props) => {
   const {
@@ -28,13 +29,7 @@ const MySelect = (props) => {
     value,
   };
 
-  const Children = data.map((v, i) => (
-    <Option key={i} value={v.value}>
-      {v.label}
-    </Option>
-  ));
-
-  return <Select {...newProps}>{Children}</Select>;
+  return <Select {...newProps}>{renderChildren(data)}</Select>;
 }
 
 MySelect.propTypes = {
@@ -54,3 +49,30 @@ MySelect.defaultProps = {
 }
 
 export default MySelect;
+
+function renderOption(target, key) {
+  if (is.object(target)) {
+    const { label = 'label', ...restTarget } = target;
+    const OptionProps = {
+      key,
+      ...restTarget,
+    }
+    return <Option {...OptionProps}>{label}</Option>
+  }
+  return <Option key={key}>{target}</Option>
+}
+
+function renderChildren(data) {
+  const isGroup = lodash.get(data, '[0].children');
+  if (!isGroup) {
+    return data.map(renderOption);
+  }
+  return data.map((d, i) => {
+    const { label, children = [] } = d;
+    return (
+      <OptGroup label={label} key={i}>
+        {d.children.map(renderOption)}
+      </OptGroup>
+    )
+  })
+}

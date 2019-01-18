@@ -39,21 +39,24 @@ class HFormItemContent extends Component {
   onBlur = (e) => {
     const { id, ext, onChange } = this.props;
     const { toUpperCase, toLowerCase, trim } = ext;
-    let newValue = value;
 
-    // 删空格
-    if (trim) {
-      newValue = lodash.trim(newValue);
+    if (e && e.target && e.target.value) {
+      let newValue = e.target.value;
+
+      // 删空格
+      if (trim) {
+        newValue = lodash.trim(newValue);
+      }
+
+      // 大小写转换
+      if (toUpperCase && is.string(value)) {
+        newValue = value.toUpperCase();
+      } else if (toLowerCase && is.string(value)) {
+        newValue = value.toLowerCase();
+      }
+
+      onChange({ id, value: newValue });
     }
-
-    // 大小写转换
-    if (toUpperCase && is.string(value)) {
-      newValue = value.toUpperCase();
-    } else if (toLowerCase && is.string(value)) {
-      newValue = value.toLowerCase();
-    }
-
-    onChange({ id, value: newValue });
   }
 
   /**
@@ -108,24 +111,18 @@ class HFormItemContent extends Component {
     const { type, api = {}, ext = {} } = this.props;
     const { data, city } = ext;
 
-    if (is.array(data)) {
-      return data;
+    if (is.not.array(data)) {
+      return [];
     }
 
     if (type === 'cascader') {
-      const { options } = api;
-      if (is.array(options)) {
-        return options;
-      } else if (city && CHINESE_CITIES[city] && is.array(CHINESE_CITIES[city])) {
+      if (city && CHINESE_CITIES[city] && is.array(CHINESE_CITIES[city])) {
         return CHINESE_CITIES[city];
       }
     }
 
     else if (type === 'treeSelect') {
-      const { treeData } = api;
-      if (is.array(treeData)) {
-        return treeData;
-      } else if (city && CHINESE_CITIES[city] && is.array(CHINESE_CITIES[city])) {
+      if (city && CHINESE_CITIES[city] && is.array(CHINESE_CITIES[city])) {
         return CHINESE_CITIES[city].map((v) => ({ title: v.label, value: v.value }));
       }
     }

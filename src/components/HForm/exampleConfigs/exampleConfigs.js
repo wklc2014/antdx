@@ -161,10 +161,24 @@ export default [
         },
         ext: {
           data: [
-            { value: 'zh', label: '中国' },
-            { value: 'en', label: '英国' },
-            { value: 'ao', label: '澳大利亚' },
-            { value: 'jap', label: '日本' },
+            {
+              label: '国籍',
+              children: [
+                { value: 'zh', label: '中国' },
+                { value: 'en', label: '英国' },
+                { value: 'ao', label: '澳大利亚' },
+                { value: 'jap', label: '日本', disabled: true, },
+              ]
+            },
+            {
+              label: '城市',
+              children: [
+                { value: 'shanghai', label: '上海' },
+                { value: 'chengdu', label: '成都' },
+                { value: 'guangzhou', label: '广州' },
+                { value: 'tianjin', label: '天津' },
+              ]
+            }
           ],
           rules: [
             { required: true, message: '请选择用户国籍' },
@@ -383,15 +397,15 @@ export default [
           { required: true, message: '号牌种类必填' },
         ],
         data: [
-          { value: '01', label: '大型汽车号牌' },
-          { value: '02', label: '小型汽车号牌' },
-          { value: '03', label: '使馆汽车号牌' },
-          { value: '04', label: '领馆汽车号牌' },
-          { value: '05', label: '境外汽车号牌' },
-          { value: '06', label: '外籍汽车号牌' },
-          { value: '07', label: '两、三轮摩托车号牌' },
-          { value: '08', label: '轻便摩托车号牌' },
-          { value: '09', label: '使馆摩托车号牌' },
+          '大型汽车号牌',
+          '小型汽车号牌',
+          '使馆汽车号牌',
+          '领馆汽车号牌',
+          '境外汽车号牌',
+          '外籍汽车号牌',
+          '两、三轮摩托车号牌',
+          '轻便摩托车号牌',
+          '使馆摩托车号牌',
         ],
       },
     },
