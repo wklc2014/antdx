@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Card, message } from 'antd';
-import HTagGroup from '../../components/HTagGroup/HTagGroup.jsx';
+import HTagGroup from '../../lib-antdx/HTagGroup/HTagGroup.jsx';
 
 class ExampleHTagGroup extends Component {
 

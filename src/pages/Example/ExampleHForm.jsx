@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Card, Modal } from 'antd';
 
-import HForm from '../../components/HForm/HForm.jsx';
-import exampleConfigs from '../../components/HForm/exampleConfigs/exampleConfigs.js';
-import getConfigInitValue from '../../components/HForm/lib/getConfigInitValues.js';
+import HForm from '../../lib-antdx/HForm/HForm.jsx';
+import exampleConfigs from '../../lib-antdx/HForm/exampleConfigs/exampleConfigs.js';
+import getConfigInitValue from '../../lib-antdx/HForm/lib/getConfigInitValues.js';
 import controlConfigs from './common/index.js';
 import path_1 from './images/1.jpg';
 import path_2 from './images/2.jpg';
