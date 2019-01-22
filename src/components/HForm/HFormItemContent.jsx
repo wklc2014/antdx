@@ -111,10 +111,6 @@ class HFormItemContent extends Component {
     const { type, api = {}, ext = {} } = this.props;
     const { data, city } = ext;
 
-    if (is.not.array(data)) {
-      return [];
-    }
-
     if (type === 'cascader') {
       if (city && CHINESE_CITIES[city] && is.array(CHINESE_CITIES[city])) {
         return CHINESE_CITIES[city];
