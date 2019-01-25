@@ -16,11 +16,7 @@ const MyTag = (props) => {
     value,
   } = props;
 
-  let { data } = ext;
-
-  if (is.not.array(data)) {
-    data = [];
-  }
+  const { data } = ext;
 
   const Children = data.map((v, i) => {
     const key = `my-tag-${i}`;

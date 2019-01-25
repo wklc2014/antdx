@@ -28,7 +28,7 @@ class HFormItemContent extends Component {
   /**
    * 表单元素 onChange 事件
    */
-  onChange = (e, composition) => {
+  onChange = (e) => {
     const { id, onChange } = this.props;
     onChange({ id, value: e });
   }
@@ -87,6 +87,7 @@ class HFormItemContent extends Component {
       case 'select':
       case 'editor':
       case 'treeSelect':
+      case 'mention':
         Object.assign(newStyle, { width: '100%' });
         break;
       default:
@@ -109,7 +110,7 @@ class HFormItemContent extends Component {
    */
   getDataProps() {
     const { type, api = {}, ext = {} } = this.props;
-    const { data, city } = ext;
+    const { city } = ext;
 
     if (type === 'cascader') {
       if (city && CHINESE_CITIES[city] && is.array(CHINESE_CITIES[city])) {
@@ -121,6 +122,12 @@ class HFormItemContent extends Component {
       if (city && CHINESE_CITIES[city] && is.array(CHINESE_CITIES[city])) {
         return CHINESE_CITIES[city].map((v) => ({ title: v.label, value: v.value }));
       }
+    }
+
+    let { data } = ext;
+
+    if (is.not.array(data)) {
+      data = [];
     }
 
     return data;

@@ -49,6 +49,8 @@ class ExampleHForm extends Component {
         ...this.state.values,
         [id]: value,
       }
+    }, () => {
+
     })
   }
 
@@ -80,6 +82,7 @@ class ExampleHForm extends Component {
 
   render() {
     const { controls, result, visible } = this.state;
+    console.log('values>>>', this.state.values);
 
     const HFormPropsRight = {
       ref: inst => this.inst = inst,

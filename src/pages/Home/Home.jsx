@@ -7,10 +7,21 @@ class Home extends Component {
 
   }
 
-  render() {
-    const {
+  state = {
+  }
 
-    } = this.props;
+  onChange = (e) => {
+    this.setState({
+      code: e
+    })
+  }
+
+  onInputChange = (e) => {
+    this.setState({
+    })
+  }
+
+  render() {
 
     return (
       <div>

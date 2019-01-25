@@ -17,11 +17,7 @@ const MyRadioButton = (props) => {
     value,
   } = props;
 
-  let { data } = ext;
-
-  if (is.not.array(data)) {
-    data = [];
-  }
+  const { data } = ext;
 
   const newProps = {
     ...api,
