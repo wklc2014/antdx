@@ -3,7 +3,7 @@
  */
 import is from 'is_js';
 
-export default function getConfigInitValues(params = {}) {
+export default function getDefaultValues(params = {}) {
 
   const { configs = [] } = params;
 

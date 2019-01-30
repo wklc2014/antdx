@@ -4,7 +4,7 @@ import { Card, Modal } from 'antd';
 
 import HForm from '../../lib-antdx/HForm/HForm.jsx';
 import exampleConfigs from '../../lib-antdx/HForm/exampleConfigs/exampleConfigs.js';
-import getConfigInitValue from '../../lib-antdx/HForm/lib/getConfigInitValues.js';
+import getDefaultValues from '../../lib-antdx/HForm/lib/getDefaultValues.js';
 import controlConfigs from './common/index.js';
 import path_1 from './images/1.jpg';
 import path_2 from './images/2.jpg';
@@ -21,8 +21,8 @@ class ExampleHForm extends Component {
 
   constructor(props) {
     super(props);
-    const values = getConfigInitValue({ configs: exampleConfigs });
-    const controls = getConfigInitValue({ configs: controlConfigs });
+    const values = getDefaultValues({ configs: exampleConfigs });
+    const controls = getDefaultValues({ configs: controlConfigs });
     this.state = {
       values: {
         imageView: [
