@@ -3,14 +3,11 @@
  * 生成一组表单元素
  */
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import propTypes from 'prop-types';
 import lodash from 'lodash';
-import is from 'is_js';
 import { Form, Row, Col } from 'antd';
 import HFormItem from './HFormItem.jsx';
 import hocFormValidate from './hoc/hocFormValidate.js';
-import styles from './styles.less';
 
 class HForm extends Component {
 
@@ -76,19 +73,14 @@ class HForm extends Component {
       return <Form layout={layout}>{Children}</Form>;
     }
 
-    return (
-      <Form layout={layout}>
-        <Row type="flex">{Children}</Row>
-      </Form>
-    );
+    return <Form layout={layout}><Row type="flex">{Children}</Row></Form>;
   }
 
 }
 
 HForm.propTypes = {
   /**
-   * 表单组列数
-   * 即: 表单组一行显示表单元素的个数
+   * 表单组一行显示的表单元素的个数
    * @type {Number}
    */
   cols: propTypes.number,
@@ -109,14 +101,10 @@ HForm.propTypes = {
   /**
    * 表单布局类型
    * 仅支持 antd 提供的表单布局 horizontal vertical inline 三种
-   * inline 布局不建议表单元素过多的时候使用
+   * ps:表单元素过多的时候不建议使用 inline 布局
    * @type {String}
    */
-  layout: propTypes.oneOf([
-    'horizontal',
-    'vertical',
-    'inline',
-  ]),
+  layout: propTypes.oneOf(['horizontal', 'vertical', 'inline']),
 
   /**
    * 可控表单搜集表单值的事件方法,
