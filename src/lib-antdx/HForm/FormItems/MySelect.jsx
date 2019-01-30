@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 import is from 'is_js';
 import lodash from 'lodash';
 import { Select } from 'antd';
+import checkDataIsEmpty from '../utils/checkDataIsEmpty.js';
 
 const { Option, OptGroup } = Select;
 
@@ -17,7 +18,7 @@ const MySelect = (props) => {
     value,
   } = props;
 
-  const { data } = ext;
+  const data = checkDataIsEmpty({ ext });
 
   const newProps = {
     ...api,
@@ -31,7 +32,7 @@ const MySelect = (props) => {
 MySelect.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.oneOfType([
     propTypes.string,
     propTypes.array,
@@ -41,6 +42,7 @@ MySelect.propTypes = {
 MySelect.defaultProps = {
   api: {},
   ext: {},
+  onChange: () => {},
   value: undefined,
 }
 

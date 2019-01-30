@@ -5,6 +5,7 @@ import React from 'react';
 import is from 'is_js';
 import propTypes from 'prop-types';
 import { TreeSelect } from 'antd';
+import checkDataIsEmpty from '../utils/checkDataIsEmpty.js';
 
 const MyTreeSelect = (props) => {
   const {
@@ -14,7 +15,7 @@ const MyTreeSelect = (props) => {
     value,
   } = props;
 
-  const { data } = ext;
+  const data = checkDataIsEmpty({ ext });
 
   const newProps = {
     dropdownStyle: {
@@ -32,7 +33,7 @@ const MyTreeSelect = (props) => {
 MyTreeSelect.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.oneOfType([
     propTypes.string,
     propTypes.arrayOf(propTypes.string),
@@ -42,6 +43,7 @@ MyTreeSelect.propTypes = {
 MyTreeSelect.defaultProps = {
   api: {},
   ext: {},
+  onChange: () => {},
   value: undefined,
 }
 

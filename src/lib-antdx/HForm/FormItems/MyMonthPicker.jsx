@@ -25,12 +25,13 @@ const MyMonthPicker = (props) => {
 
 MyMonthPicker.propTypes = {
   api: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.object,
 }
 
 MyMonthPicker.defaultProps = {
   api: {},
+  onChange: () => {},
   value: undefined,
 }
 

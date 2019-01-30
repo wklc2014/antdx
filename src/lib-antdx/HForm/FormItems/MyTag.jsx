@@ -5,6 +5,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import is from 'is_js';
 import { Tag } from 'antd';
+import checkDataIsEmpty from '../utils/checkDataIsEmpty.js';
 
 const { CheckableTag } = Tag;
 
@@ -16,7 +17,7 @@ const MyTag = (props) => {
     value,
   } = props;
 
-  const { data } = ext;
+  const data = checkDataIsEmpty({ ext });
 
   const Children = data.map((v, i) => {
     const key = `my-tag-${i}`;
@@ -43,13 +44,14 @@ const MyTag = (props) => {
 MyTag.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.array,
 }
 
 MyTag.defaultProps = {
   api: {},
   ext: {},
+  onChange: () => {},
   value: [],
 }
 

@@ -37,14 +37,16 @@ const MyTextArea = (props) => {
 MyTextArea.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
-  onChange: propTypes.func.isRequired,
-  onBlur: propTypes.func.isRequired,
+  onChange: propTypes.func,
+  onBlur: propTypes.func,
   value: propTypes.any,
 }
 
 MyTextArea.defaultProps = {
   api: {},
   ext: {},
+  onBlur: () => {},
+  onChange: () => {},
   value: undefined,
 }
 

@@ -36,14 +36,16 @@ const MySearch = (props) => {
 MySearch.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
-  onBlur: propTypes.func.isRequired,
-  onChange: propTypes.func.isRequired,
+  onBlur: propTypes.func,
+  onChange: propTypes.func,
   value: propTypes.any,
 }
 
 MySearch.defaultProps = {
   api: {},
   ext: {},
+  onBlur: () => {},
+  onChange: () => {},
   value: undefined,
 }
 

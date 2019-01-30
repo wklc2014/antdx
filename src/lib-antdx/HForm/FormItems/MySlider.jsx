@@ -23,7 +23,7 @@ const MySlider = (props) => {
 
 MySlider.propTypes = {
   api: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.oneOfType([
     propTypes.number,
     propTypes.arrayOf(propTypes.number),
@@ -32,6 +32,7 @@ MySlider.propTypes = {
 
 MySlider.defaultProps = {
   api: {},
+  onChange: () => {},
   value: 0,
 }
 

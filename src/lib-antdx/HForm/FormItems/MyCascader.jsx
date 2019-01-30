@@ -5,6 +5,7 @@ import React from 'react';
 import is from 'is_js';
 import propTypes from 'prop-types';
 import { Cascader } from 'antd';
+import checkDataIsEmpty from '../utils/checkDataIsEmpty.js';
 
 const MyCascader = (props) => {
   const {
@@ -14,7 +15,7 @@ const MyCascader = (props) => {
     value,
   } = props;
 
-  const { data } = ext;
+  const data = checkDataIsEmpty({ ext });
 
   const newProps = {
     options: data,
@@ -29,13 +30,14 @@ const MyCascader = (props) => {
 MyCascader.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.array,
 }
 
 MyCascader.defaultProps = {
   api: {},
   ext: {},
+  onChange: () => {},
   value: [],
 }
 

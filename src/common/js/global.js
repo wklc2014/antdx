@@ -53,7 +53,7 @@ const ret = lodash.mapValues(obj, function(a, b, c) {
   }
 });
 
-console.log('ret>>>', ret);
+// console.log('ret>>>', ret);
 
 
 

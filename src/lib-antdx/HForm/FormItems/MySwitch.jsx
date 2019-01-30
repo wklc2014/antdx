@@ -23,12 +23,13 @@ const MySwitch = (props) => {
 
 MySwitch.propTypes = {
   api: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.bool,
 }
 
 MySwitch.defaultProps = {
   api: {},
+  onChange: () => {},
   value: false,
 }
 

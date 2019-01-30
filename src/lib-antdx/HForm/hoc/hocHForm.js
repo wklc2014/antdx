@@ -6,7 +6,7 @@ import is from 'is_js';
 import getfilterConfig from '../utils/getfilterConfig.js';
 import getValidateByRules from '../utils/getValidateByRules.js';
 
-export default function hocFormValidate(HForm) {
+export default function hocHForm(ComponentWraper) {
   return class extends Component {
 
     static defaultProps = {}
@@ -41,54 +41,60 @@ export default function hocFormValidate(HForm) {
     }
 
     /**
+     * 获取目标配置数组
+     */
+    getTargetConfigs = () => {
+      const { configs, config } = this.props;
+      if (config !== undefined) {
+        return getfilterConfig(config);
+      }
+      if (is.array(configs)) {
+        const newConfigs = [];
+        configs.filter(val => {
+          const { extMap = {} } = val;
+          return !extMap.hide;
+        }).forEach(val => {
+          const { config } = val;
+          newConfigs.push(...getfilterConfig(config));
+        })
+        return newConfigs;
+      }
+      return [];
+    }
+
+
+    /**
      * 获取表单配置 IDS
      */
     getConfigIds() {
-      const { configs } = this.props;
+      const newConfigs = this.getTargetConfigs();
       const ids = [];
-
-      if (is.not.array(configs)) {
-        return ids;
-      }
-
-      configs.filter(val => {
-        const { extMap = {} } = val;
-        return !extMap.hide;
-      }).forEach(val => {
-        const { config } = val;
-        const newConfig = getfilterConfig(config);
-
-        newConfig.forEach((v) => {
-          v.id && ids.push(v.id);
-        })
+      newConfigs.forEach((v) => {
+        v.id && ids.push(v.id);
       })
-
       return ids;
     }
 
     /**
-     * 获取所有表单验证结果
+     * 获取特定表单验证结果
      */
-    getAllValidate = () => {
-      const { configs, values } = this.props;
+    getTargetValidate = (targetIDs) => {
+      const { values = {} } = this.props;
       const { touches } = this.state;
       const validates = {};
+      const newConfigs = this.getTargetConfigs();
+      newConfigs.forEach((val) => {
+        const { id, ext = {} } = val;
+        const { rules } = ext;
 
-      configs.forEach((val) => {
-        const { config } = val;
-        const newConfig = getfilterConfig(config);
-
-        newConfig.forEach((val) => {
-          const { id, ext = {} } = val;
-          const { rules } = ext;
-
+        if (is.inArray(id, targetIDs)) {
           // 待验证的值
           const value = values[id];
           const result = getValidateByRules({ value, rules });
           if (is.not.empty(result)) {
             validates[id] = {...result};
           }
-        })
+        }
       })
 
       return validates;
@@ -98,31 +104,29 @@ export default function hocFormValidate(HForm) {
      * 获取表单验证结果
      */
     getFormValidate = (fields = []) => {
-      const { configs, values } = this.props;
+      const { values = {} } = this.props;
       const ids = this.getConfigIds();
       const target = fields.length ? fields : ids;
-      const validate = this.getAllValidate();
       if (is.array(target)) {
-        const errors = {};
-        target.forEach((field) => {
-          if (validate[field]) {
-            errors[field] = {
-              type: 'error',
-              message: validate[field].help,
-              value: values[field],
-            };
-          }
+        const targetValidate = this.getTargetValidate(target);
+        const validateResult = [];
+        Object.keys(targetValidate).forEach(v => {
+          validateResult.push({
+            id: v,
+            type: 'error',
+            message: targetValidate[v].help,
+            value: values[v],
+          })
         })
-        return errors;
+        return validateResult;
       }
-      return validate;
+      return [];
     }
 
     /**
      * 验证表单
      */
     validateForm = (fields = []) => {
-      const { configs } = this.props;
       const ids = this.getConfigIds();
       const touches = {};
       ids.forEach((id) => {
@@ -147,13 +151,13 @@ export default function hocFormValidate(HForm) {
     render() {
       const { touches } = this.state;
 
-      const HFormProps = {
+      const ComponentWraperProps = {
         ...this.props,
         onChange: this.onChange,
         touches,
       }
 
-      return <HForm {...HFormProps} />
+      return <ComponentWraper {...ComponentWraperProps} />
     }
   }
 }

@@ -45,12 +45,13 @@ const MyButton = (props) => {
 MyButton.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
 }
 
 MyButton.defaultProps = {
   api: {},
   ext: {},
+  onChange: () => {},
 }
 
 export default MyButton;

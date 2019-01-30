@@ -9,10 +9,11 @@ import { Form, Row, Col } from 'antd';
 import HFormItemContent from './HFormItemContent.jsx';
 import getValidateByRules from './utils/getValidateByRules.js';
 import getfilterConfig from './utils/getfilterConfig.js';
+import hocHForm from './hoc/hocHForm.js'
 
 const FormItem = Form.Item;
 
-class HFormItem extends Component {
+export class HFormItem extends Component {
 
   static defaultProps = {
     extMap: {},
@@ -25,8 +26,8 @@ class HFormItem extends Component {
    * 验证表单元素
    * @return {Object} 表单元素验证结果
    */
-  getFormItemValidate = () => {
-    const { config, touches, values } = this.props;
+  setFormItemValidate = () => {
+    const { config = [], touches = {}, values = {} } = this.props;
     const filterConfig = getfilterConfig(config);
     const validates = {};
 
@@ -62,22 +63,17 @@ class HFormItem extends Component {
    * 获取表单元素布局属性
    * @return {Object} 表单元素布局属性
    */
-  getFormItemLayoutProps = () => {
+  setFormItemLayoutProps = () => {
     const { extMap } = this.props;
-    const { layout = '80px', pLayout = '' } = extMap;
+    const { layout = '80px', pLayout = 'horizontal' } = extMap;
 
     // 只有 horizontal Form 布局, 才需要设置布局属性
-    if (pLayout !== 'horizontal') {
-      return null;
-    }
+    if (pLayout !== 'horizontal') return null;
 
     // 如果表单元素布局为栅格布局(对象)，则直接作为布局属性
-    if (is.object(layout)) {
-      return layout;
-    }
+    if (is.object(layout)) return layout;
 
     let newLayout = layout;
-
     // 如果布局属性为数字
     if (is.number(layout)) {
       newLayout = `${layout}px`;
@@ -97,9 +93,9 @@ class HFormItem extends Component {
    * 获取表单元素 label 属性
    * @return {Object} 表单元素 label 属性
    */
-  getFormItemLabelProps = () => {
+  setFormItemLabelProps = () => {
     const { extMap } = this.props;
-    const { label, pLayout, colon = true } = extMap;
+    const { label, pLayout = 'horizontal', colon = true } = extMap;
 
     // 如果设置 label === false
     // 设置一个隐藏的占位元素, 且冒号不显示
@@ -130,9 +126,9 @@ class HFormItem extends Component {
    * 获取表单元素 style 属性
    * @return {Object} 表单元素 style 属性
    */
-  getFormItemStyleProps = () => {
+  setFormItemStyleProps = () => {
     const { extMap } = this.props;
-    const { style = {}, pLayout = '' } = extMap;
+    const { style = {}, pLayout = 'horizontal' } = extMap;
 
     // 如果表单不是 horizontal 布局, 返回原始 style 属性
     if (pLayout !== 'horizontal') {
@@ -146,14 +142,15 @@ class HFormItem extends Component {
    * 获取 Row 组件 style 属性
    * @return {Object} Row 组件 style 属性
    */
-  getRowStyleProps(extMap = {}) {
-    const { pLayout, space = 0, minWidth = 160, maxWidth } = extMap;
+  setRowStyleProps(extMap = {}) {
+    const { pLayout = 'horizontal', space = 0, minWidth = 160, maxWidth } = extMap;
     const RowStyle = {};
 
     if (space) {
       RowStyle.paddingRight = space;
     }
 
+    // 内联布局需要设置表单元素最小宽度和最大宽度
     if (pLayout === 'inline') {
       RowStyle.minWidth = minWidth;
       if (maxWidth) {
@@ -210,16 +207,16 @@ class HFormItem extends Component {
       className: extMap.className,
       colon: extMap.colon,
       extra: extMap.extra,
-      style: this.getFormItemStyleProps(),
-      ...this.getFormItemValidate(),
-      ...this.getFormItemLayoutProps(),
-      ...this.getFormItemLabelProps(),
+      style: this.setFormItemStyleProps(),
+      ...this.setFormItemLayoutProps(),
+      ...this.setFormItemValidate(),
+      ...this.setFormItemLabelProps(),
     }
 
     const RowProps = {
       type: 'flex',
       gutter: extMap.gutter || 8,
-      style: this.getRowStyleProps(extMap),
+      style: this.setRowStyleProps(extMap),
     };
 
     return (
@@ -268,4 +265,4 @@ HFormItem.propTypes = {
   values: propTypes.object,
 };
 
-export default HFormItem;
+export default hocHForm(HFormItem);

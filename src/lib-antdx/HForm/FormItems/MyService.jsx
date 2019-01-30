@@ -16,6 +16,7 @@ export default class MyService extends Component {
   static defaultProps = {
     api: {},
     ext: {},
+    onChange: () => {},
     value: undefined,
   }
 
@@ -89,6 +90,6 @@ export default class MyService extends Component {
 MyService.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.any,
 }

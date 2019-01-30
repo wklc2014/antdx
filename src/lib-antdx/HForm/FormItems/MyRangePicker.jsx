@@ -25,12 +25,13 @@ const MyRangePicker = (props) => {
 
 MyRangePicker.propTypes = {
   api: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.arrayOf(propTypes.object),
 }
 
 MyRangePicker.defaultProps = {
   api: {},
+  onChange: () => {},
   value: [],
 }
 

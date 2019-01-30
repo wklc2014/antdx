@@ -90,8 +90,8 @@ class MyPicture extends Component {
 }
 
 MyPicture.propTypes = {
-  value: propTypes.arrayOf(propTypes.object),
   api: propTypes.object,
+  value: propTypes.arrayOf(propTypes.object),
 }
 
 export default MyPicture;

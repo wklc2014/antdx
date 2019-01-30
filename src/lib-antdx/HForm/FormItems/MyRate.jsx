@@ -23,12 +23,13 @@ const MyRate = (props) => {
 
 MyRate.propTypes = {
   api: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.number,
 }
 
 MyRate.defaultProps = {
   api: {},
+  onChange: () => {},
   value: 0,
 }
 

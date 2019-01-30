@@ -87,7 +87,6 @@ class HFormItemContent extends Component {
       case 'select':
       case 'editor':
       case 'treeSelect':
-      case 'mention':
         Object.assign(newStyle, { width: '100%' });
         break;
       default:
@@ -125,10 +124,6 @@ class HFormItemContent extends Component {
     }
 
     let { data } = ext;
-
-    if (is.not.array(data)) {
-      data = [];
-    }
 
     return data;
   }

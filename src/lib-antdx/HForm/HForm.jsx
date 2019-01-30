@@ -6,8 +6,8 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import lodash from 'lodash';
 import { Form, Row, Col } from 'antd';
-import HFormItem from './HFormItem.jsx';
-import hocFormValidate from './hoc/hocFormValidate.js';
+import { HFormItem } from './HFormItem.jsx';
+import hocHForm from './hoc/hocHForm.js';
 
 class HForm extends Component {
 
@@ -28,17 +28,15 @@ class HForm extends Component {
    */
   getColSpanProps = (colspan = 1) => {
     const { cols } = this.props;
-    if (cols < 1) {
-      return 24;
-    }
+    if (cols < 1) return 24;
     const span = parseInt(24 / cols, 10) * colspan;
     return Math.min(span, 24);
   }
 
-  render() {
+  renderChildren = () => {
     const { configs, extMap, layout, onChange, touches, values } = this.props;
 
-    const Children = configs.filter((val) => {
+    return configs.filter((val) => {
       const { extMap = {} } = val;
       return !extMap.hide;
     }).map((val, i) => {
@@ -68,14 +66,17 @@ class HForm extends Component {
         </Col>
       );
     });
-
-    if (layout === 'inline') {
-      return <Form layout={layout}>{Children}</Form>;
-    }
-
-    return <Form layout={layout}><Row type="flex">{Children}</Row></Form>;
   }
 
+  render() {
+    const { layout = 'horizontal' } = this.props;
+
+    if (layout === 'inline') {
+      return <Form layout={layout}>{this.renderChildren()}</Form>;
+    }
+
+    return <Form layout={layout}><Row type="flex">{this.renderChildren()}</Row></Form>;
+  }
 }
 
 HForm.propTypes = {
@@ -120,4 +121,4 @@ HForm.propTypes = {
   values: propTypes.object,
 };
 
-export default hocFormValidate(HForm);
+export default hocHForm(HForm);

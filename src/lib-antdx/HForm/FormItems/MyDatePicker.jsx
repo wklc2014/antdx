@@ -23,12 +23,13 @@ const MyDatePicker = (props) => {
 
 MyDatePicker.propTypes = {
   api: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.object,
 }
 
 MyDatePicker.defaultProps = {
   api: {},
+  onChange: () => {},
   value: undefined,
 }
 

@@ -23,12 +23,13 @@ const MyTimePicker = (props) => {
 
 MyTimePicker.propTypes = {
   api: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.object,
 }
 
 MyTimePicker.defaultProps = {
   api: {},
+  onChange: () => {},
   value: undefined,
 }
 

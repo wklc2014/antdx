@@ -5,6 +5,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import is from 'is_js';
 import { Radio } from 'antd';
+import checkDataIsEmpty from '../utils/checkDataIsEmpty.js';
 
 const RadioGroup = Radio.Group;
 
@@ -16,7 +17,7 @@ const MyRadio = (props) => {
     value,
   } = props;
 
-  const { data } = ext;
+  const data = checkDataIsEmpty({ ext });
 
   const newProps = {
     ...api,
@@ -36,13 +37,14 @@ const MyRadio = (props) => {
 MyRadio.propTypes = {
   api: propTypes.object,
   ext: propTypes.object,
-  onChange: propTypes.func.isRequired,
+  onChange: propTypes.func,
   value: propTypes.any,
 }
 
 MyRadio.defaultProps = {
   api: {},
   ext: {},
+  onChange: () => {},
   value: undefined,
 }
 
