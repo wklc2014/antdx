@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import HFormItem from '../../lib-antdx/HForm/HFormItem.jsx';
+import Antdx from '../../components/index.js';
+
+const { HFormItem } = Antdx;
 
 class Home extends Component {
 
@@ -15,7 +17,7 @@ class Home extends Component {
   onChange = ({ id, value }) => {
     if (id === 'btn') {
       if (value === '1') {
-        this.inst.validateForm();
+        this.inst.setFormValidate();
       } else if (value === '2') {
         this.inst.resetForm();
       } else if (value === '3') {

@@ -10,11 +10,6 @@
         "libraryName": "antd",
         "style": true
       }
-    ],
-    // [
-    //   "transform-react-jsx", {
-    //     "pragma": "m"
-    //   }
-    // ]
+    ]
   ]
 }

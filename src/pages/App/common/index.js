@@ -11,28 +11,18 @@ export default [
   {
     title: {
       name: 'Example',
-      icon: 'user',
+      icon: 'export',
     },
     subMenus: [
-      { icon: 'user', title: 'HForm', path: '/example/hform' },
-      { icon: 'user', title: 'HPicture', path: '/example/hpicture' },
-      { icon: 'user', title: 'WarterMark', path: '/example/wartermark' },
-      { icon: 'user', title: 'HTagGroup', path: '/example/taggroup' },
+      { icon: 'lock', title: 'HForm', path: '/example/hform' },
+      { icon: 'code', title: 'HPicture', path: '/example/hpicture' },
+      { icon: 'file', title: 'WarterMark', path: '/example/wartermark' },
+      { icon: 'tag', title: 'HTagGroup', path: '/example/taggroup' },
     ]
   },
   {
-    icon: 'user',
+    icon: 'fund',
     title: 'Api',
     path: '/api',
-  },
-  {
-    icon: 'pushpin',
-    title: 'Help',
-    path: '/help',
-  },
-  {
-    icon: 'phone',
-    title: 'Error',
-    path: '/error',
   },
 ];

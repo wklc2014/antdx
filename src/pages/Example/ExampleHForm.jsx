@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Card, Modal } from 'antd';
 
-import HForm from '../../lib-antdx/HForm/HForm.jsx';
-import exampleConfigs from '../../lib-antdx/HForm/exampleConfigs/exampleConfigs.js';
-import getDefaultValues from '../../lib-antdx/HForm/lib/getDefaultValues.js';
+import Antdx from '../../components/index.js';
+import exampleConfigs from '../../components/HForm/exampleConfigs/exampleConfigs.js';
 import controlConfigs from './common/index.js';
 import path_1 from './images/1.jpg';
 import path_2 from './images/2.jpg';
@@ -12,6 +11,8 @@ import path_3 from './images/3.jpg';
 import path_4 from './images/4.jpg';
 import path_5 from './images/5.jpg';
 import path_6 from './images/6.jpg';
+
+const { HForm, getDefaultValues } = Antdx;
 
 class ExampleHForm extends Component {
 
@@ -56,7 +57,7 @@ class ExampleHForm extends Component {
 
   onChangeControls = ({ id, value }) => {
     if (id === 'validateForm') {
-      this.inst.validateForm();
+      this.inst.setFormValidate();
     } else if (id === 'resetForm') {
       this.inst.resetForm();
     } else if (id === 'errorForm') {

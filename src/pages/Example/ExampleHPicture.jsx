@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Card, message } from 'antd';
-import HPictureWraper from '../../lib-antdx/HPicture/HPictureWraper.jsx';
+import Antdx from '../../components/index.js';
 import path_1 from './images/1.jpg';
 import path_2 from './images/2.jpg';
 import path_3 from './images/3.jpg';
 import path_4 from './images/4.jpg';
 import path_5 from './images/5.jpg';
 import path_6 from './images/6.jpg';
+
+const { HPictureWraper } = Antdx;
 
 class ExampleHPicture extends Component {
 
