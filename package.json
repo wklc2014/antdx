@@ -1,5 +1,5 @@
 {
-  "name": "antdx",
+  "name": "@ali/antdx",
   "version": "1.0.1",
   "main": "dist/app.min.js",
   "license": "MIT",
