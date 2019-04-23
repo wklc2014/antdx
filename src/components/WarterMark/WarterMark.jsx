@@ -4,7 +4,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import generateDataBase64ByCanvas from './utils/generateDataBase64ByCanvas.js';
-import styles from './styles.less';
 
 const WARTER_MARK_DOM_ID = `warter-mark-dom-id-${new Date().getTime()}`;
 
@@ -76,7 +75,16 @@ class WarterMark extends Component {
     if (!dom) {
       dom = document.createElement('div');
       dom.id = WARTER_MARK_DOM_ID;
-      dom.className = styles.warterMark;
+      dom.style.position = 'fixed';
+      dom.style.top = '0px';
+      dom.style.bottom = '0px';
+      dom.style.left = '0px';
+      dom.style.right = '0px';
+      dom.style.zIndex = 1000;
+      dom.style.backgroundPosition = '0 0';
+      dom.style.backgroundRepeat = 'repeat';
+      dom.style.opacity = 0.09;
+      dom.style.pointerEvents = 'none';
     }
     dom.style.backgroundImage = `url(${warterMark})`;
     document.body.appendChild(dom);

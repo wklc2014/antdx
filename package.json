@@ -1,7 +1,7 @@
 {
   "name": "antdx",
   "version": "1.0.1",
-  "main": "src/components/index.js",
+  "main": "dist/app.min.js",
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./configs/webpack.config.js",

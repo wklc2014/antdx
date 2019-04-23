@@ -5,12 +5,11 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import lodash from 'lodash';
 import is from 'is_js';
-
 import HPictureView from './HPictureView.jsx';
 import HPictureButtons from './HPictureButtons.jsx';
 import asyncLoadImage from './utils/asyncLoadImage.js';
 import BUTTONS from './utils/_buttons.js';
-import styles from './styles.less';
+
 
 class HPicture extends Component {
 
@@ -363,7 +362,7 @@ class HPicture extends Component {
     }
 
     return (
-      <section className={`${className} ${styles.wraper}`}>
+      <section className={`${className}`}>
         <div style={view} ref={inst => this.inst = inst}>
           <HPictureView {...HPictureViewProps} />
         </div>

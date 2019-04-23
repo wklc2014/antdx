@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import Antdx from '../../components/index.js';
-
-const { HFormItem } = Antdx;
+import { HFormItem } from '../../components/index.js';
 
 class Home extends Component {
 

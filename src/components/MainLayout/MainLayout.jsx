@@ -7,10 +7,7 @@ import is from 'is_js';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { Layout, Menu, Icon } from 'antd';
-
 import MyNavLink from './MyNavLink.jsx';
-
-import styles from './styles.less';
 
 const { Sider } = Layout;
 const { SubMenu, Item } = Menu;
@@ -141,11 +138,30 @@ class MainLayout extends Component {
       selectedKeys: this.getMenuSelectedKeys(),
     };
 
+    const boxStyle = {
+      padding: 16,
+      backgroundColor: '#002140',
+    }
+
+    const logoStyle = {
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: '12px center',
+      backgroundSize: '40px',
+      display: 'block',
+      borderRadius: '4px',
+      fontSize: '16px',
+      textAlign: 'center',
+      height: '40px',
+      lineHeight: '40px',
+      color: '#fff',
+      overflow: 'hidden',
+    }
+
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider {...SideProps}>
-          <div className={styles.box}>
-            <Link to="/" className={styles.logo}>
+          <div style={boxStyle}>
+            <Link to="/" style={logoStyle}>
               {this.renderTitleEle()}
             </Link>
           </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Card, Modal } from 'antd';
 
-import Antdx from '../../components/index.js';
+import { HForm, getDefaultValues } from '../../components/index.js';
 import exampleConfigs from '../../components/HForm/exampleConfigs/exampleConfigs.js';
 import controlConfigs from './common/index.js';
 import path_1 from './images/1.jpg';
@@ -11,8 +11,6 @@ import path_3 from './images/3.jpg';
 import path_4 from './images/4.jpg';
 import path_5 from './images/5.jpg';
 import path_6 from './images/6.jpg';
-
-const { HForm, getDefaultValues } = Antdx;
 
 class ExampleHForm extends Component {
 

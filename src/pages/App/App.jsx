@@ -7,10 +7,8 @@ import ExampleHPicture from '../Example/ExampleHPicture.jsx';
 import ExampleWarterMark from '../Example/ExampleWarterMark.jsx';
 import ExampleHTagGroup from '../Example/ExampleHTagGroup.jsx';
 import Api from '../Api/Index.jsx';
-import Antdx from '../../components/index.js';
+import { MainLayout } from '../../components/index.js';
 import exampleConfig from './common/index.js';
-
-const { MainLayout } = Antdx
 
 const App = (props) => {
 

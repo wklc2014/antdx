@@ -4,7 +4,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Button, Popover, Row, Col, Slider, InputNumber } from 'antd';
-import styles from './styles.less';
 
 const ButtonGroup = Button.Group;
 
@@ -133,7 +132,7 @@ class HPictureButtons extends Component {
     })
 
     return (
-      <div className={styles.operations}>
+      <div style={{ marginTop: 16, textAlign: 'center' }}>
         <ButtonGroup>{operationsEle}</ButtonGroup>
       </div>
     )

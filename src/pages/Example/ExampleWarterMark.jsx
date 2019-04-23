@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import Antdx from '../../components/index.js';
-
-const { HForm, WarterMark } = Antdx;
+import { HForm, WarterMark } from '../../components/index.js';
 
 class ExampleWarterMark extends Component {
 

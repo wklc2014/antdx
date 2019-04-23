@@ -6,7 +6,6 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import lodash from 'lodash';
 import is from 'is_js';
-import { Tag, Input, Tooltip, Button } from 'antd';
 import HTagAdd from './HTagAdd.jsx';
 import HTagEdit from './HTagEdit.jsx';
 

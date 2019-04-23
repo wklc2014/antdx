@@ -6,7 +6,6 @@ import propTypes from 'prop-types';
 import { Tooltip, Modal, message } from 'antd';
 
 import HPictureWraper from '../../HPicture/HPictureWraper.jsx';
-import styles from '../styles.less';
 
 export default class MyPicture extends Component {
 
@@ -55,15 +54,24 @@ export default class MyPicture extends Component {
       const newBoxStyle = {
         ...boxStyle,
         backgroundImage: `url(${path})`,
+        backgroundColor: 'transparent',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        width: '80px',
+        borderRadius: '3px',
+        overflow: 'hidden',
+        cursor: 'pointer',
       };
       return (
-        <div className={styles.pictureItemWraper} key={key}>
+        <div style={{ padding: '3px 8px 8px 0' }} key={key}>
           <Tooltip {...tooltipApi} title="点击显示详图">
             <div
-              className={styles.pictureItem}
               style={newBoxStyle}
               onClick={() => this.handleClick(i)}
-            />
+            >
+              <div style={{ paddingBottom: '100%' }} />
+            </div>
           </Tooltip>
         </div>
       );
@@ -85,8 +93,13 @@ export default class MyPicture extends Component {
       onOk: () => this.onVisible('ok'),
     }
 
+    const wraperStyle = {
+      display: 'flex',
+      flexWrap: 'wrap',
+    }
+
     return (
-      <div className={styles.picture}>
+      <div style={wraperStyle}>
         {pictureEle}
         {visible && (
           <Modal {...ModalProps}>
