@@ -1,49 +1,32 @@
 {
-  "name": "@ali/antdx",
-  "version": "1.0.1",
-  "main": "dist/app.min.js",
-  "license": "MIT",
+  "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./configs/webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.js"
+    "start": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage"
   },
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-import": "^1.11.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "clean-webpack-plugin": "^2.0.1",
-    "copy-webpack-plugin": "^5.0.2",
-    "cross-env": "^5.2.0",
-    "css-loader": "^2.1.1",
-    "file-loader": "^3.0.1",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "less": "^3.9.0",
-    "less-loader": "^4.1.0",
-    "less-plugin-autoprefix": "^2.0.0",
-    "less-plugin-clean-css": "^1.5.1",
-    "mini-css-extract-plugin": "^0.5.0",
-    "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.1.2",
-    "url-loader": "^1.1.2",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.3.0"
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
   },
   "dependencies": {
-    "antd": "^3.16.4",
-    "axios": "^0.18.0",
-    "image-webpack-loader": "^4.6.0",
-    "is_js": "^0.9.0",
-    "mockjs": "^1.0.1-beta3",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-draggable": "^3.3.0",
-    "react-router-dom": "^5.0.0",
-    "underscore": "^1.9.1"
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.2.2",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "umi": "^3.2.2",
+    "yorkie": "^2.0.0"
   }
 }
